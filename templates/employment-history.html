@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Loom</title>
+
+    <style>
+        .material-symbols-rounded {
+            cursor: pointer;
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48
+        }
+    </style>
+
+    <!-- Google symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'reset.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    
+</head>
+<body>
+    
+    <header id="sign-up-header">
+        <!-- Top navigation -->
+        <div class="nav-container">
+            <a href="{% url 'home' %}" rel="logo">
+                <img src="{% static 'icons/logo.png' %}">
+            </a>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="{% url 'about' %}" rel="about">About Us</a></li>
+                    <li><a href="#">Our offices</a></li>
+                    <li><a href="#">Contact us</a></li>
+                </ul>
+            </nav>
+            <div class="ham-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <!-- Mobile navigation menu -->
+            <div class="mobile-navigation-menu">
+                <!-- Navigation links -->
+                <div class="links-mobile-group">
+                    <nav class="mobile-nav">
+                        <ul class="nav-links mobile">
+                            <li><a href="{% url 'about' %}">About us</a></li>
+                            <li><a href="#">Our Offices</a></li>
+                            <li><a href="#">Contact us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Sign up section -->
+    <section id="signup-form-section">
+        <div class="container signup">
+            <div class="vector-div">
+                <img src="{% static 'images/signup-image.svg' %}">
+            </div>
+
+            <div class="signup-form">
+                <h2>Employment history</h2>
+                <form class="forms">
+                    <!-- name of employer -->
+                    <div class="input name-employer">
+                        <label for="employer-name">Full name of employer</label>
+                        <input type="text" id="employer-name" name="employer-name" placeholder="Employer's full name"
+                            class="input-style" required>
+                    </div>
+
+                    <!-- address of employer -->
+                    <div class="input address-employer">
+                        <label for="employer-address">Addreess of employer</label>
+                        <input type="text" id="employer-address" name="employer-address" placeholder="Employee's address"
+                            class="input-style" required>
+                    </div>
+
+                    <!-- type of employer -->
+                    <div class="input type-employer">
+                        <label for="employer-type">Type of employer</label>
+                        <input type="text" id="employer-type" name="employer-type" placeholder="Type of employer"
+                            class="input-style" required>
+                    </div>
+
+                    <!-- Salary range -->
+                    <div class="input salary">
+                        <label for="salary-range">Salary range</label>
+                        <select name="salary-range" id="salary-range">
+                            <datalist id="salary-range">
+                                <option value="">Select a salary range</option>
+                                <option value="$0 - $25,000">$0 - $25,000</option>
+                                <option value="$25,000 - $50,000">$25,000 - $50,000</option>
+                                <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                                <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                                <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                            </datalist>
+
+                        </select>
+                    </div>
+                    <!-- don't have an account -->
+                    <div class="login-redirect">
+                        <p>Don't have an account? <a href="{% url 'signup' %}" class="text-link">Sign up</a></p>
+                    </div>
+                    <!-- submit button -->
+                    <div class="button-div">
+                        <button class="btn-dark">Continue</button>
+                    </div>
+                </form>
+                
+
+            </div>
+        </div>
+    </section>
+
+
+    <script src="{% static 'index.js' %}"></script>
+    <script src="//code.tidio.co/REMOVED.js" async></script>
+</body>
+</html> 

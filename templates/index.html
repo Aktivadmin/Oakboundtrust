@@ -1,0 +1,425 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+    
+    <main>
+        <!--Hero Section -->
+        <section id="hero">
+            <div class="container hero-section">
+                <div class="hero-text">
+                    <p>All-in-one banking for everyone</p>
+                    <h1>Smart and simple online banking</h1>
+                    <p>With our secure online banking services, you 
+                        can manage your finances from anywhere, at any time
+                    </p>
+                </div>
+                {% if user.is_authenticated %}{% else %}
+                <div class="hero-buttons">
+                    <a href="{% url 'signup' %}" rel="Sign Up Page">
+                        <button class="btn-stroke-light button" style="width: 200px;">Create account</button>
+                    </a>
+                    <a href="{% url 'login' %}" rel="Sign Up Page">
+                        <button class="btn-light button" style="width: 200px;">Login</button>
+                    </a>
+                    
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Products and Services Section -->
+        <section id="products">
+            <div class="container products">
+                <div class="section-header">
+                    <h2>Products & Services</h2>
+                    <p>Choose what's right for you</p>
+                </div>
+        
+                <div class="services">
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/account_balance_wallet_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "dashboard" %}"><h6>Checking account</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/credit_card_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "credit-card" %}"><h6>Credit cards</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/savings_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "dashboard" %}"><h6>Savings</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/real_estate_agent_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "loans" %}"><h6>home loans</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/elderly_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "loans" %}"><h6>Retirement</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/credit_card_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "loans" %}"><h6>Auto loans</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+        
+            </div>
+        </section>
+
+        <!-- More than just a bank -->
+        <section id="three-cards">
+            <div class="container three-box">
+                <div class="section-header">
+                    <h2>More than just a bank</h2>
+                </div>
+
+                <div class="feat-cards">
+                
+                    <!-- First card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/saving.jpg' %}" alt="a hand putting a coin in a piggy bank">
+                        </div>
+                        <div class="feature-card-text">
+                            <h6>Round up to save</h6>
+                            <h3>Grow your savings every time you spend</h3>
+                            <button class="btn-dark">Learn more</button>
+                        </div>
+                    </div>
+                
+                    <!-- Second card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/credit-cards.jpg' %}" alt="a hand putting a coin in a piggy bank">
+                        </div>
+                        <div class="feature-card-text">
+                            <h6>Credit cards</h6>
+                            <h3>Get Started With a Card That's Right for You</h3>
+                            <button class="btn-dark">Sign up</button>
+                        </div>
+                    </div>
+                
+                    <!-- Third card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/retirement-plan.jpg' %}" alt="a hand putting a coin in a piggy bank">
+                        </div>
+                        <div class="feature-card-text">
+                            <h6>Retirement planning</h6>
+                            <h3>Start Planning for a Sound Financial Future</h3>
+                            <button class="btn-dark">Sign up</button>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </section>
+
+        <!-- Mobile app callout section -->
+        <section id="mobile-app-section">
+            <!-- Mobile callout text -->
+            <div class="container mobile-app">
+                <div class="mobile-app-text">
+                    <div>
+                        <h2>Banking in the palm of your hand</h2>
+                        <p>Our Silver Loom app gives you fast and secure access to your finances</p>
+                    </div>
+                    
+                    <div class="list-feat-all">
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Pay your bills</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Send money with Zelle</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Get alerts</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Instant info</h6>
+                        </div>
+                    </div>
+
+                    <!-- Apple & Play Store buttons -->
+                    <div class="apple-playstore">
+                        <!-- App Store -->
+                        <div class="download-button">
+                            <img src="{% static 'icons/apple.svg' %}">
+                            <div class="download-text">
+                                <p><small>Download on the</small></p>
+                                <p>App Store</p>
+                            </div>
+                        </div>
+
+                        <!-- Play Store -->
+                        <div class="download-button">
+                            <img src="{% static 'icons/play-store.svg' %}">
+                            <div class="download-text">
+                                <p><small>GET IT ON</small></p>
+                                <p>Google Play</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+
+                <!-- Mobile callout image -->
+                <div class="mobile-app-img">
+                    <img src="{% static 'images/SL-Mobile.png' %}" alt="mockup of Axis Capital mobile app">
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Loan Rates -->
+        <section id="loan-rates-section">
+            <div class="container loan-rates">
+                <div class="loan-rates-header">
+                    <h2>Better Rates To Help You Reach Your Goals</h2>
+                </div>
+
+                <div class="rate-card-list">
+                    <!-- 1st Card -->
+                    <div class="rate-card">
+                        <div class="rate-icon-header">
+                            <img src="{% static 'icons/car-filled.svg' %}">
+                            <h4>Car loans</h4>
+                        </div>
+                        <p>Rates from:</p>
+                        <div class="apr-rate">
+                            <h2>4.06%</h2>
+                            <h4>APR</h4>
+                        </div>
+                        <p>for new cars</p>
+                        <button class="btn-light">Learn more</button>
+                    </div>
+
+                    <!-- 2nd Card -->
+                    <div class="rate-card">
+                        <div class="rate-icon-header">
+                            <img src="{% static 'icons/boat-filled.svg' %}">
+                            <h4>Boat Loans</h4>
+                        </div>
+                        <p>Rates from:</p>
+                        <div class="apr-rate">
+                            <h2>6.30%</h2>
+                            <h4>APR</h4>
+                        </div>
+                        <p>for new boats</p>
+                        <button class="btn-light">Learn more</button>
+                    </div>
+
+                    <!-- 3rd Card -->
+                    <div class="rate-card">
+                        <div class="rate-icon-header">
+                            <img src="{% static 'icons/motorcycle-filled.svg' %}">
+                            <h4>Motorcycle loans</h4>
+                        </div>
+                        <p>Rates from:</p>
+                        <div class="apr-rate">
+                            <h2>5.63%</h2>
+                            <h4>APR</h4>
+                        </div>
+                        <p>for new motorcycles</p>
+                        <button class="btn-light">Learn more</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights & Stories Section -->
+        <section id="insights-section">
+            <div class="container insights">
+                <div class="section-header">
+                    <h2>Insights & Stories</h2>
+                </div>
+                <div class="insight-card-list">
+                    <!-- 1st insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/customer-server-insights.png' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Customer Service: Tools to manage your account</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2nd insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/holding-hands-insights.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Axis is committed to helping close the racial wealth gap</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3rd insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/laptop-credit-card-insight.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Videos to help you bank from your device</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4th insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/teaching-insight.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Spotlight Stories: Brewing up generation wealth</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legal Disclosures -->
+        <section id="legal-disclosure">
+            <div class="container legal">
+                <div class="section-header">
+                    <h2>Important Legal Disclosures and Information</h2>
+                </div>
+                <div class="legal-list">
+                    <ul>
+                        <li>Zelle and the Zelle related marks are wholly owned 
+                            by Early Warning Services, LLC and are used herein 
+                            under license.
+                        </li>
+                        <li>Transactions typically occur in minutes when the 
+                            recipient's email address or U.S. mobile number 
+                            is already enrolled with Zelle.
+                        </li>
+                        <li>Apple Watch is a trademark of Apple, Inc. and 
+                            Apple is a registered trademark of Apple, Inc.
+                        </li>
+                        <li>Annual Percentage Rate (APR) is accurate as of 
+                            06/27/2023 and includes a one-time $150 loan 
+                            origination fee and 0.50% interest rate discount 
+                            for automatic payment draft from a Silver Loom 
+                            checking account. Minimum loan amount $4,000; maximum 
+                            loan amount $150,000. 4.06% APR is based on an example 
+                            loan amount of $40,000 for a term of 72 months with 
+                            monthly payments of $624.60. Additional fees may apply. 
+                            Other restrictions may apply. Your actual APR may vary 
+                            based on creditworthiness, loan amount, loan term and 
+                            vehicle. Rates, terms and conditions offered are subject 
+                            to change without notice. All loans are subject to credit 
+                            approval.
+                        </li>
+                        <li>Annual Percentage Rate (APR) is accurate as of 06/27/2023 
+                            and includes a one-time $150 loan origination fee and 0.50% 
+                            interest rate discount for automatic payment draft from a 
+                            Silver Loom checking account. Minimum loan amount $5,000; 
+                            maximum loan amount $300,000. 6.30% APR is based on an example 
+                            loan amount of $70,000 for a term of 144 months with monthly 
+                            payments of $693.87. 144 month term available for a loan amount 
+                            of $50,000 - $74,999. Additional fees may apply. Other 
+                            restrictions may apply. Your actual APR may vary based on 
+                            creditworthiness, loan amount, loan term and collateral. 
+                            Other rates and terms available. Rates, terms and conditions 
+                            offered are subject to change without notice. All loans are 
+                            subject to credit approval.
+                        </li>
+                        <li>Annual Percentage Rate (APR) is accurate as of 06/27/2023 and 
+                            includes a one-time $150 loan origination fee and 0.50% interest 
+                            rate discount for automatic payment draft from a SouthState 
+                            checking account. Minimum loan amount $4,000; maximum loan 
+                            amount $50,000. 5.63% APR is based on an example loan amount 
+                            of $40,000 for a term of 72 months with monthly payments of 
+                            $653.43. Additional fees may apply. Other restrictions may 
+                            apply. Your actual APR may vary based on creditworthiness, 
+                            loan amount, loan term and vehicle. Rates, terms and conditions 
+                            offered are subject to change without notice. All loans are 
+                            subject to credit approval.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock content %}

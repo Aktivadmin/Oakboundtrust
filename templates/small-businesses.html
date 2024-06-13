@@ -1,0 +1,287 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+    
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero-small-business">
+            <div class="hero-small-business-img">
+
+            </div>
+            <div class="hero-header-text">
+                <h2>Now would be the perfect time to move your business forward</h2>
+                <p>Small business lending opportunities—anytime, anywhere</p>
+                <a href="{% url "login" %}"><button class="btn-light">Client login</button></a>
+            </div>
+            <div class="online-banking">
+                <h3>Online Banking</h3>
+                <div class="login-signin">
+                    <button class="btn-dark">Log in</button>
+                    <button class="btn-stroke-dark">Sign up</button>
+                </div>
+                <div class="extra-infolink-list">
+                    <div class="extra-info-link">
+                        <div class="info-icon">
+                            <p>Learning more about Personal Online Banking</p>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                                </span>
+                        </div>
+                        <div class="line-extra-info"></div>
+                    </div>
+
+                    <div class="extra-info-link">
+                        <div class="info-icon">
+                            <p>Learning more about Small Business Online Banking</p>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                                </span>
+                        </div>
+                        <div class="line-extra-info"></div>
+                    </div>
+
+                    <div class="extra-info-link">
+                        <div class="info-icon">
+                            <p>Protect yourself against fraud</p>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                                </span>
+                        </div>
+                        <div class="line-extra-info"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SMALL BUSINESS BANKING SECTION-->
+        <section id="products">
+            <div class="container products">
+                <div class="section-header">
+                    <h2>Small Business Banking</h2>
+                    <p>Explore Small Business Banking products and services</p>
+                </div>
+        
+                <div class="services">
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/account_balance_wallet_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "dashboard" %}"><h6>Checking account</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/credit_card_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "credit-card" %}"><h6>Credit cards</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/point-of-sale-filled.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "dashboard" %}"><h6>Merchant Services</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/payments-filled.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "loans" %}"><h6>Loans</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/credit-score-filled.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "credit-card" %}"><h6>Lines of credit</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="service-icon-text">
+                        <div class="service-img">
+                            <img src="{% static 'icons/desktop-mac-filled.svg' %}" alt="wallet icon">
+                        </div>
+                        <div class="title-icon">
+                            <a href="{% url "dashboard" %}"><h6>Online & mobile</h6></a>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+        
+            </div>
+        </section>
+
+        <!-- Exploring financing options -->
+        <section id="finance-options">
+            <div class="container grid-6">
+                <div class="about-sec3-text">
+                    <h2>
+                        Exploring financing options?
+                    </h2>
+                    <p>
+                        Check out the new Business Services Digital 
+                        Advisor for recommendations on which borrowing 
+                        products may be the best fit.
+                    </p>
+                    <div class="title-icon">
+                        <h6>Learn more</h6>
+                        <span class="material-symbols-rounded">
+                            chevron_right
+                        </span>
+                    </div>
+                </div>
+
+                <div class="about-sec3-img">
+                    <img src="{% static 'images/calculator-pen.png' %}">
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Axis Capital -->
+        <section id="three-cards">
+            <div class="container three-box">
+                <div class="section-header">
+                    <h2>Why Choose Silver Loom</h2>
+                </div>
+
+                <div class="feat-cards">
+                
+                    <!-- First card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/wealth-journey1.png' %}" alt="a hand putting a coin in a piggy bank" >
+                        </div>
+                        <div class="feature-card-text">
+                            <h3>Tailored</h3>
+                            <p>We provide personalized options by working with you 
+                                to develop a deep, long-term understanding of your 
+                                business.
+                            </p>
+                        </div>
+                    </div>
+                
+                    <!-- Second card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/wealth-journey2.png' %}" alt="a hand putting a coin in a piggy bank">
+                        </div>
+                        <div class="feature-card-text">
+                            <h3>Supportive</h3>
+                            <p>Our bankers have the knowledge to help you move your 
+                                business forward — now and in the future.
+                            </p>
+                        </div>
+                    </div>
+                
+                    <!-- Third card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/wealth-journey3.png' %}" alt="a hand putting a coin in a piggy bank">
+                        </div>
+                        <div class="feature-card-text">
+                            <h3>Simple</h3>
+                            <p>We provide easy-to-use products, tools, and resources 
+                                for small businesses to help simplify your financial 
+                                life.
+                            </p>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </section>
+
+        <!-- Mobile app callout section -->
+        <section id="mobile-app-section-small-business">
+            <!-- Mobile callout text -->
+            <div class="container mobile-app">
+                <div class="mobile-app-text">
+                    <div>
+                        <h2>Banking in the palm of your hand</h2>
+                        <p>Our Silver Loom app gives you fast and secure access to your finances</p>
+                    </div>
+                    
+                    <div class="list-feat-all">
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>Pay your bills</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>Send money with Zelle</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>Get alerts</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>Instant info</h6>
+                        </div>
+                    </div>
+
+                    <!-- Apple & Play Store buttons -->
+                    <div class="apple-playstore">
+                        <!-- App Store -->
+                        <div class="download-button">
+                            <img src="{% static 'icons/apple-dark-filled.svg' %}">
+                            <div class="download-text">
+                                <p><small>Download on the</small></p>
+                                <p>App Store</p>
+                            </div>
+                        </div>
+
+                        <!-- Play Store -->
+                        <div class="download-button">
+                            <img src="{% static 'icons/play-store-dark-filled.svg' %}">
+                            <div class="download-text">
+                                <p><small>GET IT ON</small></p>
+                                <p>Google Play</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+
+                <!-- Mobile callout image -->
+                <div class="mobile-app-img">
+                    <img src="{% static 'images/SL-Mobile.png' %}" alt="mockup of Axis Capital mobile app">
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock content %}

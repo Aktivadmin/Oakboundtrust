@@ -1,0 +1,307 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+    <main>
+        <!--First Section-->
+        <section id="mortgage-hero">
+            <div class="overlay">
+                <div class="container about-hero-div">   
+                    <div class="about-hero-text">
+                        <h5>
+                            MORTGAGE
+                        </h5>
+                        <h2>
+                            From House Hunting to Moving Day
+                        </h2>
+                        <p>
+                            At Silver Loom, we are committed to creating a better banking experience with innovative solutions that make our customers' lives easier and more convenient.
+                        </p>
+                        <a href="{% url 'signup' %}" rel="Sign Up Page">
+                            <button class="btn-light button">Learn More</button>
+                        </a>
+                    </div>  
+                </div>
+            </div>
+        </section>
+
+        <!-- How Can We Help -->
+        <section id="loan-rates-section">
+            <div class="container loan-rates">
+                <div class="mortgage-help-header">
+                    <p>How can we help?</p>
+                    <h2>I'm Ready To:</h2>
+                </div>
+
+                <div class="rate-card-list">
+                    <!-- 1st Card -->
+                    <div class="mortgage-card">
+                        <div class="rate-icon-header">
+                            <img src="{% static 'icons/mortgage-online.svg' %}">
+                        </div>
+                        <h3>Apply Online Now</h3>
+                    </div>
+
+                    <!-- 2nd Card -->
+                    <div class="mortgage-card">
+                        <div class="rate-icon-header">
+                            <img src="{% static 'icons/mortgage-banker.svg' %}">
+                        </div>
+                        <h3>Find a Local Mortgage Banker</h3>
+                    </div>
+
+                    <!-- 3rd Card -->
+                    <div class="mortgage-card">
+                        <div class="rate-icon-header">
+                            <img src="{% static 'icons/Home-Loans-light.svg' %}">
+                        </div>
+                        <h3>Apply For a Home Loan</h3>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!--When You Find the Right Home, You Know-->
+
+        <section>
+            <div class="container about-sec2">
+                <h2>
+                    When You Find the Right Home, You Know
+                </h2>
+                <p>
+                    We want to make the mortgage process feel the same way. 
+                    Our loan officers work closely with you to make sure you are 
+                    comfortable with your mortgage loan and it will help you meet your long-term goals.
+                </p> 
+            </div>
+        </section>
+
+        <!--Mortgage Loan Options-->
+
+        <section>
+            <div class="container grid-6">
+                <div class="pdts-and-srvs">
+                    <div class="pdts-and-srvs-text">
+                        <h2>Mortgage Loan Options</h2>
+                        <p>Talk to us about what's important to you and we'll find the mortgage that will fit you best.</p>
+                    </div>
+                    
+                    <div class="list-feat-all">
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Fixed-Rate Mortgages</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Adjustable-Rate Mortgages</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>FHA Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>VA Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>USDA Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Construction Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Jumbo Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Lot Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Physician Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Portfolio Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Buyers Advantage</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Manufactured Housing Loans</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pdts-and-srvs-img" style="background-image: url('../static/images/mortgage-mom&baby.png'); background-position: center; background-size: cover; background-repeat: no-repeat; border-radius: 1rem; height: 300px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Refinance Your Home -->
+        <section id="finance-options">
+            <div class="container grid-6">
+
+                <div class="about-sec3-img">
+                    <img src="{% static 'images/mortgage-family.webp' %}">
+                </div>
+
+                <div class="about-sec3-text">
+                    <h2>
+                        Refinance Your Home
+                    </h2>
+                    <p>
+                        By refinancing, you may be able to reduce your interest rate and monthly payment. 
+                        You may also reduce the term length so your home is paid off faster. 
+                        Our mortgage loan officers can recommend refinancing options that will get you closer to your goals.
+                    </p>
+                    <div class="finance-btns">
+                        <button class="btn-dark">Log in</button>
+                        <div class="title-icon">
+                            <h6>Learn more</h6>
+                            <span class="material-symbols-rounded">
+                                chevron_right
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+        </section>
+
+        <!-- First-Time Buyer Resources -->
+        <section>
+            <div class="container buyer-resources">
+
+                <div class="resources-left-div">
+                    <h2>First-Time Buyer Resources</h2>
+                    <div class="resources-left-list">
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>Fixed-Rate Mortgages</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>Adjustable-Rate Mortgages</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>FHA Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>VA Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>USDA Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle-light-filled.svg' %}" width="24">
+                            <h6>Construction Loans</h6>
+                        </div>
+                    </div>
+                    <div class="resc-icon">
+                        <h6>Learn more</h6>
+                        <img src="{% static 'icons/chevron-light.svg' %}" rel="Chevron Right Light">
+                    </div>
+                </div>
+
+                <div class="resources-right-div">
+                    <img src="{% static 'icons/money-icn.svg' %}" rel="Money">
+                    <h2>Find What You Can Afford</h2>
+                    <div class="resc-icon">
+                        <h6>Speak to a Axis banker</h6>
+                        <span class="material-symbols-rounded">
+                        chevron_right
+                        </span>
+                    </div>  
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights & Stories Section -->
+        <section id="insights-section">
+            <div class="container insights">
+                <div class="section-header">
+                    <h2>Insights & Stories</h2>
+                </div>
+                <div class="insight-card-list">
+                    <!-- 1st insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/customer-server-insights.png' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Customer Service: Tools to manage your account</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2nd insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/holding-hands-insights.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Axis is committed to helping close the racial wealth gap</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3rd insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/laptop-credit-card-insight.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Videos to help you bank from your device</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4th insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/teaching-insight.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Spotlight Stories: Brewing up generation wealth</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock content %}

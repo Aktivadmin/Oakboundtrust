@@ -1,0 +1,149 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+    
+    <main>
+        <!--Investment and Wealth-->
+
+        <section>
+            <div id="investment" class="grid-6">
+                <div class="invst-hero-div">
+                    <h2>
+                        Investing and Wealth
+                    </h2>
+                    <p>
+                        Explore investing solutions based on your needs
+                    </p>
+                    <div class="invst-hero-icns">
+                        <div class="service-icon-text">
+                            <div class="invest-icn">
+                                <img src="{% static 'icons/account_balance_wallet_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                            </div>
+                            <div class="title-icon">
+                                <h6>Checking account</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="service-icon-text">
+                            <div class="service-img">
+                                <img src="{% static 'icons/credit_card_FILL1_wght400_GRAD0_opsz48.svg' %}" alt="wallet icon">
+                            </div>
+                            <div class="title-icon">
+                                <h6>Credit Cards</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="service-icon-text">
+                            <div class="service-img">
+                                <img src="{% static 'icons/fontisto_shopping-pos-machine.svg' %}" alt="wallet icon" height="80px" style="margin-top: 8px;">
+                            </div>
+                            <div class="title-icon">
+                                <h6>Merchant Services</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="invst-hero-img" style="background-image: url(../static/images/shaking-hands.png); background-position: center; background-size: cover; background-repeat: no-repeat; height: 400px;">
+                </div>
+            <div>
+        </section>
+
+        <!--Wealth Journey-->
+
+        <section id="three-cards">
+            <div class="container three-box">
+                <div class="section-header">
+                    <h2>Let's talk about your personal wealth journey</h2>
+                    <p style="margin-top: 24px;">At every stage of investing, we can help</p>
+                </div>
+
+                <div class="feat-cards">
+                
+                    <!-- First card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/wealth-journey1.png' %}" alt="a hand putting a coin in a piggy bank" >
+                        </div>
+                        <div class="feature-card-text">
+                            <h3>Start Investing</h3>
+                            <p>We'll help you get started and to find an appropriate investment.</p>
+                        </div>
+                    </div>
+                
+                    <!-- Second card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/wealth-journey2.png' %}" alt="a hand putting a coin in a piggy bank">
+                        </div>
+                        <div class="feature-card-text">
+                            <h3>Grow your Wealth</h3>
+                            <p>Whatever your goals or timeline, we can help you get there.</p>
+                        </div>
+                    </div>
+                
+                    <!-- Third card -->
+                    <div class="feature-card">
+                        <div class="feature-card-img">
+                            <img src="{% static 'images/wealth-journey3.png' %}" alt="a hand putting a coin in a piggy bank">
+                        </div>
+                        <div class="feature-card-text">
+                            <h3>Preserve your Wealth</h3>
+                            <p>Work towards a worry-free retirement and leave the legacy you want.</p>
+                        </div>
+                    </div>
+
+                </div>  
+            </div>
+        </section>
+
+        <!--Plan For Success-->
+
+        <section>
+            <div class="small-container">
+                <div class="plan-img">
+                    <img src="{% static 'images/E-Wallet-bro-1.svg' %}" alt="Plan for success ">
+                </div>
+                <div class="plan-txt">
+                    <h3>
+                        Plan for success
+                    </h3>
+                    <p>
+                        It's important to have a clear plan in place that outlines your goals. Wherever you are on your investing journey, we can help with our tailored investment options.
+                    </p>
+                    {% if user.is_authenticated %}{% else %}
+                    <a href="{% url 'signup' %}">
+                    <button class="btn-dark">Sign up</button>
+                    {% endif %}
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!--End-Of-Cycle-->
+
+        <section id="end-of-cycle">
+            <div class="container end-of-cycle-div">
+                <h1>
+                    Navigating end-of-cycle turbulence
+                </h1>
+                <h4>
+                    Our forecasts and potential investment opportunities for the second half of the year.
+                </h4>
+                <button class="btn-dark">Get the Midyear Outlook</button>
+            </div>
+        </section>
+    </main>
+{% endblock content %}

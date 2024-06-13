@@ -1,0 +1,332 @@
+{% load static %}
+{% load humanize %}
+<!-- Dashboard -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal | Silver Loom</title>
+
+    <style>
+        .material-symbols-rounded {
+            cursor: pointer;
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48
+        }
+    </style>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+
+    <!-- Google symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'reset.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    
+</head>
+
+<body>
+
+    <main class="grid-6">
+
+        <!-- Left Dashboard Section -->
+
+        <section class="dashboard-navigation">
+            <div class="dashboard-main-logo">
+                <a href="{% url 'home' %}"><img src="{% static 'icons/logo.png' %}" alt="logo"></a>
+            </div>
+
+            
+            <div class="dashboard-nav-links">
+
+                <!-- Dashboard -->
+                <div>
+                    <a href="{% url 'dashboard' %}" rel="Dashboard" class="dark-link">
+                        <img src="{% static 'icons/dash-light.svg' %}" alt="dash-svg">
+                        <p>Dashboard</p>
+                    </a>
+                </div>
+
+                <!-- Transactions -->
+                <div class="dash-links">
+                    <a href="{% url 'transaction' %}" rel="Transaction" class="dark-link">
+                        <img src="{% static 'icons/trans-light.svg' %}" alt="dash-svg">
+                        <p>Transactions</p>
+                    </a>  
+                </div>
+
+                <!-- Credit Cards -->
+                <div>
+                    <a href="{% url 'credit-card' %}" rel="Credit Cards" class="dark-link">
+                        <img src="{% static 'icons/cc-light.svg' %}" alt="dash-svg">
+                        <p>Credit Cards</p>
+                    </a>  
+                </div>
+
+                <!-- Deposit -->
+                <div>
+                    <a href="{% url 'deposit' %}" rel="Deposit" class="dark-link">
+                        <img src="{% static 'icons/deposit-light.svg' %}" alt="dash-svg">
+                        <p>Deposit</p>   
+                    </a>
+                </div>
+
+                <!-- Withdraw -->
+                <div>
+                    <a href="{% url 'withdraw' %}" rel="Withdraw" class="light-link">
+                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
+                        <p>Withdraw</p>  
+                    </a>
+                </div> 
+                
+                <div>
+                    <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
+                        {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
+                        <p>Logout</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Dashboard Navigation Menu -->
+            <div class="ham-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <!-- Dashboard Navigation links -->
+            <div class="mobile-navigation-menu web-app">   
+                
+                <!-- Mobile navigation menu -->
+                <!-- Dashboard -->
+                <div >
+                    <a href="{% url 'dashboard' %}" rel="Dashboard" class="dark-link">
+                        <img src="{% static 'icons/dash-light.svg' %}" alt="dash-svg">
+                        <p>Dashboard</p>
+                    </a>
+                </div>
+        
+                <!-- Transactions -->
+                <div class="dash-links">
+                    <a href="{% url 'transaction' %}" rel="Transaction" class="dark-link">
+                        <img src="{% static 'icons/trans-light.svg' %}" alt="dash-svg">
+                        <p>Transactions</p>
+                    </a>
+                </div>
+        
+                <!-- Credit Cards -->
+                <div>
+                    <a href="{% url 'credit-card' %}" rel="Credit Cards" class="dark-link">
+                        <img src="{% static 'icons/cc-light.svg' %}" alt="dash-svg">
+                        <p>Credit Cards</p>
+                    </a>
+                </div>
+        
+                <!-- Deposit -->
+                <div>
+                    <a href="{% url 'deposit' %}" rel="Deposit" class="dark-link">
+                        <img src="{% static 'icons/deposit-light.svg' %}" alt="dash-svg">
+                        <p>Deposit</p>
+                    </a>
+                </div>
+        
+                <!-- Withdraw -->
+                <div>
+                    <a href="{% url 'withdraw' %}" rel="Withdraw" class="light-link">
+                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
+                        <p>Withdraw</p>
+                    </a>
+                </div>
+
+                <div>
+                    <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
+                        {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
+                        <p>Logout</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Second Dashboard Section -->
+
+        <section class="dashboard-center">
+
+            <!--Greeting & Profile Pic-->
+            <div class="dash-center-first">
+                <div class="flex-row">
+                    <img src="{% static 'icons/sunrise.svg' %}" alt="sun-icon">
+                    <p>Good Morning, {{user.first_name}}</p>
+                </div>
+
+                <div class="flex-row">
+                    <img src="{% static 'icons/calender.svg' %}" alt="sun-icon">
+                    <p id="dateContainer"></p>
+                </div>
+            </div>
+
+            <!--Cards-->
+            <div class="dash-center-second deposit">
+                <h3>Withdrawal</h3>
+                <div class="grid-6">
+                    <div class="center-dark-card">
+                        <h4>Available Balance</h4>
+                        <h2>${{user.balance|floatformat:2|intcomma}}</h2>
+                    </div>
+                    <div class="center-light-card1">
+                        <h4>Pending Checking</h4>
+                        <h2>$0.00</h2>
+                    </div>
+                    <div class="center-light-card2">
+                        <h4>Savings</h4>
+                        <h2>$0.00</h2>
+                    </div>
+                    <div class="center-light-card3">
+                        <h4>Expenses</h4>
+                        <h2>$0.00</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!--This is where the chart will be embedded-->
+            <div>
+
+            </div>
+
+            <!--Withdrawal form section-->
+            <section id="withdraw-form-section">
+                <div class="withdrawal-header">
+                    <h3>Withdrawal</h3>
+                    <p>International Transfer?</p>
+                </div>
+
+                <div class="withdrawable-amount">
+                    <div class="dash-right-balance">
+                        <h2>${{user.balance|floatformat:2|intcomma}}</h2>
+                    </div>
+                </div>
+
+                <div class="withdrawal-form">
+                    <form class="forms" method="POST">
+                        {% include 'partials/messages.html' %}
+                        {% csrf_token %}
+                        <!-- amount & account number -->
+                        <div class="input-group">
+                            <div class="input">
+                                <label for="withdraw-amount">Amount</label>
+                                <input type="number" id="withdraw-amount" name="amount" placeholder="Amount you want to withdraw" class="input-style" min="0" required>
+                            </div>
+                            <div class="input">
+                                <label for="recipient-ac-num">Account number</label>
+                                <input type="number" id="recipient-ac-num" name="acc-no" placeholder="Recipient's account number" class="input-style" required>
+                            </div>
+                        </div>
+                        <!-- account name -->
+                        <div class="input">
+                            <label for="account-name">Account name</label>
+                            <input type="text" id="account-name" name="acc-name" placeholder="Full name of the recipient's account"
+                                class="input-style" required>
+                        </div>
+
+                        <!-- bank name -->
+                        <div class="input">
+                            <label for="bank-name">Bank name</label>
+                            <input type="text" id="bank-name" name="bank-name" placeholder="Name of the recipient's bank"
+                                class="input-style" required>
+                        </div>
+
+                        <!-- withdrawal description -->
+                        <div class="input">
+                            <label for="withdraw-description">Description</label>
+                            <textarea name="description" id="withdraw-description" placeholder="Description"
+                                rows="5" class="input-style"></textarea>
+                            
+                        </div>
+                        
+                        <!-- submit button -->
+                        <div class="button-div">
+                            <button class="btn-dark" type="submit">Continue</button>
+                        </div>
+                    
+                    </form>
+                </div>
+            </section>
+            
+        </section>
+
+        <!-- Third Dashboard Section -->
+
+        <section class="dashboard-right">
+
+            <h2>This Is Banking Forward</h2>
+            
+            <div class="dash-right-img">
+                <img src="{% static 'images/bank.jpg' %}">
+            </div>
+
+            <div class="dash-right-loans">
+                <img src="{% static 'icons/Home-Loans.svg' %}" alt="hole loans icons" style="height: 64px; width: 64px;">
+                <h4>Home Loans</h4>
+                <p>Getting a loan doesn't have to be a hassle, apply for a mortgage loan with Silver Loom today</p>
+                <a href="{% url "apply-for-loan" %}">
+                <button class="btn-dark" style="width: 200px;">Apply Now</button>
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+    <script src="{% static 'index.js' %}"></script>
+    <script>
+        // Function to format the date as "28th September"
+        function formatDate(date) {
+            const day = date.getDate();
+            const monthNames = [
+                "January", "February", "March", "April",
+                "May", "June", "July", "August",
+                "September", "October", "November", "December"
+            ];
+            const monthIndex = date.getMonth();
+            const month = monthNames[monthIndex];
+            const formattedDate = `${day}${getOrdinalSuffix(day)} ${month}`;
+            return formattedDate;
+        }
+
+        // Function to get the ordinal suffix for a day (e.g., 1st, 2nd, 3rd, 4th, etc.)
+        function getOrdinalSuffix(day) {
+            if (day >= 11 && day <= 13) {
+                return "th";
+            }
+            switch (day % 10) {
+                case 1:
+                    return "st";
+                case 2:
+                    return "nd";
+                case 3:
+                    return "rd";
+                default:
+                    return "th";
+            }
+        }
+
+        // Get the current date and time
+        const currentDate = new Date();
+
+        // Get the reference to the div element by its id
+        const dateContainer = document.getElementById("dateContainer");
+
+        // Update the content of the div with the formatted date
+        dateContainer.textContent = formatDate(currentDate);
+    </script>
+
+</body>
+</html>

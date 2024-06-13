@@ -1,0 +1,340 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application</title>
+
+    <style>
+        .material-symbols-rounded {
+            cursor: pointer;
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48
+        }
+    </style>
+
+    <!-- Google symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'reset.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    
+</head>
+
+<body>
+
+    <header id="sign-up-header">
+        <!-- Top navigation -->
+        <div class="nav-container">
+            <a href="{% url 'home' %}" rel="logo">
+                <img src="{% static 'icons/logo.png' %}">
+            </a>
+            <nav class="nav">
+                <button class="btn-light button">View Application Status</button>
+            </nav>
+            
+            <div class="ham-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <!-- Mobile navigation menu -->
+            <div class="mobile-navigation-menu">
+                <!-- Navigation links -->
+                <div class="links-mobile-group">
+                    <nav class="mobile-nav">
+                    <button class="btn-light button">View Application Status</button>
+                    </nav>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section>
+
+            <!--Personal Information-->
+            <div class="form-div">
+                <h3>Personal Information</h3>
+                <p>Thank you for choosing Silver Loom Bank</p>
+                <p>This application process should take approximately 10 minutes. You will need the following items:</p>
+                <ul>
+                    <li>Driver's License, Passport, Military ID or State ID.</li>
+                    <li>U.S. Social Security Number.</li>
+                    <li>U.S. Citizenship or Resident Alien Status.</li>
+                </ul>
+                <p>For your security, the system will log you off if there is no activity for 15 minutes.</p>
+            </div>
+        </section>
+
+        <section>
+
+            <div class="form-div">
+                <!--What this means to you-->
+                <div class="application-colored-div">
+                    <h4>Thank you for choosing Silver Loom Bank</h4>
+                    <p>To help the government fight the funding of terrorism and money laundering activities, 
+                        Federal Law requires all financial institutions to obtain, 
+                        verify and record information that identifies each person who opens an account.
+                    </p>
+                    <h4>What This Means to You</h4>
+                    <p>When you open a new account, we will ask for your name, address, date of 
+                        birth and other information that will allow us to identify you. 
+                        We may also ask to see your driver's license or other identifying documents.
+                    </p>
+                </div>
+            </div>
+
+            
+        </section>
+
+        <section>
+
+            <!--Credit History-->
+            
+            <div class="form-div">
+                <h4>Your Credit History</h4>
+                <p>As part of processing your application, we will request a credit report and 
+                    use the information contained in it to evaluate your loan application.
+                </p>
+                <form class="forms" method="POST">
+                    {% csrf_token %}
+                <div class="application-radio-btns">
+                    <p>*</p>
+                    <p>Are you an existing customer ?</p>
+                    <div>
+                        <input type="radio" id="html" name="existing-customer" value="Yes">
+                        <label for="Yes">Yes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="css" name="existing-customer" value="No">
+                        <label for="No">No</label>
+                    </div>    
+                </div>
+
+                
+
+                    <div class="application-pair">
+                        <!-- Firstname -->
+                        <div class="input name-firstname">
+                            <label for="firstname-name">Firstname</label>
+                            <input type="text" id="firstname-name" name="first-name" placeholder="Firstname"
+                                class="input-style" required>
+                        </div>
+
+                        <!-- Lastname -->
+                        <div class="input name-lastname">
+                            <label for="lastname-name">Lastname</label>
+                            <input type="text" id="lastname-name" name="last-name" placeholder="Lastname"
+                                class="input-style" required>
+                        </div>
+                    </div>
+
+
+                    <div class="application-pair">
+                        <!-- date of birth -->
+                        <div class="input date-of-birth">
+                            <label for="dob">Date of birth</label>
+                            <input type="date" id="dob" name="dob" class="input-style" required>
+                        </div>
+
+                        <!-- SSN -->
+                        <div class="input social-sec-number">
+                            <label for="ssn">Social security number</label>
+                            <input type="number" id="ssn" name="ssn" placeholder="Enter your SSN" class="input-style" required>
+                        </div>  
+                    </div>
+
+
+                    <div class="application-pair">
+                        <!-- Preferred Contact Method -->
+                        <div class="input contact-method">
+                            <label for="contact-method">Preferred Contact Method</label>
+                            <select name="contact-method" id="contact-method">
+                                <datalist id="contact-method">
+                                    <option value="">Select</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Work Phone">Work Phone</option>
+                                    <option value="Home Phone">Home Phone</option>
+                                    <option value="Silver Loom Chatbox">Silver Loom Chatbox</option>
+                                </datalist>
+
+                            </select>
+                        </div>
+                        
+                        
+                        <!-- Preferred Contact Time -->
+                        <div class="input contact-time">
+                            <label for="contact-time">Preferred Contact Time</label>
+                            <select name="contact-time" id="contact-time">
+                                <datalist id="contact-time">
+                                    <option value="">Select</option>
+                                    <option value="Morning">Morning</option>
+                                    <option value="Afternoon">Afternoon</option>
+                                    <option value="Evening">Evening</option>
+                                </datalist>
+
+                            </select>
+                        </div> 
+                    </div>
+
+
+
+                    <!-- email address -->
+                    <div class="input email">
+                        <label for="email-address">Email address</label>
+                        <input type="email" id="email-address" name="email" placeholder="Enter your email address"
+                            class="input-style" required>
+                    </div>
+
+
+                    <!-- phone & zip -->
+                    <div class="input-group">
+                        <div class="input phone">
+                            <label for="phone-number">Phone</label>
+                            <input type="tel" id="phone-number" name="phone" placeholder="Enter your phone number"
+                                class="input-style" required>
+                        </div>
+                        <div class="input zip">
+                            <label for="zip-code">Zip code</label>
+                            <input type="text" id="zip-code" name="zipcode" placeholder="Enter your zip code" class="input-style"
+                                required>
+                        </div>
+                    </div>
+
+                
+
+            </div>
+            
+        </section>
+
+
+        <section>
+
+            <!--Loan Information-->
+            <div class="form-div">
+                <h3>Loan Information</h3>
+
+                
+
+                    <div class="application-pair">
+                        <!-- Employment Status -->
+                        <div class="input employment-status">
+                            <label for="employment-status">Employment Status</label>
+                            <select name="employment-status" id="employment-status">
+                                <datalist id="employment-status">
+                                    <option value="">Select</option>
+                                    <option value="employed">Employed</option>
+                                    <option value="self-employed">Self-Employed</option>
+                                    <option value="currently-unemployed">Currently Unemployed</option>
+                                </datalist>
+                            </select>
+                        </div>
+                        
+                        
+                        <!-- Type of Loan desired -->
+                        <div class="input loan-desired">
+                            <label for="loan-desired">Type of Loan desired</label>
+                            <select name="loan-type" id="loan-desired">
+                                <datalist id="loan-desired">
+                                    <option value="">Select</option>
+                                    <option value="auto-loan">Auto Loan</option>
+                                    <option value="powersport-loans">Powersport Loans</option>
+                                    <option value="marine-loan">Marine Loan</option>
+                                    <option value="motorcycle-loan">Motorcycle Loan</option>
+                                    <option value="home-loan">Home Loan</option>
+                                    <option value="recreational-equipment-loan">Recreational Equipment Loan</option>
+                                    <option value="heloc-fixed">HELOC Fixed Rate 1% Repay</option>
+                                    <option value="heloc-variable">HELOC Variable Rate 1% Repay</option>
+                                    <option value="brokerage-secured-installment">Brokerage Secured Installment</option>
+                                    <option value="line-of-credit-personal">Line of Credit Personal Use</option>
+                                    <option value="copy-heloc-variable">Copy of HELOC Variable Rate 1% Repay</option>
+                                </datalist>
+                            </select>
+                        </div> 
+                    </div>
+
+
+                    <div class="application-pair">
+                        <!-- Purpose of Loan -->
+                        <div class="input purpose-of-loan">
+                            <label for="purpose-of-loan">Purpose of Loan</label>
+                            <select name="loan-purpose" id="purpose-of-loan">
+                                <datalist id="purpose-of-loan">
+                                    <option value="">Select</option>
+                                    <option value="personal">Personal</option>
+                                    <option value="purchase">Purchase</option>
+                                    <option value="business">Business</option>
+                                </datalist>
+                            </select>
+                        </div>
+
+
+                        <div class="input">
+                            <label for="withdraw-amount">Desired Loan Amount</label>
+                            <input type="number" id="withdraw-amount" name="loan-amount" placeholder="Loan Amount" class="input-style" min="0" required>
+                        </div>
+
+                    </div>
+
+                             
+            </div>
+            
+        </section>
+
+        <section>
+
+            <div class="form-div">
+                <h3>ID Verification</h3>
+
+
+
+                    <!-- front & back of ID -->
+                    <div class="id-upload">
+                        <h4>Upload ID</h4>
+                        <div class="input-group">
+                            <div class="input id">
+                                <label for="front-id">Front of ID</label>
+                                <input type="file" id="front-id" name="id-front" accept="image/png, image/jpeg" class="input-style file"
+                                    required>
+                            </div>
+                            <div class="input id">
+                                <label for="back">Back of ID</label>
+                                <input type="file" id="back-id" name="id-back" accept="image/png, image/jpeg" class="input-style file"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- submit button -->
+                    <div class="button-div" style= "margin-bottom:64px; margin-top: 64px;">
+                        <button class="btn-dark" type="submit">Continue</button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+
+</body>
+
+
+
+
+
+</html>

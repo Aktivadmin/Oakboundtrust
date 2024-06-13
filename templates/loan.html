@@ -1,0 +1,243 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+    
+
+    <main>
+
+        <!--Loan Hero Section-->
+        <section id="loan-hero">
+
+            <!--The Flexibility to Live Your Way-->
+            <div class="loan-hero-left">
+                {% comment %} <div class="overlay"> {% endcomment %}
+                    <div class="loan-hero-left-text">
+                        <h5>
+                            BORROW
+                        </h5>
+                        <h2 style="font-weight: 700;">
+                            The Flexibility to Live Your Way
+                        </h2>
+                        <p>
+                            You have things you want to accomplish, and we have the loans to help you get there on your terms.
+                        </p>
+                        <a href="{% url 'apply-for-loan' %}" rel="Apply">
+                            <button class="btn-light button">Apply Now</button>
+                        </a>
+                    {% comment %} </div>  {% endcomment %}
+                </div>
+
+            </div>
+
+            <!--Superpower/Giving you access to credit-->
+            <div class="loan-hero-right-text">
+                <h2 style="font-weight: 700;">
+                    We are a bank and our <span style="color: #814D7E;">superpower</span> is giving you access to <span style="color: #814D7E;">credit</span>
+                </h2>
+                <a href="{% url 'signup' %}" rel="Sign Up Page">
+                    <button class="btn-dark button">Get Started</button>
+                </a>
+            </div>
+
+        </section>
+
+        <!--Put Your Plans Into Action-->
+
+        <section>
+            <div class="container grid-6">
+                <div class="pdts-and-srvs">
+                    <div class="pdts-and-srvs-text">
+                        <h2>Put Your Plans Into Action</h2>
+                        <p>With a Home Equity Line of Credit, you can borrow as much or as little 
+                            as you need to turn your dreams into reality. 
+                            We offer competitive rates and an easy and fast approval process.
+                        </p>
+                    </div>
+                    
+                    <div class="loan-list">
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Renovations</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Debt Consolidation</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Unexpected Expenses</h6>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'signup' %}" rel="Sign Up Page">
+                        <button class="btn-dark button">Apply Now</button>
+                    </a>
+                </div>
+
+                <div class="pdts-and-srvs-img" style="background-image: url('images/man-writing.jpg'); background-position:center; background-size: cover; background-repeat: no-repeat; border-radius: 1rem; height: 400px">
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Car Loans -->
+
+        <section id="finance-options">
+            <div class="container grid-6">
+
+                <div class="about-sec3-img">
+                    <img src="{% static 'images/loan-sec-2.png' %}" style="height: 100%;">
+                </div>
+
+                <div class="about-sec3-text">
+                    <h2>
+                        Car Loans
+                    </h2>
+                    <p>
+                        Hit the road with the bank you know. Our flexible terms, competitive rates,
+                         and fast approval process can simplify the car buying experience for you.
+                    </p>
+                    <div class="loan-list" style="margin: 0px;">
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>New and Used</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Easy Online Application</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Fast approvals</h6>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'signup' %}" rel="Sign Up Page">
+                        <button class="btn-dark button">Apply Now</button>
+                    </a>
+                </div>
+                    
+            </div>
+        </section>
+
+
+        <!--Recreational Loans-->
+
+        <section>
+            <div class="container grid-6">
+                <div class="pdts-and-srvs">
+                    <div class="pdts-and-srvs-text">
+                        <h2>Recreational Loans</h2>
+                        <p>It's a big world, and it's time to get the toys to explore it. 
+                            Whether you're thinking about taking up sailing or traveling across country with your family,
+                             we can help. Our recreational loans offer flexible terms and competitive rates to get you on 
+                             the road - or on the water.
+                        </p>
+                    </div>
+                    
+                    <div class="loan-list">
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Boat and Marine Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>Motorcycle Loans</h6>
+                        </div>
+                        <div class="list-feat">
+                            <img src="{% static 'icons/check-circle.svg' %}" width="24">
+                            <h6>RV/Motorhome Loans</h6>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'signup' %}" rel="Sign Up Page">
+                        <button class="btn-dark button">Apply Now</button>
+                    </a>
+                </div>
+
+                <div class="pdts-and-srvs-img" style="background-image: url('../static/images/loan-sec4.webp'); background-position:center; background-size: cover; background-repeat: no-repeat; border-radius: 1rem; height: 400px;">
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Insights & Stories Section -->
+        <section id="insights-section">
+            <div class="container insights">
+                <div class="section-header">
+                    <h2>Insights & Stories</h2>
+                </div>
+                <div class="insight-card-list">
+                    <!-- 1st insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/customer-server-insights.png' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Customer Service: Tools to manage your account</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2nd insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/holding-hands-insights.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Axis is committed to helping close the racial wealth gap</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3rd insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/laptop-credit-card-insight.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Videos to help you bank from your device</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4th insight card -->
+                    <div class="insight-card">
+                        <div class="insight-img">
+                            <img src="{% static 'images/teaching-insight.jpg' %}" alt="a customer service representative">
+                        </div>
+                        <div class="insight-text">
+                            <h4>Spotlight Stories: Brewing up generation wealth</h4>
+                            <div class="title-icon">
+                                <h6>Learn more</h6>
+                                <span class="material-symbols-rounded">
+                                    chevron_right
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+{% endblock content %}
+    

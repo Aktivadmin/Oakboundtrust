@@ -1,0 +1,58 @@
+{% load static %}
+<footer id="footer-section">
+    <!--Footer -->
+
+    <div class="container footer">
+        <div class="footer-logo-icons-links">
+            <div class="footer-logo-icons">
+                <a href="{% url 'home' %}" rel="logo">
+                    <img src="{% static 'icons/logo.png' %}" class="footer-logo">
+                </a>
+                <div class="footer-icons">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'icons/social/LinkedIn.svg' %}"/>
+                    </a>
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'icons/social/Pinterest.svg' %}"/>
+                    </a>
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'icons/social/YouTube.svg' %}"/>
+                    </a>
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'icons/social/Instagram.svg' %}"/>
+                    </a>
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'icons/social/Twitter.svg' %}"/>
+                    </a>
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'icons/social/Facebook.svg' %}"/>
+                    </a>
+                </div>
+            </div>
+            {% comment %} <div class="footer-navlinks-columns">
+                <div class="footer-navlinks">
+                    <ul class="nav-links">
+                        <li><a>Privacy & Cookies</a></li>
+                        <li>Ad Choices</li>
+                        <li>Terms & Conditions</li>
+                        <li>Security & Fraud Awareness</li>
+                        <li>Regulatory Disclosures</li>
+                    </ul>
+                </div>
+                <div class="footer-navlinks">
+                    <ul class="nav-links">
+                        <li><a>Site map</a></li>
+                        <li>Customer login</li>
+                        <li>Employee login</li>
+                        <li>Alumni Network</li>
+                        <li>Mobile view</li>
+                    </ul>
+                </div>
+            </div> {% endcomment %}
+        </div>
+        <div class="line-copyright">
+            <div class="line"></div>
+            <p>© <small>2023 Silver Loom Bank, Inc. All rights reserved</small></p>
+        </div>
+    </div>
+</footer>
