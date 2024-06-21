@@ -185,7 +185,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # email config
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_HOST = 'smtppro.zoho.com' # zoho
-EMAIL_HOST_USER = 'support@silverloomplc.com'
-EMAIL_HOST_PASSWORD = 'Sokoyebom1@21'
+EMAIL_HOST_USER = 'support@example.invalid'
+EMAIL_HOST_PASSWORD = 'Pass2002word$'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = True
