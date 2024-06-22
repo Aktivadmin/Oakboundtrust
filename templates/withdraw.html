@@ -32,6 +32,21 @@
     <link rel="stylesheet" href="{% static 'reset.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
+
+    <!-- Brevo Conversations {literal} -->
+<script>
+    (function(d, w, c) {
+        w.BrevoConversationsID = '6677431686ce4863d90edcf6';
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        var s = d.createElement('script');
+        s.async = true;
+        s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'BrevoConversations');
+</script>
+<!-- /Brevo Conversations {/literal} -->
     
 </head>
 
@@ -43,7 +58,7 @@
 
         <section class="dashboard-navigation">
             <div class="dashboard-main-logo">
-                <a href="{% url 'home' %}"><img src="{% static 'icons/logo.png' %}" alt="logo"></a>
+                <a href="{% url 'home' %}"><img src="{% static 'images/logo1.png' %}" alt="logo" height="150", width="150"></a>
             </div>
 
             
