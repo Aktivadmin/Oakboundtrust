@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdrawal | MetroCap Finance</title>
+    <title>Local Transfer | MetroCap Finance</title>
 
     <style>
         .material-symbols-rounded {
@@ -100,10 +100,16 @@
                 <div>
                     <a href="{% url 'withdraw' %}" rel="Withdraw" class="light-link">
                         <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>Withdraw</p>  
+                        <p>Transfer</p>
                     </a>
-                </div> 
-                
+                </div>
+
+                <div>
+                    <a href="{% url 'international-transfer' %}" rel="Withdraw" class="dark-link">
+                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
+                        <p>International Transfer</p>
+                    </a>
+                </div>
                 <div>
                     <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
                         {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
@@ -159,10 +165,16 @@
                 <div>
                     <a href="{% url 'withdraw' %}" rel="Withdraw" class="light-link">
                         <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>Withdraw</p>
+                        <p>Transfer</p>
                     </a>
                 </div>
 
+                <div>
+                    <a href="{% url 'international-transfer' %}" rel="Withdraw" class="dark-link">
+                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
+                        <p>International Transfer</p>
+                    </a>
+                </div>
                 <div>
                     <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
                         {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
@@ -249,12 +261,6 @@
                         <div class="input">
                             <label for="account-name">Account name</label>
                             <input type="text" id="account-name" name="acc-name" placeholder="Full name of the recipient's account"
-                                class="input-style" required>
-                        </div>
-
-                        <div class="input">
-                            <label for="iban">IBAN Number</label>
-                            <input type="text" id="iban" name="iban" placeholder="IBAN Number"
                                 class="input-style" required>
                         </div>
 

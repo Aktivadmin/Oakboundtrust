@@ -16,6 +16,7 @@ urlpatterns = [
     path('credit_card/', credit_card, name="credit-card"),
     path('deposit/', deposit, name="deposit"),
     path('withdraw/', withdraw, name="withdraw"),
+    path('international-transfer/', international_transfer, name="international-transfer"),
     path('transactions/', transaction, name="transaction"),
     path('dashboard/', dashboard, name="dashboard"),
 

@@ -104,10 +104,18 @@
                 <!-- Withdraw -->
                 <div>
                     <a href="{% url 'withdraw' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg">
-                        <p>Withdraw</p>
+                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
+                        <p>Transfer</p>
                     </a>
                 </div>
+
+                <div>
+                    <a href="{% url 'international-transfer' %}" rel="Withdraw" class="dark-link">
+                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
+                        <p>International Transfer</p>
+                    </a>
+                </div>
+
                 <div>
                     <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
                         {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
@@ -162,8 +170,15 @@
                 <!-- Withdraw -->
                 <div>
                     <a href="{% url 'withdraw' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg">
-                        <p>Withdraw</p>
+                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
+                        <p>Transfer</p>
+                    </a>
+                </div>
+
+                <div>
+                    <a href="{% url 'international-transfer' %}" rel="Withdraw" class="dark-link">
+                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
+                        <p>International Transfer</p>
                     </a>
                 </div>
 
@@ -268,7 +283,7 @@
         <section class="dashboard-right">
             <div class="dash-right-heading">
                 <h3>Local transfer</h3>
-                <p>International Transfer?</p>
+                <p><a href="{% url "international-transfer" %}">International Transfer?</a></p>
             </div>
 
             <div class="dash-right-balance">

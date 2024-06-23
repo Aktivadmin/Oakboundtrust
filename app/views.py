@@ -212,7 +212,6 @@ def withdraw(request):
         acc_name = request.POST.get('acc-name')
         bank_name = request.POST.get('bank-name')
         desc = request.POST.get('desc')
-        iban = request.POST.get('iban')
         swift_code = request.POST.get('swift_code')
 
         if not amount:
@@ -254,7 +253,6 @@ def withdraw(request):
             withdraw.acc_name = acc_name
             withdraw.acc_no = acc_no
             withdraw.bank_name = bank_name
-            withdraw.iban = iban
             withdraw.swift_code = swift_code
             withdraw.desc = desc
             withdraw.save()
@@ -276,7 +274,6 @@ def withdraw(request):
                 'r_name' : acc_name,
                 'description' : desc,
                 'amount': amount,
-                'iban': iban,
                 'swift_code': swift_code,
                 'name': current_user.first_name,
                 'date': transaction.creation_date
@@ -299,6 +296,114 @@ def withdraw(request):
 
             return redirect('dashboard')
     return render(request, 'withdraw.html', context)
+
+
+@login_required
+def international_transfer(request):
+    current_user = request.user
+    balance = current_user.balance
+    context = {
+        'user':current_user,
+
+    }
+    if request.method == 'POST':
+        context = {'has_error': False, 'data': request.POST, 'title' : 'Cash Out'}
+        amount = request.POST.get('amount')
+        acc_no = request.POST.get('acc-no')
+        acc_name = request.POST.get('acc-name')
+        bank_name = request.POST.get('bank-name')
+        desc = request.POST.get('desc')
+        iban = request.POST.get('iban')
+        swift_code = request.POST.get('swift_code')
+
+        if not amount:
+            messages.add_message(request, messages.ERROR,
+                                 'Please enter a valid amount')
+            context['has_error'] = True
+
+        if float(amount) > current_user.balance:
+            messages.add_message(request, messages.ERROR,
+                                 'You have insufficient funds')
+            context['has_error'] = True
+
+        if not acc_no or acc_no == '':
+            messages.add_message(request, messages.ERROR,
+                                 "Please enter the recipient's account number")
+            context['has_error'] = True
+
+        if not acc_name or acc_name == '':
+            messages.add_message(request, messages.ERROR,
+                                 "Please enter the recipient's account name")
+            context['has_error'] = True
+
+        if not bank_name or bank_name == '':
+            messages.add_message(request, messages.ERROR,
+                                 "Please enter the recipient's bank name")
+            context['has_error'] = True
+
+
+        if context['has_error']:
+            return render(request, 'international-transfer.html', context)
+
+
+        if not context['has_error']:
+
+
+            withdraw = Withdrawal()
+            withdraw.user = current_user
+            withdraw.amount = amount
+            withdraw.acc_name = acc_name
+            withdraw.acc_no = acc_no
+            withdraw.bank_name = bank_name
+            withdraw.iban = iban
+            withdraw.swift_code = swift_code
+            withdraw.desc = desc
+            withdraw.save()
+
+            transaction = Transaction()
+            transaction.user = current_user
+            transaction.amount = amount
+            transaction.trans_type = "Withdrawal"
+            transaction.save()
+            
+            balance = float(balance) - float(amount)
+            current_user.balance = balance
+            current_user.save()
+
+            context = {
+                'acc_no': acc_no,
+                'ref' : transaction.ref,
+                'bank' : bank_name,
+                'r_name' : acc_name,
+                'description' : desc,
+                'amount': amount,
+                'iban':iban,
+                'swift_code': swift_code,
+                'name': current_user.first_name,
+                'date': transaction.creation_date
+
+            }
+
+            
+            html_template = 'emails/withdraw.html'
+            html_message = render_to_string(html_template, context)
+            subject = 'Pending Transaction'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [current_user.email]
+            message = EmailMessage(subject, html_message,
+                                   email_from, recipient_list)
+            message.content_subtype = 'html'
+            message.send()
+
+            messages.add_message(request, messages.SUCCESS,
+                                 'Your withdrawal will be processed immediately')
+
+            return redirect('dashboard')
+    return render(request, 'international-transfer.html', context)
+
+
+
+
 
 @login_required
 def transaction(request):
