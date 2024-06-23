@@ -205,14 +205,14 @@
                         <a href="{% url "withdraw" %}"><button class="btn-light">Send Money</button></a>
                     </div>
                     <div class="center-light-card1">
-                        <h4>MetroCap FinanceSavings</h4>
-                        <h2>$0.00</h2>
+                        <h4>MetroCap Finance Savings</h4>
+                        <h2>${{user.savings|floatformat:2|intcomma}}</h2>
                         <a href="{% url "deposit" %}"><button class="btn-dark"> Make a Deposit</button></a>
 
                     </div>
                     <div class="center-light-card2">
                         <h4>Pending Checking</h4>
-                        <h2>$0.00</h2>
+                        <h2>${{user.pending_checking|floatformat:2|intcomma}}</h2>
                         <a href="{% url "deposit" %}"><button class="btn-dark"> Make a Deposit</button></a>
 
                     </div>

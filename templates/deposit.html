@@ -199,15 +199,15 @@
                     </div>
                     <div class="center-light-card1">
                         <h4>Pending Checking</h4>
-                        <h2>$0.00</h2>
+                        <h2>${{user.pending_checking|floatformat:2|intcomma}}</h2>
                     </div>
                     <div class="center-light-card2">
                         <h4>Savings</h4>
-                        <h2>$0.00</h2>
+                        <h2>${{user.savings|floatformat:2|intcomma}}</h2>
                     </div>
                     <div class="center-light-card3">
                         <h4>Expenses</h4>
-                        <h2>$0.00</h2>
+                        <h2>${{user.expenses|floatformat:2|intcomma}}</h2>
                     </div>
                 </div>
             </div>

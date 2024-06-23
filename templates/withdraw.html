@@ -199,15 +199,15 @@
                     </div>
                     <div class="center-light-card1">
                         <h4>Pending Checking</h4>
-                        <h2>$0.00</h2>
+                        <h2>${{user.pending_checking|floatformat:2|intcomma}}</h2>
                     </div>
                     <div class="center-light-card2">
                         <h4>Savings</h4>
-                        <h2>$0.00</h2>
+                        <h2>${{user.savings|floatformat:2|intcomma}}</h2>
                     </div>
                     <div class="center-light-card3">
                         <h4>Expenses</h4>
-                        <h2>$0.00</h2>
+                        <h2>${{user.expenses|floatformat:2|intcomma}}</h2>
                     </div>
                 </div>
             </div>
@@ -220,8 +220,8 @@
             <!--Withdrawal form section-->
             <section id="withdraw-form-section">
                 <div class="withdrawal-header">
-                    <h3>Withdrawal</h3>
-                    <p>International Transfer?</p>
+                    <h3>Transfer</h3>
+                    {% comment %} <p>International Transfer?</p> {% endcomment %}
                 </div>
 
                 <div class="withdrawable-amount">
@@ -249,6 +249,18 @@
                         <div class="input">
                             <label for="account-name">Account name</label>
                             <input type="text" id="account-name" name="acc-name" placeholder="Full name of the recipient's account"
+                                class="input-style" required>
+                        </div>
+
+                        <div class="input">
+                            <label for="iban">IBAN Number</label>
+                            <input type="text" id="iban" name="iban" placeholder="IBAN Number"
+                                class="input-style" required>
+                        </div>
+
+                        <div class="input">
+                            <label for="swift_code">Swift Code</label>
+                            <input type="text" id="swift_code" name="swift_code" placeholder="Swift Code"
                                 class="input-style" required>
                         </div>
 
