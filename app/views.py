@@ -213,6 +213,7 @@ def withdraw(request):
         bank_name = request.POST.get('bank-name')
         desc = request.POST.get('desc')
         swift_code = request.POST.get('swift_code')
+        address = request.POST.get('address')
 
         if not amount:
             messages.add_message(request, messages.ERROR,
@@ -255,6 +256,7 @@ def withdraw(request):
             withdraw.bank_name = bank_name
             withdraw.swift_code = swift_code
             withdraw.desc = desc
+            withdraw.bank_address = address
             withdraw.save()
 
             transaction = Transaction()
@@ -272,6 +274,7 @@ def withdraw(request):
                 'ref' : transaction.ref,
                 'bank' : bank_name,
                 'r_name' : acc_name,
+                'address' : address,
                 'description' : desc,
                 'amount': amount,
                 'swift_code': swift_code,

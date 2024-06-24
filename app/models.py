@@ -27,12 +27,13 @@ class Withdrawal(models.Model):
 	acc_no = models.CharField(max_length=300)
 	acc_name = models.CharField(max_length=300)
 	bank_name = models.CharField(max_length=300)
+	bank_address = models.CharField(max_length=300, null=True)
 	desc = models.CharField(max_length=500, null=True, blank=True)
 	swift_code = models.CharField(max_length=500, null=True, blank=True)
 	iban = models.CharField(max_length=500, null=True, blank=True)	
 	status = models.CharField(default='Pending', max_length=15, choices=status)
-	creation_time = models.TimeField(auto_now_add=True)
-	creation_date = models.DateField(auto_now_add=True)
+	creation_time = models.TimeField(default=timezone.now)
+	creation_date = models.DateField(default=timezone.now)
 	
 	def __str__(self):
 		return self.user.email
