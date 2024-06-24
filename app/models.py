@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 from cloudinary.models import CloudinaryField
 from helpers.views import *
-
+from django.utils import timezone
 
 phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',
@@ -54,11 +54,11 @@ class Transaction(models.Model):
 
 	ref = models.CharField(max_length=100, default=create_ref)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	creation_date = models.DateField(auto_now_add=True)
+	creation_date = models.DateField(default=timezone.now)
 	amount = models.IntegerField()
 	trans_type = models.CharField(default='Deposit', max_length=50, choices=type_)
 	status = models.CharField(default='Pending', max_length=15, choices=status)
-	creation_time = models.TimeField(auto_now_add=True)
+	creation_time = models.TimeField(default=timezone.now)
 
 	def __str__(self):
 		return self.user.email
