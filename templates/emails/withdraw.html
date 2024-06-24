@@ -180,11 +180,14 @@
                                         <span style="font-weight: bold;">Amount</span> : ${{amount|floatformat:2|intcomma}}
                                     </p>
                                     <hr>
+									{% if address %}
 
 									<p class="text-left ml-4" style="font-size:15px;">
                                         <span style="font-weight: bold;">Bank Address</span> : {{address}}
                                     </p>
                                     <hr>
+									{% endif %}
+									
 									{% if iban %}
 
 									<p class="text-left ml-4" style="font-size:15px;">
