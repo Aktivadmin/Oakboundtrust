@@ -72,15 +72,11 @@ def login_user(request):
                                  'Invalid credentials, try again')
             return render(request, 'login.html', context, status=401)
 
-        # if not user.is_verified:
-        #     messages.add_message(request, messages.ERROR,
-        #                          'Please verify your email address')
-        #     return render(request, 'signin.html', context)
-        # else:
             
         login(request, user)
         return redirect(reverse('dashboard'))
     return render(request, 'login.html', context)
+
 
 def signup(request):
     context = {
@@ -95,7 +91,8 @@ def signup(request):
         password2 = request.POST.get('confirm-password')
         zipcode = request.POST.get('zipcode')
         phone = request.POST.get('phone')
-        dob_str = request.POST.get('dob') 
+        dob_str = request.POST.get('dob')
+        image = request.FILES['image']
 
 
         try:
@@ -135,11 +132,7 @@ def signup(request):
             messages.add_message(request, messages.ERROR,
                                  'Email is taken, choose another one')
             return render(request, 'sign-up.html', context)
-
         
-            return render(request, 'sign-up.html', context)
-            
-
 
         if context['has_error']:
             return render(request, 'sign-up.html', context)

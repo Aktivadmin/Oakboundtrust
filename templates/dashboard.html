@@ -198,8 +198,8 @@
             <!--Greeting & Profile Pic-->
             <div class="dash-center-first">
                 <div class="flex-row">
-                    <img src="{% static 'icons/sunrise.svg' %}" alt="sun-icon">
-                    <p>Good Morning, {{user.first_name}}</p>
+                    <img src="{{user.image.url}}" alt="sun-icon" width="70" height="70">
+                    <p>Hello, {{user.first_name}}</p>
                 </div>
 
                 <div class="flex-row">

@@ -54,7 +54,7 @@ class CustomUserAccount(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=200, default="Doe")
     dob = models.DateField(null=True, blank=True)
     zipcode = models.CharField(max_length=50)
-    # image = CloudinaryField('image', default="https://res.cloudinary.com/ds8ljaxsa/image/upload/v1677173485/media/default_t3vbot.png")
+    image = CloudinaryField('image', default="https://res.cloudinary.com/ds8ljaxsa/image/upload/v1677173485/media/default_t3vbot.png")
 
 
     objects = CustomUserManager()
