@@ -214,22 +214,22 @@
                 <div class="grid-6">
                     <div class="trans-dark-card">
                         <h4>Available Balance</h4>
-                        <h2>${{user.balance|floatformat:2|intcomma}}</h2>
+                        <h2>{{user.currency}}{{user.balance}}</h2>
                         <a href="{% url "withdraw" %}"<button class="btn-light">Transfer Money</button></a>
                     </div>
                     <div class="trans-light-card1">
                         <h4>MetroCap Finance Savings</h4>
-                        <h2>${{user.savings|floatformat:2|intcomma}}</h2>
+                        <h2>{{user.currency}}{{user.savings}}</h2>
                         <a href="{% url "deposit" %}"><button class="btn-dark"> Make a Deposit</button></a>
                     </div>
                     <div class="trans-light-card2">
                         <h4>Pending Checking</h4>
-                        <h2>${{user.pending_checking|floatformat:2|intcomma}}</h2>
+                        <h2>{{user.currency}}{{user.pending_checking}}</h2>
                         <!--<button class="btn-dark">Make a Deposit</button>-->
                     </div>
                     <div class="trans-light-card3">
                         <h4>Expenses</h4>
-                        <h2>${{user.expenses|floatformat:2|intcomma}}</h2>
+                        <h2>{{user.currency}}{{user.expenses}}</h2>
                         <!--<button class="btn-dark">Transfer Money</button>-->
                     </div>
                 </div>
@@ -257,7 +257,7 @@
                                     <th scope="row">{{transaction.creation_date}}</th>
                                     <td>{{transaction.creation_time}}</td>
                                     <td>{{transaction.trans_type}}</td>
-                                    <td>${{transaction.amount|floatformat:2|intcomma}}</td>
+                                    <td>{{user.currency}}{{transaction.amount}}</td>
                                     <td>{{transaction.status}}</td>
                                 </tr>
                             {% endfor %}

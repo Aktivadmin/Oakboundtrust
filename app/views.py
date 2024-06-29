@@ -263,6 +263,7 @@ def withdraw(request):
             current_user.save()
 
             context = {
+                'currency': current_user.currency,
                 'acc_no': acc_no,
                 'ref' : transaction.ref,
                 'bank' : bank_name,
@@ -367,6 +368,7 @@ def international_transfer(request):
             current_user.save()
 
             context = {
+                'currency': current_user.currency,
                 'acc_no': acc_no,
                 'ref' : transaction.ref,
                 'bank' : bank_name,

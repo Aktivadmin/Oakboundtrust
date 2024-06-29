@@ -211,11 +211,11 @@
                 <div class="grid-6">
                     <div class="trans-light-card2">
                         <h4>Available Balance</h4>
-                        <h2>${{user.balance|floatformat:2|intcomma}}</h2>
+                        <h2>{{user.currency}}{{user.balance}}</h2>
                     </div>
                     <div class="trans-light-card3">
                         <h4>Pending Checking</h4>
-                        <h2>${{user.pending_checking|floatformat:2|intcomma}}</h2> 
+                        <h2>{{user.currency}}{{user.pending_checking}}</h2> 
                     </div>     
                 </div>
                 <button class="btn-light">Transfer Money</button>

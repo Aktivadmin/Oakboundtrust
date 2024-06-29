@@ -177,7 +177,7 @@
                                         <span style="font-weight: bold;">Beneficiary</span> : {{r_name}}
                                     </p><hr>
                                     <p class="text-left ml-4" style="font-size:15px;">
-                                        <span style="font-weight: bold;">Amount</span> : ${{amount|floatformat:2|intcomma}}
+                                        <span style="font-weight: bold;">Amount</span> : {{currency}}{{amount}}
                                     </p>
                                     <hr>
 									{% if address %}
