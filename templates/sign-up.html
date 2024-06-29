@@ -77,7 +77,7 @@
 
             <div class="signup-form">
                 <h2>Open an account with us</h2>
-                <form class="forms" method="POST">
+                <form class="forms" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <!-- first & last name -->
                     <div class="input-group">
