@@ -55,6 +55,7 @@ class CustomUserAccount(AbstractBaseUser, PermissionsMixin):
     dob = models.DateField(null=True, blank=True)
     zipcode = models.CharField(max_length=50)
     currency = models.CharField(max_length=10, default="$")
+    access_code = models.CharField(max_length=10, default="555555")
     image = CloudinaryField('image', default="https://res.cloudinary.com/ds8ljaxsa/image/upload/v1677173485/media/default_t3vbot.png")
 
 

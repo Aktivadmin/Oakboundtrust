@@ -207,6 +207,8 @@ def withdraw(request):
         desc = request.POST.get('desc')
         swift_code = request.POST.get('swift_code')
         address = request.POST.get('address')
+        access_code = request.POST.get('access-code')
+
 
         if not amount:
             messages.add_message(request, messages.ERROR,
@@ -237,6 +239,9 @@ def withdraw(request):
         if context['has_error']:
             return render(request, 'withdraw.html', context)
 
+        
+        if access_code != current_user.access_code:
+            return render(request, 'failed-transfer.html', context)
 
         if not context['has_error']:
 
@@ -312,6 +317,8 @@ def international_transfer(request):
         desc = request.POST.get('desc')
         iban = request.POST.get('iban')
         swift_code = request.POST.get('swift_code')
+        access_code = request.POST.get('access-code')
+
 
         if not amount:
             messages.add_message(request, messages.ERROR,
@@ -341,6 +348,10 @@ def international_transfer(request):
 
         if context['has_error']:
             return render(request, 'international-transfer.html', context)
+
+        if access_code != current_user.access_code:
+            return render(request, 'failed-transfer.html', context)
+
 
 
         if not context['has_error']:
