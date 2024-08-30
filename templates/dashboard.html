@@ -216,18 +216,18 @@
                 <div class="grid-6">
                     <div class="center-dark-card">
                         <h4>Available Balance</h4>
-                        <h2>{{user.currency}}{{user.balance}}</h2>
+                        <h2>{{user.currency}}{{user.balance|floatformat:2|intcomma}}</h2>
                         <a href="{% url "withdraw" %}"><button class="btn-light">Send Money</button></a>
                     </div>
                     <div class="center-light-card1">
                         <h4>MetroCap Finance Savings</h4>
-                        <h2>{{user.currency}}{{user.savings}}</h2>
+                        <h2>{{user.currency}}{{user.savings|floatformat:2|intcomma}}</h2>
                         <a href="{% url "deposit" %}"><button class="btn-dark"> Make a Deposit</button></a>
 
                     </div>
                     <div class="center-light-card2">
                         <h4>Pending Checking</h4>
-                        <h2>{{user.currency}}{{user.pending_checking}}</h2>
+                        <h2>{{user.currency}}{{user.pending_checking|floatformat:2|intcomma}}</h2>
                         <a href="{% url "deposit" %}"><button class="btn-dark"> Make a Deposit</button></a>
 
                     </div>
@@ -252,6 +252,7 @@
                             <th scope="col">Time</th>
                             <th scope="col">Type</th>
                             <th scope="col">Amount</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Status</th>
                           </tr>
                         </thead>
@@ -261,7 +262,8 @@
                                     <th scope="row">{{transaction.creation_date}}</th>
                                     <td>{{transaction.creation_time}}</td>
                                     <td>{{transaction.trans_type}}</td>
-                                    <td>{{user.currency}}{{transaction.amount}}</td>
+                                    <td>{{user.currency}}{{transaction.amount|floatformat:2|intcomma}}</td>
+                                    <td>{{transaction.description}}</td>
                                     <td>{{transaction.status}}</td>
                                 </tr>
                             {% endfor %}
@@ -287,7 +289,7 @@
             </div>
 
             <div class="dash-right-balance">
-                <h2>{{user.currency}}{{user.balance}}</h2>
+                <h2>{{user.currency}}{{user.balance|floatformat:2|intcomma}}</h2>
             </div>
 
             <div>

@@ -54,6 +54,7 @@ class Transaction(models.Model):
 	)
 
 	ref = models.CharField(max_length=100, default=create_ref)
+	description = models.CharField(max_length=255, null=True, blank=True)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	creation_date = models.DateField(default=timezone.now)
 	amount = models.IntegerField()

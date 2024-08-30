@@ -260,6 +260,7 @@ def withdraw(request):
             transaction = Transaction()
             transaction.user = current_user
             transaction.amount = amount
+            transaction.description = desc
             transaction.trans_type = "Withdrawal"
             transaction.save()
             
@@ -371,6 +372,7 @@ def international_transfer(request):
             transaction = Transaction()
             transaction.user = current_user
             transaction.amount = amount
+            transaction.description = desc
             transaction.trans_type = "Withdrawal"
             transaction.save()
             
