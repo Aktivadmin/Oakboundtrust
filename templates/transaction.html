@@ -214,25 +214,44 @@
                 <div class="grid-6">
                     <div class="trans-dark-card">
                         <h4>Available Balance</h4>
-                        <h2>{{user.currency}}{{user.balance|floatformat:2|intcomma}}</h2>
+                        <h2>
+                            {% with user.balance|stringformat:"0.2f" as balance %}
+                                {{ user.currency }}{{ balance|slice:":-3"|intcomma }}{{ balance|slice:"-3:" }}
+                            {% endwith %}
+                        </h2>
                         <a href="{% url "withdraw" %}"<button class="btn-light">Transfer Money</button></a>
                     </div>
                     <div class="trans-light-card1">
                         <h4>MetroCap Finance Savings</h4>
-                        <h2>{{user.currency}}{{user.savings|floatformat:2|intcomma}}</h2>
+                        <h2>
+                            {% with user.savings|stringformat:"0.2f" as savings %}
+                                {{ user.currency }}{{ savings|slice:":-3"|intcomma }}{{ savings|slice:"-3:" }}
+                            {% endwith %}
+                        </h2>
                         <a href="{% url "deposit" %}"><button class="btn-dark"> Make a Deposit</button></a>
                     </div>
                     <div class="trans-light-card2">
                         <h4>Pending Checking</h4>
-                        <h2>{{user.currency}}{{user.pending_checking|floatformat:2|intcomma}}</h2>
+                        <h2>
+                            {% with user.pending_checking|stringformat:"0.2f" as pending_checking %}
+                                {{ user.currency }}{{ pending_checking|slice:":-3"|intcomma }}{{ pending_checking|slice:"-3:" }}
+                            {% endwith %}
+                        </h2>
                         <!--<button class="btn-dark">Make a Deposit</button>-->
                     </div>
                     <div class="trans-light-card3">
                         <h4>Expenses</h4>
-                        <h2>{{user.currency}}{{user.expenses|floatformat:2|intcomma}}</h2>
+                        <h2>
+                            {% with user.expenses|stringformat:"0.2f" as expenses %}
+                                {{ user.currency }}{{ expenses|slice:":-3"|intcomma }}{{ expenses|slice:"-3:" }}
+                            {% endwith %}
+                        </h2>
                         <!--<button class="btn-dark">Transfer Money</button>-->
                     </div>
                 </div>
+                {% with user.expenses|stringformat:"0.2f" as expenses %}
+                                {{ user.currency }}{{ expenses|slice:":-3"|intcomma }}{{ expenses|slice:"-3:" }}
+                            {% endwith %}
             </div>
 
             <!--Recent Transactions-->
@@ -258,7 +277,11 @@
                                     <th scope="row">{{transaction.creation_date}}</th>
                                     <td>{{transaction.creation_time}}</td>
                                     <td>{{transaction.trans_type}}</td>
-                                    <td>{{user.currency}}{{transaction.amount|floatformat:2|intcomma  }}</td>
+                                    <td>
+                                        {% with transaction.amount|stringformat:"0.2f" as amount %}
+                                            {{ user.currency }}{{ amount|slice:":-3"|intcomma }}{{ amount|slice:"-3:" }}
+                                        {% endwith %}
+                                    </td>
                                     <td>{{transaction.description}}</td>
                                     <td>{{transaction.status}}</td>
                                 </tr>

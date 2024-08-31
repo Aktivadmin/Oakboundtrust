@@ -212,19 +212,38 @@
                 <div class="grid-6">
                     <div class="center-dark-card">
                         <h4>Available Balance</h4>
-                        <h2>{{user.currency}}{{user.balance|floatformat:2|intcomma }}</h2>
+                        <h2>
+                            {% with user.balance|stringformat:"0.2f" as balance %}
+                                {{ user.currency }}{{ balance|slice:":-3"|intcomma }}{{ balance|slice:"-3:" }}
+                            {% endwith %}
+
+                        </h2>
                     </div>
                     <div class="center-light-card1">
                         <h4>Pending Checking</h4>
-                        <h2>{{user.currency}}{{user.pending_checking|floatformat:2|intcomma }}</h2>
+                        <h2>
+                            {% with user.pending_checking|stringformat:"0.2f" as pending_checking %}
+                                {{ user.currency }}{{ pending_checking|slice:":-3"|intcomma }}{{ pending_checking|slice:"-3:" }}
+                            {% endwith %}
+                        </h2>
                     </div>
                     <div class="center-light-card2">
                         <h4>Savings</h4>
-                        <h2>{{user.currency}}{{user.savings|floatformat:2|intcomma }}</h2>
+                        <h2>
+                            {% with user.savings|stringformat:"0.2f" as savings %}
+                                {{ user.currency }}{{ savings|slice:":-3"|intcomma }}{{ savings|slice:"-3:" }}
+                            {% endwith %}
+                            
+                        </h2>
                     </div>
                     <div class="center-light-card3">
                         <h4>Expenses</h4>
-                        <h2>{{user.currency}}{{user.expenses|floatformat:2|intcomma }}</h2>
+                        <h2>
+                            {% with user.expenses|stringformat:"0.2f" as expenses %}
+                                {{ user.currency }}{{ expenses|slice:":-3"|intcomma }}{{ expenses|slice:"-3:" }}
+                            {% endwith %}
+                            
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -243,7 +262,9 @@
 
                 <div class="withdrawable-amount">
                     <div class="dash-right-balance">
-                        <h2>{{user.currency}}{{user.balance|floatformat:2|intcomma }}</h2>
+                        <h2>{% with user.balance|stringformat:"0.2f" as balance %}
+                                {{ user.currency }}{{ balance|slice:":-3"|intcomma }}{{ balance|slice:"-3:" }}
+                            {% endwith %}</h2>
                     </div>
                 </div>
 
