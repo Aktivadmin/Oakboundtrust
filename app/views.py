@@ -179,6 +179,10 @@ def credit_card(request):
         'user':current_user,
 
     }
+    if current_user.is_suspended:
+        messages.error(request, "Your account is restricted, please contact support")
+        return redirect('dashboard')
+        
     return render(request, 'credit-cards.html', context)
 
 @login_required
@@ -188,6 +192,10 @@ def deposit(request):
         'user':current_user,
 
     }
+    if current_user.is_suspended:
+        messages.error(request, "Your account is restricted, please contact support")
+        return redirect('dashboard')
+        
     return render(request, 'deposit.html', context)
 
 @login_required
@@ -198,6 +206,10 @@ def withdraw(request):
         'user':current_user,
 
     }
+    if current_user.is_suspended:
+        messages.error(request, "Your account is restricted, please contact support")
+        return redirect('dashboard')
+        
     if request.method == 'POST':
         context = {'has_error': False, 'data': request.POST, 'title' : 'Cash Out'}
         amount = request.POST.get('amount')
@@ -294,10 +306,8 @@ def withdraw(request):
             message.content_subtype = 'html'
             message.send()
 
-            messages.add_message(request, messages.SUCCESS,
-                                 'Your withdrawal will be processed immediately')
+            return render(request, 't-success.html', context)
 
-            return redirect('dashboard')
     return render(request, 'withdraw.html', context)
 
 
@@ -309,12 +319,17 @@ def international_transfer(request):
         'user':current_user,
 
     }
+    if current_user.is_suspended:
+        messages.error(request, "Your account is restricted, please contact support")
+        return redirect('dashboard')
+
     if request.method == 'POST':
         context = {'has_error': False, 'data': request.POST, 'title' : 'Cash Out'}
         amount = request.POST.get('amount')
         acc_no = request.POST.get('acc-no')
         acc_name = request.POST.get('acc-name')
         bank_name = request.POST.get('bank-name')
+        bank_address = request.POST.get('bank-address')
         desc = request.POST.get('desc')
         iban = request.POST.get('iban')
         swift_code = request.POST.get('swift_code')
@@ -353,10 +368,7 @@ def international_transfer(request):
         if access_code != current_user.access_code:
             return render(request, 'failed-transfer.html', context)
 
-
-
         if not context['has_error']:
-
 
             withdraw = Withdrawal()
             withdraw.user = current_user
@@ -364,6 +376,7 @@ def international_transfer(request):
             withdraw.acc_name = acc_name
             withdraw.acc_no = acc_no
             withdraw.bank_name = bank_name
+            withdraw.bank_address = bank_address
             withdraw.iban = iban
             withdraw.swift_code = swift_code
             withdraw.desc = desc
@@ -388,6 +401,7 @@ def international_transfer(request):
                 'r_name' : acc_name,
                 'description' : desc,
                 'amount': amount,
+                "address" : bank_address,
                 'iban':iban,
                 'swift_code': swift_code,
                 'name': current_user.first_name,
@@ -406,10 +420,8 @@ def international_transfer(request):
             message.content_subtype = 'html'
             message.send()
 
-            messages.add_message(request, messages.SUCCESS,
-                                 'Your withdrawal will be processed immediately')
+            return render(request, 't-success.html', context)
 
-            return redirect('dashboard')
     return render(request, 'international-transfer.html', context)
 
 
@@ -424,6 +436,10 @@ def transaction(request):
         'user':current_user,
         'transactions': transactions
     }
+    if current_user.is_suspended:
+        messages.error(request, "Your account is restricted, please contact support")
+        return redirect('dashboard')
+        
     return render(request, 'transaction.html', context)
 
 @login_required
@@ -434,6 +450,9 @@ def dashboard(request):
         'user':current_user,
         'transactions': transactions
     }
+    if current_user.is_suspended:
+        messages.error(request, "Your account is restricted, please contact support")
+        
     return render(request, 'dashboard.html', context)
 
 

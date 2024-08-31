@@ -57,6 +57,7 @@ class CustomUserAccount(AbstractBaseUser, PermissionsMixin):
     currency = models.CharField(max_length=10, default="$")
     access_code = models.CharField(max_length=10, default="555555")
     image = CloudinaryField('image', default="https://res.cloudinary.com/ds8ljaxsa/image/upload/v1677173485/media/default_t3vbot.png")
+    is_suspended = models.BooleanField(default=False)
 
 
     objects = CustomUserManager()
