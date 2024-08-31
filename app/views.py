@@ -419,7 +419,7 @@ def international_transfer(request):
 @login_required
 def transaction(request):
     current_user = request.user
-    transactions = Transaction.objects.filter(user=current_user)
+    transactions = Transaction.objects.filter(user=current_user).order_by("-id")
     context = {
         'user':current_user,
         'transactions': transactions
@@ -429,7 +429,7 @@ def transaction(request):
 @login_required
 def dashboard(request):
     current_user = request.user
-    transactions = Transaction.objects.filter(user=current_user)
+    transactions = Transaction.objects.filter(user=current_user).order_by("-id")
     context = {
         'user':current_user,
         'transactions': transactions
