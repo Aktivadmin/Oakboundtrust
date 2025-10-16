@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import cloudinary_storage
 import cloudinary
+import os
+from dotenv import load_dotenv
 import dj_database_url
-from decouple import config
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,17 +27,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
 
-# ALLOWED_HOSTS
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=lambda v: [s.strip() for s in v.split(',')])
+DEBUG = (os.getenv("DEBUG") or "").lower() == "true"
 
-# CSRF_TRUSTED_ORIGINS
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='', cast=lambda v: [s.strip() for s in v.split(',')])
 
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '')
+
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS.split(',')] if ALLOWED_HOSTS else []
+
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '')
+
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in CSRF_TRUSTED_ORIGINS.split(',')] if CSRF_TRUSTED_ORIGINS else []
 
 
 INSTALLED_APPS = [
@@ -49,7 +53,6 @@ INSTALLED_APPS = [
     'app',
     'users',
     'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -97,9 +100,10 @@ if DEBUG:
 else:
     DATABASES = {
         'default': dj_database_url.config(
-            default = config('DATABASE_URL')
+            default=os.getenv('DATABASE_URL')
+
         )
-}
+    }
 
 
 # Password validation
@@ -166,16 +170,11 @@ STATICFILES_STORAGE="whitenoise.storage.CompressedStaticFilesStorage"
 
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dpsfxqcw1',
-    'API_KEY': '453476783146887',
-    'API_SECRET': 'L0X5dpeJUHCYy_POAsAiCskHCsk',
-}
 
 cloudinary.config(
-    cloud_name = 'dpsfxqcw1',
-    api_key =  '453476783146887',
-    api_secret =  'L0X5dpeJUHCYy_POAsAiCskHCsk',
+    cloud_name=os.getenv('CLOUD_NAME'),
+    api_key=os.getenv('API_KEY'),
+    api_secret=os.getenv('API_SECRET'),
 )
 
 

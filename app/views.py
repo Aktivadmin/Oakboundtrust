@@ -1,20 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from helpers.decorators import auth_user_should_not_access
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.core.mail import EmailMessage
 from validate_email import validate_email
 from datetime import datetime
 from django.contrib import messages
 from .models import *
-from django.template.loader import render_to_string
-from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -150,15 +144,10 @@ def signup(request):
             user.save()
 
             mydict = {'name': first_name}
+
             html_template = 'emails/welcome.html'
-            html_message = render_to_string(html_template, context=mydict)
             subject = 'Welcome'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [email]
-            message = EmailMessage(subject, html_message,
-                                   email_from, recipient_list)
-            message.content_subtype = 'html'
-            message.send()
+            send_email(html_template, mydict, subject, email)
 
             messages.success(request, "Please login")
 
@@ -297,14 +286,8 @@ def withdraw(request):
 
             
             html_template = 'emails/withdraw.html'
-            html_message = render_to_string(html_template, context)
             subject = 'Pending Transaction'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [current_user.email]
-            message = EmailMessage(subject, html_message,
-                                   email_from, recipient_list)
-            message.content_subtype = 'html'
-            message.send()
+            send_email(html_template, context, subject, current_user.email)
 
             return render(request, 't-success.html', context)
 
@@ -411,14 +394,8 @@ def international_transfer(request):
 
             
             html_template = 'emails/withdraw.html'
-            html_message = render_to_string(html_template, context)
             subject = 'Pending Transaction'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [current_user.email]
-            message = EmailMessage(subject, html_message,
-                                   email_from, recipient_list)
-            message.content_subtype = 'html'
-            message.send()
+            send_email(html_template, context, subject, current_user.email)
 
             return render(request, 't-success.html', context)
 
@@ -618,15 +595,8 @@ def reset_password(request):
 
         mydict = {'token': token, 'uid': uid, 'reset_url': reset_url }
         html_template = 'emails/password_reset_email.html'
-        html_message = render_to_string(html_template, context=mydict)
         subject = 'Reset Password'
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [email]
-        message = EmailMessage(subject, html_message,
-                                   email_from, recipient_list)
-        message.content_subtype = 'html'
-        message.send()
-
+        send_email(html_template, mydict, subject, email)
         context = {
             'title': "Reset Password"
         }
