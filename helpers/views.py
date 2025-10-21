@@ -20,7 +20,7 @@ def send_email(html_template, context, subject, email):
 
     try:
         r = resend.Emails.send({
-            "from": f"MetroCap PLC <{settings.EMAIL_HOST_USER}>",
+            "from": f"Metrocap Plc <{settings.EMAIL_HOST_USER}>",
             "to": [email],
             "subject": subject,
             "html": html_content,
@@ -29,9 +29,12 @@ def send_email(html_template, context, subject, email):
         logger.info(f"Email sent successfully: {r}")
     except Exception as e:
         # Log the error but don't stop the application
+
         logger.error(f"Email sending failed: {e}", exc_info=True)
 
     return None
+
+
 
 
 
