@@ -16,6 +16,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', password_reset_confirm, name='password_reset_confirm'),
 
     path('credit_card/', credit_card, name="credit-card"),
+    path('credit_card/activate/', activate_card, name="activate-card"),
     path('deposit/', deposit, name="deposit"),
     path('withdraw/', withdraw, name="withdraw"),
     path('receipt/<str:ref>/', receipt, name="receipt"),

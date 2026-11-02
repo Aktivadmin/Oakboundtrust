@@ -4,6 +4,7 @@ from unittest import mock
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase, override_settings
+from django.conf import settings
 from django.utils import timezone
 
 from users import otp
@@ -328,3 +329,45 @@ class TransferFlowTests(TestCase):
         self.assertNotIn("blocked", html)
         self.assertFalse(Transaction.objects.exists()); self.assertFalse(Withdrawal.objects.exists())
         self.user.refresh_from_db(); self.assertEqual(self.user.balance, 1000.0)
+
+
+class IdentifierTests(TestCase):
+    def test_numbers_are_valid_and_unique(self):
+        from users import identifiers as ids
+        a = User.objects.create_user("a@example.com", "pw12345678", zipcode="1")
+        b = User.objects.create_user("b@example.com", "pw12345678", zipcode="1")
+        for u in (a, b):
+            self.assertTrue(ids.routing_is_valid(u.routing_number))
+            self.assertEqual(len(u.account_number), 12)
+            self.assertEqual(len(u.card_number), 16)
+            self.assertTrue(set(u.card_number) <= set("12345"))
+            self.assertTrue(ids.luhn_is_valid(u.card_number))
+        self.assertNotEqual(a.account_number, b.account_number)
+        self.assertNotEqual(a.routing_number, b.routing_number)
+        self.assertNotEqual(a.card_number, b.card_number)
+
+
+class CardActivationTests(TestCase):
+    def setUp(self):
+        self.u = User.objects.create_user("c@example.com", "pw12345678", zipcode="1", first_name="Ada", last_name="Obi")
+        self.client.force_login(self.u)
+
+    def test_card_page_shows_holder_and_number(self):
+        r = self.client.get("/credit_card/")
+        self.assertContains(r, "ADA OBI")
+        self.assertContains(r, self.u.card_number_spaced)
+        self.assertContains(r, self.u.card_expiry)
+
+    def test_activation_emails_support(self):
+        from unittest import mock
+        with mock.patch("app.views.send_email", return_value=True) as m:
+            r = self.client.post("/credit_card/activate/", {"phone": "123", "note": "hi"})
+            self.assertRedirects(r, "/credit_card/", fetch_redirect_response=False)
+            self.assertEqual(m.call_args[0][3], settings.SUPPORT_EMAIL)
+            self.client.post("/credit_card/activate/")
+            self.assertEqual(m.call_count, 1)  # throttled
+
+    def test_deposit_page_shows_own_numbers(self):
+        r = self.client.get("/deposit/")
+        self.assertContains(r, self.u.account_number)
+        self.assertContains(r, self.u.routing_number)

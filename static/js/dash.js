@@ -92,4 +92,11 @@
     var x = 0, NS = "http://www.w3.org/2000/svg";
     while (x < 236) { var w = 1 + Math.floor(rnd() * 3.4), gap = 1 + Math.floor(rnd() * 2.6), r = doc.createElementNS(NS, "rect"); r.setAttribute("x", x); r.setAttribute("y", 0); r.setAttribute("width", w); r.setAttribute("height", 44); svg.appendChild(r); x += w + gap; }
   });
+  (function () {
+    var b = doc.getElementById("mb-menu"), sheet = doc.getElementById("mb-sheet"); if (!b || !sheet) return;
+    var set = function (open) { sheet.hidden = !open; b.setAttribute("aria-expanded", String(open)); b.setAttribute("aria-label", open ? "Close menu" : "Open menu"); b.classList.toggle("open", open); };
+    b.addEventListener("click", function (e) { e.stopPropagation(); set(sheet.hidden); });
+    doc.addEventListener("click", function (e) { if (!sheet.hidden && !sheet.contains(e.target)) set(false); });
+    doc.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
+  })();
 })();

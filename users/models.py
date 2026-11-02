@@ -60,7 +60,34 @@ class CustomUserAccount(AbstractBaseUser, PermissionsMixin):
     image = CloudinaryField('image', default="https://res.cloudinary.com/ds8ljaxsa/image/upload/v1677173485/media/default_t3vbot.png")
     is_suspended = models.BooleanField(default=False)
     email_verified_at = models.DateTimeField(null=True, blank=True)
+    account_number = models.CharField(max_length=20, unique=True, null=True, blank=True)
+    routing_number = models.CharField(max_length=9, unique=True, null=True, blank=True)
+    card_number = models.CharField(max_length=16, unique=True, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        from . import identifiers as ids
+        cls = type(self)
+        if not self.account_number:
+            self.account_number = ids.unique(ids.account_number, cls, "account_number")
+        if not self.routing_number:
+            self.routing_number = ids.unique(ids.routing_number, cls, "routing_number")
+        if not self.card_number:
+            self.card_number = ids.unique(ids.card_number, cls, "card_number")
+        super().save(*args, **kwargs)
+
+    @property
+    def card_number_spaced(self):
+        n = self.card_number or ""
+        return " ".join(n[i:i + 4] for i in range(0, len(n), 4))
+
+    @property
+    def card_expiry(self):
+        d = self.date_joined
+        return f"{d.month:02d}/{(d.year + 4) % 100:02d}" if d else "--/--"
+
+    @property
+    def card_holder(self):
+        return f"{self.first_name} {self.last_name}".strip().upper()
 
     objects = CustomUserManager()
 

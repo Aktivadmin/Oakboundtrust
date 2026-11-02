@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
-    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=11">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=17">
     <script>document.documentElement.classList.add('js');</script>
 
     <style>
@@ -98,7 +98,7 @@
             <dl class="rcpt-grid">
                 <div><dt>Reference</dt><dd><span class="mono" id="rcpt-ref">{{ ref }}</span><button type="button" class="rcpt-copy" data-copy="#rcpt-ref" aria-label="Copy reference"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button></dd></div>
                 <div><dt>Date and time</dt><dd>{{ date|date:"M j, Y" }}{% if time %}<small>{{ time|time:"H:i" }}</small>{% endif %}</dd></div>
-                <div><dt>From</dt><dd>{{ user.first_name }} {{ user.last_name }}<small>Account 009328811</small></dd></div>
+                <div><dt>From</dt><dd>{{ user.first_name }} {{ user.last_name }}<small>Account {{ debit_account|default:user.account_number }}</small></dd></div>
                 <div><dt>To</dt><dd>{{ r_name }}<small>Account {{ acc_no }}</small></dd></div>
                 <div><dt>Beneficiary bank</dt><dd>{{ bank }}</dd></div>
                 <div><dt>Transfer type</dt><dd>{{ transfer_type|default:"Transfer" }}</dd></div>
@@ -127,6 +127,6 @@
     </main>
     {% include 'partials/livechat.html' %}
     <script src="{% static 'js/oak.js' %}?v=3" defer></script>
-    <script src="{% static 'js/dash.js' %}?v=3" defer></script>
+    <script src="{% static 'js/dash.js' %}?v=4" defer></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+import time
+from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -256,6 +258,33 @@ def credit_card(request):
         
     return render(request, 'credit-cards.html', context)
 
+
+@login_required
+def activate_card(request):
+    """Customer asks support to activate their debit card. Emails support; support replies to the customer."""
+    if request.method != 'POST':
+        return redirect('credit-card')
+    user = request.user
+    if user.is_suspended:
+        messages.error(request, "Your account is restricted, please contact support")
+        return redirect('dashboard')
+    last = request.session.get('card_activation_at', 0)
+    if time.time() - last < 600:
+        messages.info(request, "Your activation request was already sent. Our team will be in touch shortly.")
+        return redirect('credit-card')
+    phone = request.POST.get('phone', '').strip()[:30]
+    note = request.POST.get('note', '').strip()[:500]
+    ok = send_email('emails/card_activation.html', {
+        'name': f"{user.first_name} {user.last_name}", 'email': user.email, 'phone': phone, 'note': note,
+        'account_number': user.account_number, 'card_last4': (user.card_number or '')[-4:],
+    }, f"Debit card activation request: {user.first_name} {user.last_name}", settings.SUPPORT_EMAIL, reply_to=user.email)
+    if ok:
+        request.session['card_activation_at'] = time.time()
+        messages.success(request, "Request sent. Customer support will contact you to activate your debit card.")
+    else:
+        messages.error(request, "We could not send your request just now. Please try again or use live chat.")
+    return redirect('credit-card')
+
 @login_required
 def deposit(request):
     current_user = request.user
@@ -368,6 +397,7 @@ def withdraw(request):
                 'date': transaction.creation_date,
                 'time': transaction.creation_time,
                 'transfer_type': 'Local',
+                'debit_account': current_user.account_number,
                 'status': transaction.status,
 
             }
@@ -482,6 +512,7 @@ def international_transfer(request):
                 'date': transaction.creation_date,
                 'time': transaction.creation_time,
                 'transfer_type': 'International',
+                'debit_account': current_user.account_number,
                 'status': transaction.status,
 
             }

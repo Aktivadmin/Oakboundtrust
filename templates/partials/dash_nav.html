@@ -1,4 +1,23 @@
 {% load static %}
+{% comment %}Mobile brand bar with a menu (hidden on desktop, where the sidebar shows the brand).{% endcomment %}
+<header class="dash-mbar glass">
+    <a class="mb-brand" href="{% url 'dashboard' %}" aria-label="Oakbound Trust Bank overview">
+        <img src="{% static 'images/brand/icon-O-reversed.svg' %}" alt="">
+        <span>Oakbound<small>Trust Bank</small></span>
+    </a>
+    <button type="button" class="mb-menu" id="mb-menu" aria-expanded="false" aria-controls="mb-sheet" aria-label="Open menu"><i></i><i></i><i></i></button>
+    <nav class="mb-sheet" id="mb-sheet" aria-label="Menu" hidden>
+        <a href="{% url 'dashboard' %}">Overview</a>
+        <a href="{% url 'transaction' %}">Activity</a>
+        <a href="{% url 'credit-card' %}">Cards</a>
+        <a href="{% url 'deposit' %}">Deposit</a>
+        <a href="{% url 'withdraw' %}">Send money</a>
+        <a href="{% url 'international-transfer' %}">Send abroad</a>
+        <a href="{% url 'home' %}">Oakbound website</a>
+        {% if real_user.is_superuser or user.is_superuser %}<a href="{% url 'console' %}">Admin console</a>{% endif %}
+        <a class="out" href="{% url 'logout' %}">Log out</a>
+    </nav>
+</header>
 {% comment %}Account sidebar (desktop) and floating dock (mobile). Pass active='dashboard|transaction|card|deposit|withdraw|international'.{% endcomment %}
 <aside class="dash-nav glass" aria-label="Account navigation">
     <a class="dash-brand" href="{% url 'home' %}" aria-label="Oakbound Trust Bank home">

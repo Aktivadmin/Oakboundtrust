@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
-    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=11">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=17">
     <script>document.documentElement.classList.add('js');</script>
 
     
@@ -75,8 +75,25 @@
             <!--Cards-->
             <div class="cc-center-second">
                 <h3>Cards</h3>
-                <img src="{% static 'images/brand/card-single.svg' %}" alt="Debit Card Image">
+                <div class="ob-card" role="img" aria-label="Debit card ending {{ user.card_number|slice:'-4:' }}">
+                    <div class="ob-card-top"><span class="ob-card-brand">Oakbound <small>Trust Bank</small></span><span class="ob-card-type">DEBIT</span></div>
+                    <span class="ob-card-chip"></span>
+                    <div class="ob-card-num">{{ user.card_number_spaced }}</div>
+                    <div class="ob-card-bot">
+                        <div><small>Card holder</small><b>{{ user.card_holder }}</b></div>
+                        <div><small>Valid thru</small><b>{{ user.card_expiry }}</b></div>
+                    </div>
+                </div>
+                {% include "partials/messages.html" %}
                 <h3>Activate Debit Card</h3>
+                <button type="button" class="btn-dark ob-act-btn" id="act-open" aria-expanded="false" aria-controls="act-form">Request activation</button>
+                <form method="post" action="{% url 'activate-card' %}" id="act-form" class="ob-act-form" hidden>
+                    {% csrf_token %}
+                    <p>Our support team will activate your card and contact you at <b>{{ user.email }}</b>.</p>
+                    <label>Phone number (optional)<input type="tel" name="phone" maxlength="30" placeholder="+1 555 000 0000"></label>
+                    <label>Anything we should know? (optional)<textarea name="note" rows="3" maxlength="500"></textarea></label>
+                    <button type="submit" class="btn-dark">Send request to support</button>
+                </form>
                 <div class="grid-6">
                     <div class="trans-light-card2">
                         <h4>Available Balance</h4>
@@ -99,6 +116,7 @@
     </main>
 
     <script src="{% static 'index.js' %}"></script>
+    <script>(function(){var b=document.getElementById("act-open"),f=document.getElementById("act-form");if(b&&f)b.addEventListener("click",function(){f.hidden=!f.hidden;b.setAttribute("aria-expanded",String(!f.hidden));});})();</script>
     
     <script>
         // Function to format the date as "28th September"
@@ -146,6 +164,6 @@
     {% include 'partials/livechat.html' %}
     <script src="{% static 'js/oak.js' %}?v=3" defer></script>
     <script src="{% static 'js/pw-toggle.js' %}?v=2" defer></script>
-    <script src="{% static 'js/dash.js' %}?v=3" defer></script>
+    <script src="{% static 'js/dash.js' %}?v=4" defer></script>
 </body>
 </html>
