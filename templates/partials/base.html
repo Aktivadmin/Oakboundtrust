@@ -1,6 +1,7 @@
 {% load static %}<!DOCTYPE html>
 <html lang="en">
 <head>
+    {% include "partials/theme_head.html" %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{% block title %}Oakbound Trust Bank{% endblock %}</title>
@@ -28,6 +29,7 @@
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
     <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=10">
     {% block extra_head %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=7">
 </head>
 <body>
     

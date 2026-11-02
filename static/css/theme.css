@@ -1,0 +1,208 @@
+/* ============================================================
+   Oakbound Trust Bank: light and dark themes
+   Loaded last. html[data-theme="dark" | "light"] is set before first paint
+   (see partials/theme_head.html) from the saved choice or the device setting.
+   The hero bands, call-to-action, footer and header stay dark in both
+   themes: they are the brand anchors. Everything else follows the theme.
+   ============================================================ */
+html { color-scheme: dark; }
+html[data-theme="light"] { color-scheme: light; }
+html[data-theme] body { transition: background-color 0.35s, color 0.35s; }
+
+/* ---------- toggle buttons ---------- */
+.theme-toggle { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: rgba(245, 238, 223, 0.08); color: var(--cream); cursor: pointer; display: grid; place-items: center; padding: 0; transition: background 0.25s, transform 0.3s; }
+.theme-toggle:hover { background: rgba(245, 238, 223, 0.16); transform: rotate(-12deg); }
+.theme-toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.theme-toggle.floating { position: fixed; top: 16px; right: 16px; z-index: 90; }
+html[data-theme="dark"] .i-moon, html[data-theme="light"] .i-sun { display: none; }
+html[data-theme="dark"] .t-light, html[data-theme="light"] .t-dark { display: none; }
+.drawer-theme { align-self: flex-start; margin: 8px 0; padding: 12px 20px; border-radius: 999px; border: 1px solid var(--line); background: rgba(245, 238, 223, 0.08); color: var(--cream); font: 600 1rem var(--f-body); cursor: pointer; }
+@media (max-width: 520px) { .ob-right .theme-toggle { display: none; } }
+@media (min-width: 1081px) { .drawer-theme { display: none; } }
+
+/* ============================================================
+   DARK: the cream sections and white cards become dark surfaces
+   ============================================================ */
+html[data-theme="dark"] .ob-sec.light, html[data-theme="dark"] .ob-split { background: #33211a; color: var(--cream); }
+html[data-theme="dark"] .ob-sec.paper { background: #2a1912; color: var(--cream); }
+html[data-theme="dark"] .ob-split .ghost { color: rgba(245, 238, 223, 0.04); }
+html[data-theme="dark"] .light .ob-eyebrow, html[data-theme="dark"] .paper .ob-eyebrow { color: var(--gold); }
+html[data-theme="dark"] .light .ob-eyebrow::before, html[data-theme="dark"] .paper .ob-eyebrow::before { background: var(--gold); box-shadow: 0 0 0 5px rgba(201, 162, 74, 0.2); }
+html[data-theme="dark"] .light .ob-btn.ghost, html[data-theme="dark"] .paper .ob-btn.ghost { border-color: var(--line); }
+html[data-theme="dark"] .light .ob-card, html[data-theme="dark"] .paper .ob-card { background: rgba(245, 238, 223, 0.045); border-color: var(--line); box-shadow: none; }
+html[data-theme="dark"] .light .ob-card:hover, html[data-theme="dark"] .paper .ob-card:hover { border-color: rgba(201, 162, 74, 0.55); background: rgba(245, 238, 223, 0.07); box-shadow: none; }
+html[data-theme="dark"] .light .ob-ico, html[data-theme="dark"] .paper .ob-ico { background: rgba(201, 162, 74, 0.14); color: var(--gold); }
+html[data-theme="dark"] .light .ob-card .more, html[data-theme="dark"] .paper .ob-card .more { color: var(--gold); }
+html[data-theme="dark"] .light .ob-ticks li, html[data-theme="dark"] .paper .ob-ticks li { border-color: var(--line); }
+html[data-theme="dark"] .light .ob-post:hover h3, html[data-theme="dark"] .paper .ob-post:hover h3 { color: var(--gold); }
+html[data-theme="dark"] .ob-step { background: rgba(245, 238, 223, 0.045); border-color: var(--line); }
+html[data-theme="dark"] .ob-step::before { color: rgba(245, 238, 223, 0.07); }
+html[data-theme="dark"] .ob-step .ob-doodle { color: var(--gold); }
+html[data-theme="dark"] .ob-faq details { background: rgba(245, 238, 223, 0.045); border-color: var(--line); }
+html[data-theme="dark"] .ob-faq details[open] { border-color: var(--gold); }
+html[data-theme="dark"] .ob-faq summary::after { background: rgba(201, 162, 74, 0.16); color: var(--gold); }
+html[data-theme="dark"] .ob-form input, html[data-theme="dark"] .ob-form select, html[data-theme="dark"] .ob-form textarea { background: rgba(245, 238, 223, 0.06); color: var(--cream); border-color: var(--line); }
+html[data-theme="dark"] .ob-form input:focus, html[data-theme="dark"] .ob-form select:focus, html[data-theme="dark"] .ob-form textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(201, 162, 74, 0.18); }
+html[data-theme="dark"] .ob-msg { background: rgba(90, 154, 104, 0.18); color: #bfe3c6; }
+html[data-theme="dark"] .ob-tab[aria-selected="true"] { background: var(--cream); color: var(--bark); }
+html[data-theme="dark"] .ob-toast { background: rgba(43, 27, 18, 0.96); color: var(--cream); border-color: var(--line); }
+html[data-theme="dark"] .ob-article blockquote { color: var(--gold-2); }
+
+/* auth pages (login, sign-up, reset, email code) */
+html[data-theme="dark"] body.ob-auth .signup-form { background: #33211a; color: var(--cream); box-shadow: 0 50px 100px -40px #000; border: 1px solid var(--line); }
+html[data-theme="dark"] body.ob-auth .signup-form a, html[data-theme="dark"] body.ob-auth .otp-resend button.text-link { color: var(--gold-2) !important; }
+html[data-theme="dark"] body.ob-auth .input-style, html[data-theme="dark"] body.ob-auth input, html[data-theme="dark"] body.ob-auth select, html[data-theme="dark"] body.ob-auth textarea { background: rgba(245, 238, 223, 0.07); color: var(--cream); border-color: var(--line); }
+html[data-theme="dark"] body.ob-auth ::placeholder { color: rgba(245, 238, 223, 0.45); }
+html[data-theme="dark"] body.ob-auth .ob-toast { background: rgba(90, 154, 104, 0.16); border-color: rgba(90, 154, 104, 0.35); color: var(--cream); }
+html[data-theme="dark"] body.ob-auth .ob-toast.error, html[data-theme="dark"] body.ob-auth .ob-toast.warning { background: rgba(192, 69, 58, 0.16); border-color: rgba(192, 69, 58, 0.4); }
+
+/* legacy pages that sit inside the site shell */
+html[data-theme="dark"] body.ob-legacy:not(.ob-dash):not(.ob-auth) { background: var(--bark); color: var(--cream); }
+
+/* ============================================================
+   LIGHT: page base turns cream; dark brand bands keep cream text
+   ============================================================ */
+html[data-theme="light"] body:not(.ob-dash):not(.ob-auth):not(.ob-legacy) { background: var(--paper); color: var(--bark); }
+html[data-theme="light"] .ob-header, html[data-theme="light"] .ob-drawer, html[data-theme="light"] .ob-hero, html[data-theme="light"] .ob-page,
+html[data-theme="light"] .ob-cta, html[data-theme="light"] .ob-foot, html[data-theme="light"] .ob-marquee, html[data-theme="light"] .ob-loader,
+html[data-theme="light"] .ob-sec.ink, html[data-theme="light"] .ob-sec.green { color: var(--cream); }
+html[data-theme="light"] .ob-glass { color: var(--cream); }
+/* the two sections that used to be plain dark ones now follow the theme */
+html[data-theme="light"] .ob-sec.paper .ob-glass { color: var(--bark); background: rgba(255, 255, 255, 0.7); border-color: var(--line-dark); }
+
+/* auth pages in light mode */
+html[data-theme="light"] body.ob-auth { background: radial-gradient(90% 80% at 85% 0%, #efe3c9 0%, var(--paper) 55%, #f3ead8 100%) fixed; color: var(--bark); }
+html[data-theme="light"] body.ob-auth .signup-form { background: #fff; box-shadow: 0 40px 80px -40px rgba(43, 27, 18, 0.35); border: 1px solid var(--line-dark); }
+html[data-theme="light"] .theme-toggle.floating, html[data-theme="light"] body.ob-auth .theme-toggle { background: #fff; color: var(--bark); border-color: var(--line-dark); }
+html[data-theme="light"] body.ob-auth a:not(.signup-form a) { color: var(--green); }
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+html[data-theme="light"] body.ob-dash {
+  --cream: #2b1b12;
+  --glass: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.58) 62%);
+  --glass-line: rgba(43, 27, 18, 0.12);
+  --rl: rgba(43, 27, 18, 0.14); --fl: rgba(43, 27, 18, 0.14);
+  background: #f3ecdf; color: #2b1b12;
+}
+html[data-theme="light"] body.ob-dash::before {
+  background:
+    radial-gradient(38% 34% at 12% 18%, rgba(90, 154, 104, 0.34), transparent 72%),
+    radial-gradient(34% 30% at 88% 12%, rgba(230, 199, 124, 0.5), transparent 72%),
+    radial-gradient(46% 40% at 72% 92%, rgba(201, 162, 74, 0.22), transparent 72%),
+    #f3ecdf;
+}
+html[data-theme="light"] body.ob-dash::after { opacity: 0.03; }
+html[data-theme="light"] .glass { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 24px 50px -30px rgba(43, 27, 18, 0.4); }
+html[data-theme="light"] .glass::before { background: linear-gradient(115deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 38%); }
+html[data-theme="light"] [data-tilt]::after { background: radial-gradient(260px circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, 0.7), transparent 60%); }
+
+/* sidebar and links */
+html[data-theme="light"] .dash-brand small { color: var(--green); }
+html[data-theme="light"] .dash-links a, html[data-theme="light"] .dash-foot a, .dash-theme { color: rgba(43, 27, 18, 0.7); }
+html[data-theme="light"] .dash-links a:hover, html[data-theme="light"] .dash-foot a:hover { background: rgba(43, 27, 18, 0.06); color: #2b1b12; }
+html[data-theme="light"] .dash-links a.on { background: linear-gradient(135deg, var(--green), var(--moss)); color: #fff; box-shadow: 0 12px 24px -12px rgba(31, 74, 44, 0.7); }
+html[data-theme="light"] .dash-links a.on svg { color: var(--gold-2); }
+html[data-theme="light"] .dash-foot .dash-admin { color: var(--green); }
+.dash-theme { display: flex; align-items: center; gap: 14px; padding: 13px 16px; border-radius: 18px; border: 0; background: none; color: rgba(245, 238, 223, 0.72); font: 500 0.98rem var(--f-app); cursor: pointer; text-align: left; width: 100%; transition: background 0.3s, color 0.3s; }
+.dash-theme:hover { background: rgba(255, 255, 255, 0.09); color: #fff; }
+html[data-theme="light"] .dash-theme { color: rgba(43, 27, 18, 0.7); } html[data-theme="light"] .dash-theme:hover { background: rgba(43, 27, 18, 0.06); color: #2b1b12; }
+.dash-theme svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* headings, text, hero */
+html[data-theme="light"] body.ob-dash h1, html[data-theme="light"] body.ob-dash h2, html[data-theme="light"] body.ob-dash h3, html[data-theme="light"] body.ob-dash h4 { color: #2b1b12; }
+html[data-theme="light"] body.ob-dash .dash-greet small, html[data-theme="light"] .act .ic.out, html[data-theme="light"] .act .amt.out { color: #8a6a1c; }
+html[data-theme="light"] .act .ic.out { background: rgba(201, 162, 74, 0.22); }
+html[data-theme="light"] .act .ic { color: var(--green); } html[data-theme="light"] .act .amt.in { color: var(--green); }
+html[data-theme="light"] .act:hover { background: rgba(43, 27, 18, 0.05); }
+html[data-theme="light"] .chip { background: rgba(43, 27, 18, 0.08); }
+html[data-theme="light"] .chip.approved { background: rgba(47, 107, 63, 0.14); color: #1f5a30; }
+html[data-theme="light"] .chip.pending { background: rgba(201, 162, 74, 0.28); color: #7a5a10; }
+html[data-theme="light"] .chip.declined { background: rgba(192, 69, 58, 0.14); color: #a3362c; }
+html[data-theme="light"] .quick .ico, html[data-theme="light"] .side-card .ico { background: rgba(47, 107, 63, 0.13); color: var(--green); }
+html[data-theme="light"] .empty svg { stroke: var(--green); }
+html[data-theme="light"] .act-link { color: #7a5a10 !important; background: rgba(201, 162, 74, 0.25); }
+/* the hero and the dark feature cards keep their rich, dark look with light text */
+html[data-theme="light"] body.ob-dash :is(.bal-hero, .trans-dark-card, .center-dark-card) { --cream: #f5eedf; color: #f5eedf; }
+html[data-theme="light"] body.ob-dash :is(.bal-hero, .trans-dark-card, .center-dark-card) :is(h1, h2, h3, h4, p, span, b) { color: inherit; }
+html[data-theme="light"] body.ob-dash .bal-hero .lbl { color: var(--gold-2); }
+html[data-theme="light"] body.ob-dash :is(.trans-dark-card, .center-dark-card) :is(h2) { color: #fff !important; }
+html[data-theme="light"] body.ob-dash :is(.trans-dark-card, .center-dark-card) h4 { color: #f5eedf !important; }
+html[data-theme="light"] .bal-hero .art img { filter: drop-shadow(0 24px 30px rgba(43, 27, 18, 0.35)); }
+html[data-theme="light"] .pillbtn.cream { background: #f5eedf; color: #2b1b12; }
+html[data-theme="light"] .pillbtn.glassy { color: #fff; }
+html[data-theme="light"] body.ob-dash .btn-light { background: #2b1b12 !important; color: #f5eedf !important; }
+html[data-theme="light"] body.ob-dash :is(.bal-hero, .trans-dark-card) .btn-light { background: #f5eedf !important; color: #2b1b12 !important; }
+html[data-theme="light"] .imp-banner { background: rgba(230, 199, 124, 0.7); border-color: rgba(138, 106, 28, 0.5); }
+html[data-theme="light"] .imp-banner button { background: #2b1b12; color: #f5eedf; }
+
+/* legacy cards and panels inside the dashboard */
+html[data-theme="light"] body.ob-dash [class*="-card"] h4 { color: #2b1b12 !important; }
+html[data-theme="light"] body.ob-dash [class*="-card"] h2 { color: #2b1b12 !important; }
+html[data-theme="light"] body.ob-dash .dash-right-balance h2, html[data-theme="light"] .rcpt-amount { color: #2b1b12; }
+html[data-theme="light"] body.ob-dash .dash-right-loans p, html[data-theme="light"] body.ob-dash .dash-right-loans h4 { color: #2b1b12 !important; }
+html[data-theme="light"] body.ob-dash table.table td, html[data-theme="light"] body.ob-dash table.table tbody th { background: rgba(43, 27, 18, 0.05) !important; color: #2b1b12 !important; }
+html[data-theme="light"] body.ob-dash table.table th { color: #2b1b12 !important; }
+html[data-theme="light"] body.ob-dash .input-style, html[data-theme="light"] body.ob-dash .forms input, html[data-theme="light"] body.ob-dash .forms select, html[data-theme="light"] body.ob-dash .forms textarea, html[data-theme="light"] body.ob-dash .modal input { background: rgba(255, 255, 255, 0.9) !important; border-color: rgba(43, 27, 18, 0.18) !important; color: #2b1b12 !important; }
+html[data-theme="light"] body.ob-dash .input-style::placeholder, html[data-theme="light"] body.ob-dash .forms ::placeholder, html[data-theme="light"] body.ob-dash .modal ::placeholder { color: rgba(43, 27, 18, 0.45); }
+html[data-theme="light"] body.ob-dash .input-style:focus, html[data-theme="light"] body.ob-dash .forms input:focus, html[data-theme="light"] body.ob-dash .forms textarea:focus { border-color: var(--green) !important; background: #fff !important; box-shadow: 0 0 0 4px rgba(47, 107, 63, 0.16); }
+html[data-theme="light"] .modal .modal-content { background: #fbf7ee !important; background-color: #fbf7ee !important; color: #2b1b12; box-shadow: 0 50px 90px -30px rgba(43, 27, 18, 0.5); }
+html[data-theme="light"] .modal .btn-close { background: rgba(43, 27, 18, 0.08); }
+html[data-theme="light"] .modal-backdrop-glass { background: rgba(43, 27, 18, 0.4); }
+html[data-theme="light"] body.ob-dash .centered-content, html[data-theme="light"] body.ob-dash .card { color: #2b1b12; box-shadow: 0 40px 80px -40px rgba(43, 27, 18, 0.4); }
+
+/* receipt + failed transfer */
+html[data-theme="light"] .rcpt-back { background: rgba(255, 255, 255, 0.8); color: #2b1b12; }
+html[data-theme="light"] .rcpt-back:hover { background: #fff; }
+html[data-theme="light"] .rcpt-steps li i { background: #fbf7ee; }
+html[data-theme="light"] .rcpt-copy { background: rgba(43, 27, 18, 0.06); color: #2b1b12; }
+html[data-theme="light"] .rcpt-head small, html[data-theme="light"] .rcpt-check.wait svg { color: #8a6a1c; stroke: #8a6a1c; }
+html[data-theme="light"] .rcpt-check svg { stroke: var(--green); }
+html[data-theme="light"] .rcpt-check.bad svg, html[data-theme="light"] .fail-icon svg { stroke: #b4382d; }
+html[data-theme="light"] .fail-head small { color: #b4382d; }
+html[data-theme="light"] .fail-steps li::before { background: rgba(201, 162, 74, 0.28); color: #7a5a10; }
+html[data-theme="light"] .rcpt-grid .total { background: rgba(43, 27, 18, 0.05); }
+
+/* bank card page */
+html[data-theme="light"] .ob-act-form { background: rgba(255, 255, 255, 0.75); border-color: rgba(43, 27, 18, 0.12); }
+html[data-theme="light"] .ob-act-form input, html[data-theme="light"] .ob-act-form textarea { background: #fff; border-color: rgba(43, 27, 18, 0.18); color: #2b1b12; }
+
+/* mobile brand bar, menu sheet, top bar */
+html[data-theme="light"] .dash-mbar, html[data-theme="light"] body.ob-dash .dash-center-first { background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(251, 247, 238, 0.96)) !important; }
+html[data-theme="light"] .mb-brand, html[data-theme="light"] .mb-sheet a { color: #2b1b12; }
+html[data-theme="light"] .mb-brand small { opacity: 0.6; }
+html[data-theme="light"] .mb-menu { background: rgba(43, 27, 18, 0.06) !important; border-color: rgba(43, 27, 18, 0.14); }
+html[data-theme="light"] .mb-menu i { background: #2b1b12; }
+html[data-theme="light"] .mb-sheet { background: linear-gradient(145deg, #fff, #fbf7ee); border-color: rgba(43, 27, 18, 0.12); box-shadow: 0 20px 40px rgba(43, 27, 18, 0.25); }
+html[data-theme="light"] .mb-sheet a:active { background: rgba(43, 27, 18, 0.07); }
+html[data-theme="light"] .mb-sheet a.out { color: #b4382d; border-top-color: rgba(43, 27, 18, 0.1); }
+.mb-theme { display: flex; align-items: center; width: 100%; min-height: 48px; padding: 14px 16px; border: 0; border-radius: 14px; background: none; color: var(--cream, #f7efe1); font: 600 1rem var(--f-app); text-align: left; cursor: pointer; }
+.mb-theme:active { background: rgba(255, 255, 255, 0.1); }
+html[data-theme="light"] .mb-theme { color: #2b1b12; } html[data-theme="light"] .mb-theme:active { background: rgba(43, 27, 18, 0.07); }
+html[data-theme="light"] body.ob-dash table.table tr { background: rgba(255, 255, 255, 0.6); border-color: rgba(43, 27, 18, 0.1); }
+
+/* the live chat widget follows no theme of ours; give the bottom bar a light shadow */
+html[data-theme="light"] .dash-nav { box-shadow: 0 18px 40px -18px rgba(43, 27, 18, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.9); }
+
+/* light mode: the header sits on the page base, so it carries its own dark bar */
+html[data-theme="light"] .ob-header { background: var(--bark); }
+html[data-theme="light"] .ob-header.scrolled { background: rgba(22, 13, 7, 0.86); }
+html[data-theme="light"] .ob-hero ~ * .ob-header, html[data-theme="light"] body:has(.ob-hero) .ob-header:not(.scrolled) { background: transparent; }
+
+/* ---- later, more specific rules (must come after the generic card rules above) ---- */
+html[data-theme="light"] body.ob-dash :is(.bal-hero, .trans-dark-card, .center-dark-card) h4,
+html[data-theme="light"] body.ob-dash .dash-center-second .grid-6 > :is(.trans-dark-card, .center-dark-card) h4 { color: #f5eedf !important; }
+html[data-theme="light"] body.ob-dash :is(.trans-dark-card, .center-dark-card) h2,
+html[data-theme="light"] body.ob-dash .dash-center-second .grid-6 > :is(.trans-dark-card, .center-dark-card) h2 { color: #fff !important; }
+@media (max-width: 640px) {
+  html[data-theme="light"] body.ob-dash table.table td, html[data-theme="light"] body.ob-dash table.table tbody th, html[data-theme="light"] body.ob-dash table.table th { background: transparent !important; }
+}
+html[data-theme="light"] body.ob-dash .dash-right-loans > img { filter: brightness(0) opacity(0.62); }
+html[data-theme="light"] .rcpt-perf i { background: #f3ecdf; }
+html[data-theme="light"] .rcpt-grid .total dd { color: #7a5a10; }
+html[data-theme="light"] .rcpt .pillbtn.glassy, html[data-theme="light"] .fail-actions .pillbtn.glassy, html[data-theme="light"] .rcpt-wrap .pillbtn.glassy { background: rgba(43, 27, 18, 0.07); color: #2b1b12; box-shadow: inset 0 0 0 1px rgba(43, 27, 18, 0.14); }
+@media print { html[data-theme] body.rcpt-page { background: #fff !important; color: #111 !important; } }
+.ob-cat { color: #2f6b3f; }
+html[data-theme="dark"] .ob-cat { color: var(--gold-2); }
+html[data-theme="light"] .act-all { color: #7a5a10 !important; background: rgba(201, 162, 74, 0.25); }

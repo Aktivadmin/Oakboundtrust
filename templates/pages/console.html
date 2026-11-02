@@ -1,6 +1,7 @@
 {% load static %}<!DOCTYPE html>
 <html lang="en">
 <head>
+    {% include "partials/theme_head.html" %}
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Admin console | Oakbound Trust Bank</title>
     <meta name="robots" content="noindex, nofollow">
@@ -28,6 +29,7 @@
         .count { opacity: .6; font-size: .9rem; margin: 0 4px }
         @media (max-width: 760px) { .row-c { grid-template-columns: 46px 1fr; } .row-c .bal { text-align: left; grid-column: 2 } .row-c .acts { grid-column: 1 / -1 } }
     </style>
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=7">
 </head>
 <body class="ob-legacy ob-dash">
     <div class="con">

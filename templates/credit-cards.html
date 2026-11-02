@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% include "partials/theme_head.html" %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Oakbound Trust Bank</title>
@@ -38,12 +39,13 @@
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=10">
-    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=18">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=19">
     <script>document.documentElement.classList.add('js');</script>
 
     
 
     
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=7">
 </head>
 
 <body class="ob-legacy ob-dash{% if impersonating %} has-banner{% endif %}">
@@ -75,11 +77,11 @@
             <!--Cards-->
             <div class="cc-center-second">
                 <h3>Cards</h3>
-                <div class="ob-card" role="img" aria-label="Debit card ending {{ user.card_number|slice:'-4:' }}">
-                    <div class="ob-card-top"><span class="ob-card-brand">Oakbound <small>Trust Bank</small></span><span class="ob-card-type">DEBIT</span></div>
-                    <span class="ob-card-chip"></span>
-                    <div class="ob-card-num">{{ user.card_number_spaced }}</div>
-                    <div class="ob-card-bot">
+                <div class="bk-card" role="img" aria-label="Debit card ending {{ user.card_number|slice:'-4:' }}">
+                    <div class="bk-card-top"><span class="bk-card-brand">Oakbound <small>Trust Bank</small></span><span class="bk-card-type">DEBIT</span></div>
+                    <span class="bk-card-chip"></span>
+                    <div class="bk-card-num">{{ user.card_number_spaced }}</div>
+                    <div class="bk-card-bot">
                         <div><small>Card holder</small><b>{{ user.card_holder }}</b></div>
                         <div><small>Valid thru</small><b>{{ user.card_expiry }}</b></div>
                     </div>

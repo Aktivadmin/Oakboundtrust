@@ -18,7 +18,7 @@
     <div class="ob-wrap">
         {% for cat, items in groups.items %}
         <div style="margin-bottom:54px">
-            <h2 class="ob-h3" style="margin-bottom:18px;color:#2f6b3f">{{ cat }}</h2>
+            <h2 class="ob-h3 ob-cat" style="margin-bottom:18px">{{ cat }}</h2>
             <div class="ob-faq" style="max-width:none">{% for q, a in items %}<details><summary>{{ q }}</summary><p>{{ a }}</p></details>{% endfor %}</div>
         </div>
         {% endfor %}

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% include "partials/theme_head.html" %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Dashboard | Oakbound Trust Bank</title>
@@ -39,12 +40,13 @@
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=10">
-    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=18">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=19">
     <script>document.documentElement.classList.add('js');</script>
 
     
 
     
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=7">
 </head>
 
 <body class="ob-legacy ob-dash{% if impersonating %} has-banner{% endif %}">

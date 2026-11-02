@@ -1,0 +1,22 @@
+{% comment %}Light/dark theme: applied before first paint so there is no flash. Saved choice wins, otherwise the device setting.{% endcomment %}
+<meta name="color-scheme" content="dark light">
+<script>
+(function () {
+  var d = document.documentElement, t = null;
+  try { t = localStorage.getItem('ob-theme'); } catch (e) {}
+  if (t !== 'light' && t !== 'dark') t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+  d.setAttribute('data-theme', t);
+  function apply(next, save) {
+    d.setAttribute('data-theme', next);
+    if (save) { try { localStorage.setItem('ob-theme', next); } catch (e) {} }
+    var m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', next === 'light' ? '#FBF7EE' : '#2B1B12');
+    document.querySelectorAll('[data-theme-toggle]').forEach(function (b) { b.setAttribute('aria-pressed', String(next === 'dark')); b.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'); });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-theme-toggle]'); if (!b) return;
+    apply(d.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+  });
+  window.addEventListener('storage', function (e) { if (e.key === 'ob-theme' && (e.newValue === 'light' || e.newValue === 'dark')) apply(e.newValue, false); });
+  document.addEventListener('DOMContentLoaded', function () { apply(d.getAttribute('data-theme'), false); });
+})();
+</script>

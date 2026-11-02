@@ -16,6 +16,7 @@
         <a href="{% url 'contact' %}" data-live-chat>Live support</a>
         <a href="{% url 'home' %}">Oakbound website</a>
         {% if real_user.is_superuser or user.is_superuser %}<a href="{% url 'console' %}">Admin console</a>{% endif %}
+        <button type="button" class="mb-theme" data-theme-toggle><span class="t-dark">Switch to light mode</span><span class="t-light">Switch to dark mode</span></button>
         <a class="out" href="{% url 'logout' %}">Log out</a>
     </nav>
 </header>
@@ -34,6 +35,7 @@
         <a href="{% url 'international-transfer' %}" class="{% if active == 'international' %}on{% endif %}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span>Abroad</span></a>
     </nav>
     <div class="dash-foot">
+        <button type="button" class="dash-theme" data-theme-toggle><svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8"/></svg><svg class="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7z"/></svg><span class="t-dark">Light mode</span><span class="t-light">Dark mode</span></button>
         {% if real_user.is_superuser or user.is_superuser %}<a class="dash-admin" href="{% url 'console' %}"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg><span>Admin console</span></a>{% endif %}
         <a class="dash-out" href="{% url 'logout' %}"><svg viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 8l-4 4 4 4M6 12h10"/></svg><span>Log out</span></a>
     </div>

@@ -24,6 +24,7 @@
             <a href="{% url 'help' %}">Help</a>
         </nav>
         <div class="ob-right">
+            {% include "partials/theme_toggle.html" %}
             {% if user.is_authenticated %}
             <a class="ob-btn ghost sm" href="{% url 'logout' %}">Log out</a>
             <a class="ob-btn cream sm" href="{% url 'dashboard' %}">My account <span class="ar">&rarr;</span></a>
@@ -44,6 +45,7 @@
         <a href="{% url 'investment' %}">Invest</a>
         <a href="{% url 'pricing' %}">Pricing</a>
         <a href="{% url 'help' %}">Help</a>
+        <button type="button" class="drawer-theme" data-theme-toggle><span class="t-dark">Switch to light mode</span><span class="t-light">Switch to dark mode</span></button>
         <a href="{% url 'about' %}"><small>Company</small>About us</a>
         <a href="{% url 'blog' %}">Insights blog</a>
         <a href="{% url 'careers' %}">Careers</a>

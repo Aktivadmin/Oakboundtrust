@@ -388,3 +388,21 @@ class InsightsAndContactTests(TestCase):
         self.assertContains(r, "support@oakboundtrust.com")
         self.assertContains(r, "Kentucky, USA")
         self.assertContains(r, "data-live-chat")
+
+
+class ThemeTests(TestCase):
+    def test_public_pages_have_theme_script_stylesheet_and_toggle(self):
+        for url in ["/", "/pricing/", "/blog/", "/contact/", "/about/", "/login/", "/signup/"]:
+            r = self.client.get(url)
+            self.assertContains(r, "ob-theme", msg_prefix=url)
+            self.assertContains(r, "css/theme.css", msg_prefix=url)
+            self.assertContains(r, "data-theme-toggle", msg_prefix=url)
+
+    def test_dashboard_pages_have_toggle(self):
+        u = User.objects.create_user("t@example.com", "pw12345678", zipcode="1")
+        self.client.force_login(u)
+        for url in ["/dashboard/", "/transactions/", "/credit_card/", "/deposit/", "/withdraw/", "/international-transfer/"]:
+            r = self.client.get(url)
+            self.assertContains(r, "ob-theme", msg_prefix=url)
+            self.assertContains(r, "css/theme.css", msg_prefix=url)
+            self.assertContains(r, "data-theme-toggle", msg_prefix=url)
