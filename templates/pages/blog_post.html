@@ -1,0 +1,35 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}{{ post.title }} | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}{{ post.excerpt }}{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" style="background:radial-gradient(90% 90% at 80% 0%,{{ post.accent }} 0%,#2b1b12 70%)">
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'blog' %}">Insights</a><span>/</span><span>{{ post.tag }}</span></div>
+        <span class="ob-eyebrow">{{ post.tag }} &middot; {{ post.date }} &middot; {{ post.read }}</span>
+        <h1 class="ob-h1" style="max-width:14em" data-reveal>{{ post.title }}</h1>
+    </div>
+</section>
+<section class="ob-sec paper">
+    <article class="ob-wrap ob-article">
+        {% for kind, text in post.body %}
+            {% if kind == 'h2' %}<h2>{{ text }}</h2>{% elif kind == 'quote' %}<blockquote>{{ text }}</blockquote>{% else %}<p>{{ text }}</p>{% endif %}
+        {% endfor %}
+        <p style="opacity:.55;font-size:.95rem;margin-top:2.4em">General information only, not personal financial advice.</p>
+    </article>
+</section>
+<section class="ob-sec light" style="padding-top:0">
+    <div class="ob-wrap"><div class="ob-head"><h2 class="ob-h2">Keep <span class="ob-it">reading.</span></h2></div>
+    <div class="ob-grid c3">{% for p in more %}<div>{% include 'partials/post_card.html' %}</div>{% endfor %}</div></div>
+</section>
+<section class="ob-cta" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ob-wrap" style="position:relative">
+        <span class="ob-eyebrow">Ready when you are</span>
+        <h2 class="ob-h1" data-reveal>Let&rsquo;s get you <span class="ob-it">started.</span></h2>
+        <div class="ob-row" data-reveal><a class="ob-btn cream" href="{% url 'signup' %}">Open an account <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'contact' %}">Talk to us</a></div>
+    </div>
+</section>
+</main>
+{% endblock %}

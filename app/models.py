@@ -23,6 +23,7 @@ class Withdrawal(models.Model):
 	)
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	ref = models.CharField(max_length=100, blank=True, default='', db_index=True)  # same reference as its Transaction
 	amount = models.FloatField(default=0.00)
 	acc_no = models.CharField(max_length=300)
 	acc_name = models.CharField(max_length=300)

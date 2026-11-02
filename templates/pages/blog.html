@@ -1,0 +1,31 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Insights | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}Guides and ideas from Oakbound Trust Bank.{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ghost" aria-hidden="true" data-par="0.1">INSIGHTS</div>
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'home' %}">Home</a><span>/</span><span>Insights</span></div>
+        <span class="ob-eyebrow">Insights</span>
+        <h1 class="ob-h1" data-reveal>Money, <span class="ob-it">made clearer.</span></h1>
+        <p class="ob-lead" data-reveal style="--d:.1s">Practical guides on saving, borrowing, payments and staying safe.</p>
+    </div>
+</section>
+<section class="ob-sec light">
+    <div class="ob-wrap"><div class="ob-grid c3">
+        {% for p in posts %}<div data-reveal style="--d:{{ forloop.counter0 }}00ms">{% include 'partials/post_card.html' %}</div>{% endfor %}
+    </div></div>
+</section>
+<section class="ob-cta" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ob-wrap" style="position:relative">
+        <span class="ob-eyebrow">Ready when you are</span>
+        <h2 class="ob-h1" data-reveal>Let&rsquo;s get you <span class="ob-it">started.</span></h2>
+        <div class="ob-row" data-reveal><a class="ob-btn cream" href="{% url 'signup' %}">Open an account <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'contact' %}">Talk to us</a></div>
+    </div>
+</section>
+</main>
+{% endblock %}

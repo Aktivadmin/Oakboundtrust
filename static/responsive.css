@@ -1,12 +1,12 @@
 :root {
     /* Color Styles */
-    --primary-color: #3F2E3E;
-    --dark-bg-color: #2A1F29;
-    --secondary-color: #EFE1D1;
-    --main-bg-color: #F4ECE2;
-    --main-bg-color-24: hsla(33, 45%, 92%, 0.24);
-    --light-text-color: #F7F0E8;
-    --dark-text-color: #0D090C;
+    --primary-color: #4A3020;
+    --dark-bg-color: #2B1B12;
+    --secondary-color: #EFE6D4;
+    --main-bg-color: #F5EEDF;
+    --main-bg-color-24: hsla(41, 50%, 92%, 0.24);
+    --light-text-color: #F5EEDF;
+    --dark-text-color: #2B1B12;
 
     /* Text Styles */
     --h1-text-size: 4rem;

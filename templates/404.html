@@ -1,0 +1,17 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Page not found | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}That page could not be found.{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot style="min-height:70vh;display:grid;align-items:center">
+    <div class="ob-spot" aria-hidden="true"></div><div class="ghost" aria-hidden="true">404</div>
+    <div class="ob-wrap" style="position:relative">
+        <span class="ob-eyebrow">Error 404</span>
+        <h1 class="ob-h1">This path has <span class="ob-it">no roots.</span></h1>
+        <p class="ob-lead" style="margin:24px 0 32px">The page you were looking for has moved or does not exist.</p>
+        <div class="ob-row"><a class="ob-btn cream" href="{% url 'home' %}">Back home <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'help' %}">Help centre</a></div>
+    </div>
+</section>
+</main>
+{% endblock %}

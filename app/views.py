@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -10,6 +10,9 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
+from helpers.views import otp_enabled
+from users.otp import issue as issue_code, check as check_code, mask_email, seconds_until_resend
 
 
 User = get_user_model()
@@ -17,8 +20,10 @@ User = get_user_model()
 
 # Create your views here.
 def home(request):
+    from .content import BLOG_POSTS, FAQS
     context = {
-
+        'posts': BLOG_POSTS[:3],
+        'faqs': FAQS[:6],
     }
     return render(request, 'index.html', context)
 
@@ -52,13 +57,20 @@ def login_user(request):
     }
     if request.method == 'POST':
         context = {'data': request.POST, 'title' : 'Dashboard'}
-        email = request.POST.get('email')
+        email = (request.POST.get('email') or '').strip()
         password = request.POST.get('password')
 
         if not validate_email(email):
             messages.add_message(request, messages.ERROR,
                                  'Please enter a valid email address and try again')
             return render(request, 'login.html', context, status=401)
+
+        pending = User.objects.filter(email__iexact=email, is_active=False, email_verified_at__isnull=True).first()
+        if pending and pending.check_password(password):
+            # Signed up but never confirmed their email: pick up where they left off.
+            request.session['pending_user_id'] = pending.pk
+            messages.info(request, 'Please confirm your email address to finish signing in.')
+            return redirect('verify-email')
 
         user = authenticate(request, email=email, password=password)
         if not user:
@@ -68,6 +80,8 @@ def login_user(request):
 
             
         login(request, user)
+        if user.is_superuser:
+            return redirect(reverse('console'))
         return redirect(reverse('dashboard'))
     return render(request, 'login.html', context)
 
@@ -86,7 +100,7 @@ def signup(request):
         zipcode = request.POST.get('zipcode')
         phone = request.POST.get('phone')
         dob_str = request.POST.get('dob')
-        image = request.FILES['image']
+        image = request.FILES.get('image')
 
 
         try:
@@ -122,7 +136,8 @@ def signup(request):
                                  'Please enter your last name')
             return render(request, 'sign-up.html', context)
 
-        if User.objects.filter(email=email).exists():
+        existing = User.objects.filter(email__iexact=email).first()
+        if existing and (existing.is_active or existing.email_verified_at):
             messages.add_message(request, messages.ERROR,
                                  'Email is taken, choose another one')
             return render(request, 'sign-up.html', context)
@@ -133,26 +148,93 @@ def signup(request):
 
 
         if not context['has_error']:
-            user = User.objects.create_user(email=email)
+            # The account stays inactive until the emailed code is entered.
+            user = existing or User.objects.create_user(email=email, is_active=False)
             user.set_password(password)
             user.dob = dob
             user.zipcode = zipcode
             user.phone = phone
             user.first_name = first_name
             user.last_name = last_name
-            
+            user.is_active = False
             user.save()
 
-            mydict = {'name': first_name}
+            if not otp_enabled():
+                # No way to email a code yet (see OTP_REQUIRED): keep the original sign-up so nobody is locked out.
+                user.is_active = True
+                user.save(update_fields=['is_active'])
+                send_email('emails/welcome.html', {'name': first_name}, 'Welcome', email)
+                messages.success(request, "Please login")
+                return redirect('login')
 
-            html_template = 'emails/welcome.html'
-            subject = 'Welcome'
-            send_email(html_template, mydict, subject, email)
-
-            messages.success(request, "Please login")
-
-            return redirect('login')
+            request.session['pending_user_id'] = user.pk
+            status = issue_code(user)
+            if status == 'failed':
+                messages.warning(request, "We could not send your code just now. Tap Resend code to try again.")
+            else:
+                messages.success(request, f"We sent a 6-digit code to {mask_email(user.email)}.")
+            return redirect('verify-email')
     return render(request, 'sign-up.html', context)
+
+
+def verify_email(request):
+    """Step 2 of sign-up: enter the 6-digit code that was emailed."""
+    pending_id = request.session.get('pending_user_id')
+    user = User.objects.filter(pk=pending_id, is_active=False, email_verified_at__isnull=True).first() if pending_id else None
+    if not user:
+        request.session.pop('pending_user_id', None)
+        messages.error(request, 'That sign-up session has ended. Please sign up again, or log in to continue.')
+        return redirect('signup')
+
+    if request.method == 'POST':
+        if request.POST.get('action') == 'resend':
+            status = issue_code(user)
+            text = {
+                'sent': (messages.success, f"A new code is on its way to {mask_email(user.email)}."),
+                'cooldown': (messages.info, "Please wait a moment before asking for another code."),
+                'limit': (messages.error, "Too many codes requested. Please try again in an hour or contact support."),
+                'failed': (messages.warning, "We could not send the code just now. Please try again shortly."),
+            }[status]
+            text[0](request, text[1])
+            return redirect('verify-email')
+
+        code = ''.join(ch for ch in request.POST.get('code', '') if ch.isdigit())
+        result = check_code(user, code)
+        if result == 'ok':
+            user.is_active = True
+            user.email_verified_at = timezone.now()
+            user.save(update_fields=['is_active', 'email_verified_at'])
+            request.session.pop('pending_user_id', None)
+            login(request, user)
+            send_email('emails/welcome.html', {'name': user.first_name}, 'Welcome to Oakbound Trust Bank', user.email)
+            messages.success(request, 'Email confirmed. Welcome to Oakbound Trust Bank.')
+            return redirect('dashboard')
+        problem = {
+            'bad': 'That code is not right. Please check it and try again.',
+            'expired': 'That code has expired. Tap Resend code for a new one.',
+            'locked': 'Too many wrong tries. Tap Resend code for a new one.',
+            'missing': 'There is no active code. Tap Resend code for a new one.',
+        }[result]
+        messages.error(request, problem)
+        return render(request, 'verify-email.html', {'masked_email': mask_email(user.email), 'seconds': seconds_until_resend(user), 'title': 'Verify email'}, status=400)
+
+    return render(request, 'verify-email.html', {'masked_email': mask_email(user.email), 'seconds': seconds_until_resend(user), 'title': 'Verify email'})
+
+
+@login_required
+def receipt(request, ref):
+    """Reopen the receipt of any past transfer. Shows the transfer's real, current status."""
+    tx = get_object_or_404(Transaction, ref=ref, user=request.user)
+    w = Withdrawal.objects.filter(ref=ref, user=request.user).first()
+    ctx = {
+        'currency': request.user.currency, 'ref': tx.ref, 'amount': tx.amount, 'status': tx.status,
+        'description': tx.description or (w.desc if w else ''), 'date': tx.creation_date, 'time': tx.creation_time,
+        'name': request.user.first_name, 'transfer_type': 'Transfer',
+    }
+    if w:
+        ctx.update(acc_no=w.acc_no, bank=w.bank_name, r_name=w.acc_name, address=w.bank_address, swift_code=w.swift_code,
+                   iban=w.iban, transfer_type='International' if w.iban else 'Local')
+    return render(request, 't-success.html', ctx)
 
 
 def beneficiary(request):
@@ -205,9 +287,9 @@ def withdraw(request):
         acc_no = request.POST.get('acc-no')
         acc_name = request.POST.get('acc-name')
         bank_name = request.POST.get('bank-name')
-        desc = request.POST.get('desc')
+        desc = request.POST.get('description') or request.POST.get('desc')            # the form field is "description"
         swift_code = request.POST.get('swift_code')
-        address = request.POST.get('address')
+        address = request.POST.get('bank-address') or request.POST.get('address')     # the form field is "bank-address"
         access_code = request.POST.get('access-code')
 
 
@@ -242,6 +324,7 @@ def withdraw(request):
 
         
         if access_code != current_user.access_code:
+            context.update(reason='access_code', retry_url=reverse('withdraw'))
             return render(request, 'failed-transfer.html', context)
 
         if not context['has_error']:
@@ -264,6 +347,8 @@ def withdraw(request):
             transaction.description = desc
             transaction.trans_type = "Withdrawal"
             transaction.save()
+            withdraw.ref = transaction.ref          # lets us find the transfer details from the transaction (and back)
+            withdraw.save(update_fields=['ref'])
             
             balance = float(balance) - float(amount)
             current_user.balance = balance
@@ -280,7 +365,10 @@ def withdraw(request):
                 'amount': amount,
                 'swift_code': swift_code,
                 'name': current_user.first_name,
-                'date': transaction.creation_date
+                'date': transaction.creation_date,
+                'time': transaction.creation_time,
+                'transfer_type': 'Local',
+                'status': transaction.status,
 
             }
 
@@ -313,7 +401,7 @@ def international_transfer(request):
         acc_name = request.POST.get('acc-name')
         bank_name = request.POST.get('bank-name')
         bank_address = request.POST.get('bank-address')
-        desc = request.POST.get('desc')
+        desc = request.POST.get('description') or request.POST.get('desc')   # the form field is "description"
         iban = request.POST.get('iban')
         swift_code = request.POST.get('swift_code')
         access_code = request.POST.get('access-code')
@@ -349,6 +437,7 @@ def international_transfer(request):
             return render(request, 'international-transfer.html', context)
 
         if access_code != current_user.access_code:
+            context.update(reason='access_code', retry_url=reverse('international-transfer'))
             return render(request, 'failed-transfer.html', context)
 
         if not context['has_error']:
@@ -371,6 +460,8 @@ def international_transfer(request):
             transaction.description = desc
             transaction.trans_type = "Withdrawal"
             transaction.save()
+            withdraw.ref = transaction.ref          # lets us find the transfer details from the transaction (and back)
+            withdraw.save(update_fields=['ref'])
             
             balance = float(balance) - float(amount)
             current_user.balance = balance
@@ -388,7 +479,10 @@ def international_transfer(request):
                 'iban':iban,
                 'swift_code': swift_code,
                 'name': current_user.first_name,
-                'date': transaction.creation_date
+                'date': transaction.creation_date,
+                'time': transaction.creation_time,
+                'transfer_type': 'International',
+                'status': transaction.status,
 
             }
 
@@ -425,7 +519,8 @@ def dashboard(request):
     transactions = Transaction.objects.filter(user=current_user).order_by("-id")
     context = {
         'user':current_user,
-        'transactions': transactions
+        'transactions': transactions,
+        'total': current_user.balance + current_user.savings + current_user.pending_checking,
     }
     if current_user.is_suspended:
         messages.error(request, "Your account is restricted, please contact support")
@@ -547,6 +642,9 @@ def password_reset_confirm(request, uidb64, token):
         user = None
 
     
+    if user and (user.is_staff or user.is_superuser):
+        user = None  # admin passwords can only be changed from the admin panel
+
     if user and default_token_generator.check_token(user, token):
         
         if request.method == 'POST':
@@ -588,6 +686,11 @@ def reset_password(request):
             messages.add_message(request, messages.ERROR,
                                  f"Please, there's no account associated with {email}")
             return render(request, 'password_reset_form.html', status=401)
+
+        if user.is_staff or user.is_superuser:
+            # Admin accounts are never reset by email: whoever owns that mailbox could take over the site.
+            # Show the same page as a normal request so nothing is revealed.
+            return render(request, 'password_reset_link_sent.html')
 
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)

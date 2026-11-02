@@ -1,0 +1,46 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Security | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}How Oakbound Trust Bank protects your account.{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ghost" aria-hidden="true" data-par="0.1">SECURE</div>
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'home' %}">Home</a><span>/</span><span>Security</span></div>
+        <span class="ob-eyebrow">Security</span>
+        <h1 class="ob-h1" data-reveal>Strong by <span class="ob-it">design.</span></h1>
+        <p class="ob-lead" data-reveal style="--d:.1s">Several layers work together to keep your account and your money safe.</p>
+    </div>
+</section>
+<section class="ob-sec">
+    <div class="ob-wrap"><div class="ob-grid c4">
+        <div class="ob-card" data-reveal><div class="ob-ico">{% include 'doodles/d-star.html' %}</div><h3 class="ob-h3">Identity checks</h3><p>We verify who you are with a photo ID and a selfie when you open an account.</p></div>
+        <div class="ob-card" data-reveal style="--d:.08s"><div class="ob-ico">{% include 'doodles/d-acorn.html' %}</div><h3 class="ob-h3">Security questions</h3><p>Personal questions only you can answer add another gate to your account.</p></div>
+        <div class="ob-card" data-reveal style="--d:.16s"><div class="ob-ico">{% include 'doodles/d-coin.html' %}</div><h3 class="ob-h3">Transaction PIN</h3><p>Transfers are confirmed with your PIN, so a payment never happens by accident.</p></div>
+        <div class="ob-card" data-reveal style="--d:.24s"><div class="ob-ico">{% include 'doodles/d-spark.html' %}</div><h3 class="ob-h3">Monitoring</h3><p>We review unusual activity and may pause a payment to protect you.</p></div>
+    </div></div>
+</section>
+<section class="ob-sec light">
+    <div class="ob-wrap ob-spotlight">
+        <div data-reveal><span class="ob-eyebrow">Stay safe</span><h2 class="ob-h2">Five habits that <span class="ob-it">protect you.</span></h2></div>
+        <ul class="ob-ticks" data-reveal>
+            <li>Never share your PIN, password or one-time codes with anyone</li>
+            <li>We will never ask you to move money to a &lsquo;safe account&rsquo;</li>
+            <li>Check the web address before you log in</li>
+            <li>Use a unique password you do not use elsewhere</li>
+            <li>Contact us straight away if something looks wrong</li>
+        </ul>
+    </div>
+</section>
+<section class="ob-cta" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ob-wrap" style="position:relative">
+        <span class="ob-eyebrow">Ready when you are</span>
+        <h2 class="ob-h1" data-reveal>Let&rsquo;s get you <span class="ob-it">started.</span></h2>
+        <div class="ob-row" data-reveal><a class="ob-btn cream" href="{% url 'signup' %}">Open an account <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'contact' %}">Talk to us</a></div>
+    </div>
+</section>
+</main>
+{% endblock %}

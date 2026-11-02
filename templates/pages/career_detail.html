@@ -1,0 +1,26 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}{{ job.title }} | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}{{ job.about }}{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ghost" aria-hidden="true" data-par="0.1">CAREERS</div>
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'home' %}">Home</a><span>/</span><span>Careers</span></div>
+        <span class="ob-eyebrow">{{ job.team }} &middot; {{ job.where }} &middot; {{ job.type }}</span>
+        <h1 class="ob-h1" data-reveal>{{ job.title }}</h1>
+        <p class="ob-lead" data-reveal style="--d:.1s">{{ job.about }}</p>
+    </div>
+</section>
+<section class="ob-sec paper">
+    <div class="ob-wrap ob-article">
+        <h2>What you will do</h2><ul class="ob-ticks">{% for x in job.do %}<li>{{ x }}</li>{% endfor %}</ul>
+        <h2>What we are looking for</h2><ul class="ob-ticks">{% for x in job.need %}<li>{{ x }}</li>{% endfor %}</ul>
+        <div class="ob-row" style="margin-top:2.4em"><a class="ob-btn green" href="{% url 'contact' %}">Apply for this role <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'careers' %}">All roles</a></div>
+    </div>
+</section>
+
+</main>
+{% endblock %}

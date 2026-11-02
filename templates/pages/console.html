@@ -1,0 +1,64 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin console | Oakbound Trust Bank</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="{% static 'favicons/favicon.svg' %}" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=8">
+    <style>
+        .con { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; display: grid; gap: 20px; }
+        .con-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 18px; border-radius: 999px; flex-wrap: wrap; }
+        .con-top a { color: var(--cream); text-decoration: none; font-weight: 500; opacity: .8 } .con-top a:hover { opacity: 1 }
+        .con-top .brand { display: flex; align-items: center; gap: 12px; opacity: 1; font: 700 1.1rem var(--f-display); letter-spacing: -.03em }
+        .con-top .brand img { height: 34px; width: auto }
+        .con-top nav { display: flex; gap: 8px; flex-wrap: wrap }
+        .con-top nav a { padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,.08) }
+        .con h1 { margin: 10px 4px 0; font: 700 clamp(2rem, 4vw, 3rem)/1 var(--f-app); letter-spacing: -.045em } .con h1 em { font-family: var(--f-serif); font-weight: 400 }
+        .con .sub { margin: 0 4px; opacity: .7; max-width: 46em }
+        .con-search { display: flex; gap: 10px } .con-search input { flex: 1; padding: 16px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: var(--cream); font: 500 1rem var(--f-app); outline: 0 }
+        .con-search input:focus { border-color: var(--gold) }
+        .rows { padding: 8px } .row-c { display: grid; grid-template-columns: 52px 1fr auto auto; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 22px; transition: background .3s }
+        .row-c:hover { background: rgba(255,255,255,.07) } .row-c b { display: block } .row-c small { opacity: .62 }
+        .row-c .bal { text-align: right; font: 700 1.05rem var(--f-app); letter-spacing: -.02em } .row-c form { margin: 0 }
+        .row-c .acts { display: flex; gap: 8px; align-items: center }
+        .row-c .mini { padding: 10px 16px; font-size: .88rem }
+        .count { opacity: .6; font-size: .9rem; margin: 0 4px }
+        @media (max-width: 760px) { .row-c { grid-template-columns: 46px 1fr; } .row-c .bal { text-align: left; grid-column: 2 } .row-c .acts { grid-column: 1 / -1 } }
+    </style>
+</head>
+<body class="ob-legacy ob-dash">
+    <div class="con">
+        <header class="con-top glass">
+            <a class="brand" href="{% url 'home' %}"><img src="{% static 'images/brand/icon-O-reversed.svg' %}" alt="">Admin console</a>
+            <nav>
+                <a href="/admin/">Django admin</a>
+                <a href="{% url 'home' %}">Public site</a>
+                <a href="{% url 'logout' %}">Log out ({{ admin.email }})</a>
+            </nav>
+        </header>
+        <div><h1>Customer <em>dashboards.</em></h1></div>
+        <p class="sub">Pick a customer to open their dashboard exactly as they see it. The view is read-only, so nothing can be changed or sent while you look around. Use the banner at the top to exit.</p>
+        {% for m in messages %}<div class="ob-toast {{ m.tags }}"><span class="dot"></span><span>{{ m }}</span></div>{% endfor %}
+        <form class="con-search" method="get"><input type="search" name="q" value="{{ q }}" placeholder="Search by name or email" aria-label="Search customers"><button class="pillbtn cream" type="submit">Search</button></form>
+        <p class="count">{{ count }} customer{{ count|pluralize }}{% if q %} matching &ldquo;{{ q }}&rdquo;{% endif %}</p>
+        <section class="rows glass">
+            {% for c in customers %}
+            <div class="row-c">
+                <span class="dash-avatar initials">{{ c.first_name|slice:":1" }}{{ c.last_name|slice:":1" }}</span>
+                <div><b>{{ c.first_name }} {{ c.last_name }}</b><small>{{ c.email }}{% if c.is_suspended %} &middot; <span class="chip declined">Restricted</span>{% endif %}</small></div>
+                <div class="bal">{{ c.currency }}{{ c.balance|floatformat:2 }}<br><small style="font-weight:400">balance</small></div>
+                <div class="acts">
+                    <form method="post" action="{% url 'console-view' c.pk %}">{% csrf_token %}<button class="pillbtn gold mini" type="submit">View dashboard</button></form>
+                    <a class="pillbtn glassy mini" href="/admin/users/customuseraccount/{{ c.pk }}/change/">Edit</a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty"><p>No customers yet. They will appear here as people open accounts.</p></div>
+            {% endfor %}
+        </section>
+    </div>
+</body>
+</html>

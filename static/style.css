@@ -1,16 +1,19 @@
 :root {
     /* Color Styles */
-    --primary-color: #3F2E3E;
-    --dark-bg-color: #2A1F29;
-    --dark-bg-color-24: hsla(305, 15%, 14%, 0.24);
-    --secondary-color: #EFE1D1;
-    --main-bg-color: #F4ECE2;
-    --main-bg-color-24: hsla(33, 45%, 92%, 0.24);
-    --light-text-color: #F7F0E8;
-    --light-text-color-60: hsla(32, 48%, 94%, 0.60);
-    --dark-text-color: #0D090C;
-    --dark-text-color-60: hsla(315, 18%, 4%, 0.60);
-    --dark-text-color-80: hsla(315, 18%, 4%, 0.80);
+    --brand-green: #2F6B3F;
+    --brand-green-light: #5A9A68;
+    --brand-gold: #C9A24A;
+    --primary-color: #4A3020;
+    --dark-bg-color: #2B1B12;
+    --dark-bg-color-24: hsla(22, 40%, 12%, 0.24);
+    --secondary-color: #EFE6D4;
+    --main-bg-color: #F5EEDF;
+    --main-bg-color-24: hsla(41, 50%, 92%, 0.24);
+    --light-text-color: #F5EEDF;
+    --light-text-color-60: hsla(41, 50%, 92%, 0.60);
+    --dark-text-color: #2B1B12;
+    --dark-text-color-60: hsla(22, 40%, 12%, 0.60);
+    --dark-text-color-80: hsla(22, 40%, 12%, 0.80);
 
     /* Text Styles */
     --h1-text-size: 4rem;
@@ -276,7 +279,7 @@ button {
     align-items: center;
     gap: 2rem;
     padding-bottom: 18rem;
-    background-image: url('images/SL-Cards.png');
+    background-image: url('images/brand/cards-fan.svg');
     background-repeat: no-repeat;
     background-position: bottom center;
 }
@@ -414,7 +417,7 @@ button {
 /* About-Hero Section */
 
 #about-hero {
-    background-image: url('images/safe.jpg');
+    background-image: url('images/safe.webp');
     background-position: center;
     background-size: cover;
     height: 500px;
@@ -795,7 +798,7 @@ button {
 /* About-Hero Section */
 
 #about-hero {
-    background-image: url('images/safe.jpg');
+    background-image: url('images/safe.webp');
     background-position: center;
     background-size: cover;
     height: 500px;
@@ -1025,7 +1028,7 @@ button {
 /* End Of Cycle */
 
 #end-of-cycle {
-    background-image: url(images/Scetion\ 4.png);
+    background-image: url(images/Scetion\ 4.webp);
     background-position: center;
     background-size: cover;
     height: 650px;
@@ -1061,7 +1064,7 @@ button {
 .hero-small-business-img {
     width: 100%;
     height: 100%;
-    background-image: url('images/man-writing.jpg');
+    background-image: url('images/man-writing.webp');
     background-size: cover;
 }
 

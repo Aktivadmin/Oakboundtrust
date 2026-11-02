@@ -1,148 +1,56 @@
-{% load static %}
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetroCap Finance</title>
+    <title>{% block title %}Oakbound Trust Bank{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Oakbound Trust Bank: strong, trusted banking. Accounts, cards, loans and transfers in one place.{% endblock %}">
+    <link rel="icon" href="{% static 'favicons/favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'favicons/favicon.ico' %}" sizes="any">
+    <link rel="apple-touch-icon" href="{% static 'favicons/apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+    <meta name="theme-color" content="#2B1B12">
+    <meta property="og:title" content="Oakbound Trust Bank">
+    <meta property="og:description" content="Strong, trusted banking.">
+    <meta property="og:type" content="website">
 
-    <style>
-        .material-symbols-rounded {
-            cursor: pointer;
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 48
-        }
-    </style>
+    <script>document.documentElement.classList.add('js');</script>
 
-    <!-- Google symbols -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <!-- Google fonts -->
+    <!-- Fonts: Bricolage Grotesque (display), Instrument Serif (accent), Inter (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=chevron_right&display=swap">
 
-    <!-- CSS Files -->
+    <!-- CSS: legacy page styles first, then the Oakbound design system on top -->
     <link rel="stylesheet" href="{% static 'reset.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
-
-<!-- Smartsupp Live Chat script -->
-<script type="text/javascript">
-var _smartsupp = _smartsupp || {};
-_smartsupp.key = 'REMOVED';
-window.smartsupp||(function(d) {
-  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-  c.type='text/javascript';c.charset='utf-8';c.async=true;
-  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-})(document);
-</script>
-<noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
+    <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
+    
 
-    <header id="header">
-        <!-- Top navigation -->
-        <div class="nav-container">
-            <a href="{% url 'home' %}" rel="logo">
-                <img src="{% static 'images/logo1.png' %}" height="150", width="150">
-            </a>
-            <nav class="nav">
-                <ul class="nav-links">
-                    <li>Bank</li>
-                    <li><a href="{% url 'loans' %}" rel="Loan Page">Loans</a></li>
-                    <li>Invest</li>
-                </ul>
-            </nav>
-            <nav class="nav">
-                <ul class="nav-links">
-                    <li><a href="{% url 'about' %}" rel="about">About Us</a></li>
-                    <li>Help</li>
-                    <li><a href="{% url 'dashboard' %}">My account</a></li>
-                </ul>
-            </nav>
-            <div class="ham-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            
-            <!-- Mobile navigation menu -->
-            <div class="mobile-navigation-menu">   
-                <!-- Navigation links -->
-                <div class="links-mobile-group">
-                    <nav class="mobile-nav">
-                        <ul class="nav-links mobile">
-                            <li><a href="{% url "home" %}">Bank</a></li>
-                            <li><a href="{% url 'loans' %}" rel="Loan Page">Loans</a></li>
-                            <li><a href="{% url 'investment' %}">Invest</a></li>
-                        </ul>
-                    </nav>
-                    <nav class="mobile-nav">
-                        <ul class="nav-links mobile">
-                            <li><a href="{% url 'about' %}" rel="About Page">About us</a></li>
-                            {% comment %} <li><a href="#">Help</a></li> {% endcomment %}
-                            <li><a href="{% url 'dashboard' %}">My account</a></li>
-                        </ul>
-                    </nav>
-                    <nav class="mobile-nav">
-                        <ul class="nav-links mobile">
-                            <li><a href="{% url 'home' %}" rel="Homepage">Personal</a></li>
-                            <li><a href="{% url 'mortgage' %}" rel="Mortgage Page">Mortgage</a></li>
-                            <li><a href="{% url 'small-businesses' %}" rel="Small Businesses">Small businesses</a></li>
-                            <li><a href="{% url 'investment' %}" rel="Investment & Wealth">Investment & Wealth</a></li>
-                        </ul>
-                    </nav>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}">
-                        <button class="btn-light button">Logout</button>
-                    </a>
-                    {% else %}
-                    <a href="{% url 'login' %}">
-                        <button class="btn-light button">Client login</button>
-                    </a>
-                {% endif %}
-                </div>
-                
-            </div>
-            
+    <!-- Loader: ghost wordmark and a counter (shown once per visit) -->
+    <div class="ob-loader" aria-hidden="true">
+        <div class="ghost">OAKBOUND</div>
+        <div class="box">
+            <img src="{% static 'images/brand/icon-O-reversed.svg' %}" alt="">
+            <div class="count">000%</div>
+            <div class="bar"><i></i></div>
         </div>
-        <!-- Lower Navigation -->
-        <div class="nav-container lower">
-            <nav class="nav">
-                <ul class="nav-links">
-                    <li><a href="{% url 'home' %}" rel="Homepage">Personal</a></li>
-                    <li><a href="{% url 'mortgage' %}" rel="Mortgage Page">Mortgage</a></li>
-                    <li><a href="{% url 'small-businesses' %}" rel="Small Businesses">Small businesses</a></li>
-                    <li><a href="{% url 'investment' %}" rel="Investment & Wealth">Investment & Wealth</a></li>
-                </ul>
-            </nav>
-            {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" rel="Login Page">
-                <button class="btn-light button">Logout</button>                
-            </a>
-            {% else %}
-            <a href="{% url 'login' %}" rel="Login Page">
-                <button class="btn-light button">Client login</button>                
-            </a>
-            {% endif %}
-        </div>
-    </header>
+    </div>
+    <div class="ob-cursor" aria-hidden="true"></div>
 
+    {% include 'partials/nav.html' %}
 
     {% block content %}{% endblock content %}
 
-
-
-
     {% include 'partials/footer.html' %}
 
-<script src="{% static 'index.js' %}"></script>
-<script src="//code.tidio.co/REMOVED.js" async></script>
+    {% include 'partials/livechat.html' %}
+    <script src="{% static 'js/oak.js' %}?v=3" defer></script>
+    <script src="{% static 'js/pw-toggle.js' %}?v=2" defer></script>
 </body>
 </html>

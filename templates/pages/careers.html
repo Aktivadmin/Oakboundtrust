@@ -1,0 +1,46 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Careers | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}Build trusted banking with Oakbound Trust Bank.{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ghost" aria-hidden="true" data-par="0.1">JOIN US</div>
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'home' %}">Home</a><span>/</span><span>Careers</span></div>
+        <span class="ob-eyebrow">Careers</span>
+        <h1 class="ob-h1" data-reveal>Help us build banking that <span class="ob-it">lasts.</span></h1>
+        <p class="ob-lead" data-reveal style="--d:.1s">Join a team that cares about getting the details right, for customers who depend on us.</p>
+    </div>
+</section>
+<section class="ob-sec">
+    <div class="ob-wrap"><div class="ob-grid c3">
+        <div class="ob-card" data-reveal><div class="ob-ico">{% include 'doodles/d-acorn.html' %}</div><h3 class="ob-h3">Grow roots</h3><p>Time to learn, mentors who care and room to take on more.</p></div>
+        <div class="ob-card" data-reveal style="--d:.1s"><div class="ob-ico">{% include 'doodles/d-leaf.html' %}</div><h3 class="ob-h3">Work your way</h3><p>Remote, hybrid and on-site roles with a focus on outcomes.</p></div>
+        <div class="ob-card" data-reveal style="--d:.2s"><div class="ob-ico">{% include 'doodles/d-star.html' %}</div><h3 class="ob-h3">Do careful work</h3><p>We take pride in craft, clarity and doing what we say.</p></div>
+    </div></div>
+</section>
+<section class="ob-sec light">
+    <div class="ob-wrap">
+        <div class="ob-head"><span class="ob-eyebrow">Open roles</span><h2 class="ob-h2">Find your <span class="ob-it">place.</span></h2></div>
+        <div style="display:grid;gap:12px">
+            {% for j in jobs %}
+            <a class="ob-card" href="{% url 'career-detail' j.slug %}" style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:18px;align-items:center;text-decoration:none" data-reveal>
+                <h3 class="ob-h3" style="margin:0">{{ j.title }}</h3><span style="opacity:.65">{{ j.team }}</span><span style="opacity:.65">{{ j.where }} &middot; {{ j.type }}</span><span class="more" style="margin:0">View &rarr;</span>
+            </a>
+            {% endfor %}
+        </div>
+        <p style="margin-top:28px;opacity:.55;font-size:.9rem">Roles shown are sample listings.</p>
+    </div>
+</section>
+<section class="ob-cta" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ob-wrap" style="position:relative">
+        <span class="ob-eyebrow">Ready when you are</span>
+        <h2 class="ob-h1" data-reveal>Let&rsquo;s get you <span class="ob-it">started.</span></h2>
+        <div class="ob-row" data-reveal><a class="ob-btn cream" href="{% url 'signup' %}">Open an account <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'contact' %}">Talk to us</a></div>
+    </div>
+</section>
+</main>
+{% endblock %}

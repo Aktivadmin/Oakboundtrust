@@ -5,7 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | MetroCap Finance</title>
+    <title>Dashboard | Oakbound Trust Bank</title>
+    <link rel="icon" href="{% static 'favicons/favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'favicons/favicon.ico' %}" sizes="any">
+    <link rel="apple-touch-icon" href="{% static 'favicons/apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+    <meta name="theme-color" content="#4A3020">
 
     <style>
         .material-symbols-rounded {
@@ -17,347 +22,107 @@
           'opsz' 48
         }
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
     </style>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
 
     <!-- Google symbols -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=chevron_right&display=swap">
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'reset.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=8">
+    <script>document.documentElement.classList.add('js');</script>
 
-    <!-- Smartsupp Live Chat script -->
-<script type="text/javascript">
-var _smartsupp = _smartsupp || {};
-_smartsupp.key = 'REMOVED';
-window.smartsupp||(function(d) {
-  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-  c.type='text/javascript';c.charset='utf-8';c.async=true;
-  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-})(document);
-</script>
-<noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+    
 
     
 </head>
 
-<body>
+<body class="ob-legacy ob-dash{% if impersonating %} has-banner{% endif %}">
 
+    {% include 'partials/imp_banner.html' %}
     <main class="grid-6" id="dashboard">
-
-        <!-- Left Dashboard Section -->
-
-        <section class="dashboard-navigation">
-            <div class="dashboard-main-logo">
-                <a href="{% url 'home' %}"><img src="{% static 'images/logo1.png' %}" alt="logo" height="150", width="150"></a>
-            </div>
-        
-        
-            <div class="dashboard-nav-links">
-        
-                <!-- Dashboard -->
-                <div>
-                    <a href="{% url 'dashboard' %}" rel="Dashboard" class="light-link">
-                        <img src={% static 'icons/Dashboard.svg' %} alt="dash-svg">
-                        <p>Dashboard</p>
-                    </a>
-                </div>
-        
-                <!-- Transactions -->
-                <div class="dash-links">
-                    <a href="{% url 'transaction' %}" rel="Transaction" class="dark-link">
-                        <img src="{% static 'icons/trans-light.svg' %}" alt="dash-svg">
-                        <p>Transactions</p>
-                    </a>
-                </div>
-        
-                <!-- Credit Cards -->
-                <div>
-                    <a href="{% url 'credit-card' %}" rel="Credit Cards" class="dark-link">
-                        <img src="{% static 'icons/cc-light.svg' %}" alt="dash-svg">
-                        <p>Credit Cards</p>
-                    </a>
-                </div>
-        
-                <!-- Deposit -->
-                <div>
-                    <a href="{% url 'deposit' %}" rel="Deposit" class="dark-link">
-                        <img src={% static 'icons/deposit-light.svg' %} alt="dash-svg">
-                        <p>Deposit</p>
-                    </a>
-                </div>
-        
-                <!-- Withdraw -->
-                <div>
-                    <a href="{% url 'withdraw' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>Transfer</p>
-                    </a>
-                </div>
-
-                <div>
-                    <a href="{% url 'international-transfer' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>International Transfer</p>
-                    </a>
-                </div>
-
-                <div>
-                    <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
-                        {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
-                        <p>Logout</p>
-                    </a>
-                </div>
-            </div>
-        
-            <!-- Mobile Dashboard Navigation Menu -->
-            <div class="ham-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-        
-            <!-- Dashboard Navigation links -->
-            <div class="mobile-navigation-menu web-app">
-        
-                <!-- Mobile navigation menu -->
-                <!-- Dashboard -->
-                <div >
-                    <a href="{% url 'dashboard' %}" rel="Dashboard" class="light-link">
-                        <img src={% static 'icons/Dashboard.svg' %} alt="dash-svg">
-                        <p>Dashboard</p>
-                    </a>
-                </div>
-        
-                <!-- Transactions -->
-                <div class="dash-links">
-                    <a href="{% url 'transaction' %}" rel="Transaction" class="dark-link">
-                        <img src="{% static 'icons/trans-light.svg' %}" alt="dash-svg">
-                        <p>Transactions</p>
-                    </a>
-                </div>
-        
-                <!-- Credit Cards -->
-                <div>
-                    <a href="{% url 'credit-card' %}" rel="Credit Cards" class="dark-link">
-                        <img src="{% static 'icons/cc-light.svg' %}" alt="dash-svg">
-                        <p>Credit Cards</p>
-                    </a>
-                </div>
-        
-                <!-- Deposit -->
-                <div>
-                    <a href="{% url 'deposit' %}" rel="Deposit" class="dark-link">
-                        <img src={% static 'icons/deposit-light.svg' %} alt="dash-svg">
-                        <p>Deposit</p>
-                    </a>
-                </div>
-        
-                <!-- Withdraw -->
-                <div>
-                    <a href="{% url 'withdraw' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>Transfer</p>
-                    </a>
-                </div>
-
-                <div>
-                    <a href="{% url 'international-transfer' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>International Transfer</p>
-                    </a>
-                </div>
-
-                <div>
-                    <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
-                        {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
-                        <p>Logout</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Second Dashboard Section -->
+        {% include 'partials/dash_nav.html' with active='dashboard' %}
 
         <section class="dashboard-center">
-
-            <!--Greeting & Profile Pic-->
             <div class="dash-center-first">
-                <div class="flex-row">
-                    <img src="{{user.image.url}}" alt="sun-icon" width="70" height="70">
-                    <p>Hello, {{user.first_name}}</p>
-                </div>
-
-                <div class="flex-row">
-                    <img src="{% static 'icons/calender.svg' %}" alt="sun-icon">
-                    <p id="dateContainer"></p>
-                </div>
+                <div class="flex-row">{% include 'partials/dash_avatar.html' %}<p><span data-greet>Hello</span>, {{ user.first_name }}</p></div>
+                <div class="flex-row"><img src="{% static 'icons/calender.svg' %}" alt="" width="20" height="20"><p id="dateContainer"></p></div>
             </div>
-
             {% include "partials/messages.html" %}
 
-            <!--Cards-->
-            <div class="dash-center-second">
-                <h3>My Account</h3>
-                <div class="grid-6">
-                    <div class="center-dark-card">
-                        <h4>Available Balance</h4>
-                        <h2>
-                            {% with user.balance|stringformat:"0.2f" as balance %}
-                                {{ user.currency }}{{ balance|slice:":-3"|intcomma }}{{ balance|slice:"-3:" }}
-                            {% endwith %}
-                        </h2>
-                        <a href="{% url "withdraw" %}"><button class="btn-light">Send Money</button></a>
-                    </div>
-                    <div class="center-light-card1">
-                        <h4>MetroCap Finance Savings</h4>
-                        <h2>
-                            {% with user.savings|stringformat:"0.2f" as savings %}
-                                {{ user.currency }}{{ savings|slice:":-3"|intcomma }}{{ savings|slice:"-3:" }}
-                            {% endwith %}
-                        </h2>
-                        <a href="{% url "deposit" %}"><button class="btn-dark"> Make a Deposit</button></a>
+            <div class="dash-greet"><small>Overview</small><h1>Your money, <em>at a glance.</em></h1></div>
 
-                    </div>
-                    <div class="center-light-card2">
-                        <h4>Pending Checking</h4>
-                        <h2>
-                            {% with user.pending_checking|stringformat:"0.2f" as pending_checking %}
-                                {{ user.currency }}{{ pending_checking|slice:":-3"|intcomma }}{{ pending_checking|slice:"-3:" }}
-                            {% endwith %}
-                        </h2>
-                        <a href="{% url "deposit" %}"><button class="btn-dark"> Make a Deposit</button></a>
-
+            <section class="bal-hero glass" data-tilt="4">
+                <div>
+                    <div class="lbl">Available balance</div>
+                    <div class="amt" data-count>{% with user.balance|stringformat:"0.2f" as balance %}{{ user.currency }}{{ balance|slice:":-3"|intcomma }}{{ balance|slice:"-3:" }}{% endwith %}</div>
+                    <div class="row">
+                        <a class="pillbtn cream" href="{% url 'withdraw' %}"><svg viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></svg>Send money</a>
+                        <a class="pillbtn glassy" href="{% url 'deposit' %}"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Deposit</a>
                     </div>
                 </div>
+                <div class="art"><img src="{% static 'images/brand/card-single.svg' %}" alt="Your Oakbound card" width="320" height="228" decoding="async"></div>
+            </section>
+
+            <div class="stats">
+                <div class="stat glass" data-tilt="8"><div class="k"><span class="dot" style="background:var(--gold)"></span>Savings</div><div class="v" data-count>{% with user.savings|stringformat:"0.2f" as v %}{{ user.currency }}{{ v|slice:":-3"|intcomma }}{{ v|slice:"-3:" }}{% endwith %}</div></div>
+                <div class="stat glass" data-tilt="8"><div class="k"><span class="dot" style="background:var(--oak-2)"></span>Pending checking</div><div class="v" data-count>{% with user.pending_checking|stringformat:"0.2f" as v %}{{ user.currency }}{{ v|slice:":-3"|intcomma }}{{ v|slice:"-3:" }}{% endwith %}</div></div>
+                <div class="stat glass" data-tilt="8"><div class="k"><span class="dot" style="background:var(--cream)"></span>Expenses</div><div class="v" data-count>{% with user.expenses|stringformat:"0.2f" as v %}{{ user.currency }}{{ v|slice:":-3"|intcomma }}{{ v|slice:"-3:" }}{% endwith %}</div></div>
             </div>
 
-            <!--This is where the chart will be embedded-->
-            <div>
-
+            <div class="quick">
+                <a class="glass" href="{% url 'withdraw' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></svg></span><b>Send<small>Local transfer</small></b></a>
+                <a class="glass" href="{% url 'international-transfer' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><b>Send abroad<small>International</small></b></a>
+                <a class="glass" href="{% url 'deposit' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v12M12 15l-4-4M12 15l4-4"/><path d="M4 17v1.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V17"/></svg></span><b>Deposit<small>Add funds</small></b></a>
+                <a class="glass" href="{% url 'credit-card' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/></svg></span><b>Cards<small>Apply or manage</small></b></a>
             </div>
 
-            <!--Recent Transactions-->
-            <div class="rcnt-transaction">
-                <h3>Recent Transaction</h3>
-                <div class="rcnt-transaction-div">
+            <div class="two-col">
+                <section class="activity glass">
+                    <h3 class="dash-h">Recent activity</h3>
                     {% if transactions %}
-                    
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            {% for transaction in transactions %}
-                                <tr>
-                                    <th scope="row">{{transaction.creation_date}}</th>
-                                    <td>{{transaction.creation_time}}</td>
-                                    <td>{{transaction.trans_type}}</td>
-                                    <td>
-                                        {% with transaction.amount|stringformat:"0.2f" as amount %}
-                                            {{ user.currency }}{{ amount|slice:":-3"|intcomma }}{{ amount|slice:"-3:" }}
-                                        {% endwith %}
-                                    </td>
-                                    <td>{{transaction.description}}</td>
-                                    <td>{{transaction.status}}</td>
-                                </tr>
-                            {% endfor %}
-                          
-                        </tbody>
-                      </table>
+                    {% for transaction in transactions|slice:":10" %}
+                    <div class="act">
+                        <span class="ic {% if transaction.trans_type != 'Deposit' %}out{% endif %}"><svg viewBox="0 0 24 24">{% if transaction.trans_type == 'Deposit' %}<path d="M12 5v14M6 13l6 6 6-6"/>{% else %}<path d="M12 19V5M6 11l6-6 6 6"/>{% endif %}</svg></span>
+                        <div><b>{{ transaction.description|default:transaction.trans_type }}</b><small>{{ transaction.trans_type }} &middot; {{ transaction.creation_date|date:"M j, Y" }}</small><br><span class="chip {{ transaction.status|lower }}">{{ transaction.status }}</span>{% if transaction.trans_type == 'Withdrawal' %} <a class="act-link" href="{% url 'receipt' transaction.ref %}">Receipt</a>{% endif %}</div>
+                        <div class="amt {% if transaction.trans_type == 'Deposit' %}in{% else %}out{% endif %}">{% with transaction.amount|stringformat:"0.2f" as amount %}{% if transaction.trans_type == 'Deposit' %}+{% else %}&minus;{% endif %}{{ user.currency }}{{ amount|slice:":-3"|intcomma }}{{ amount|slice:"-3:" }}{% endwith %}</div>
+                    </div>
+                    {% endfor %}
                     {% else %}
-                    <img src="{% static 'icons/recent-transaction-icon.svg' %}" alt="Transaction Icon">
-                    <p>Your 10 most recent transactions will appear here</p>
+                    <div class="empty"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M8.5 11h5"/></svg><p>Your 10 most recent transactions will appear here.</p></div>
                     {% endif %}
-                    
-                </div>
+                </section>
+                <section class="donut-card glass" data-tilt="6">
+                    <h3 class="dash-h" style="margin:0">Where it sits</h3>
+                    <div class="donut" data-donut="{{ user.balance|stringformat:'f' }},{{ user.savings|stringformat:'f' }},{{ user.pending_checking|stringformat:'f' }},{{ user.expenses|stringformat:'f' }}">
+                        <svg viewBox="0 0 190 190" aria-hidden="true"><circle cx="95" cy="95" r="70" stroke="rgba(255,255,255,.1)"/><circle data-seg cx="95" cy="95" r="70" stroke="#5a9a68"/><circle data-seg cx="95" cy="95" r="70" stroke="#c9a24a"/><circle data-seg cx="95" cy="95" r="70" stroke="#a9744f"/><circle data-seg cx="95" cy="95" r="70" stroke="#f5eedf"/></svg>
+                        <div class="mid"><small>Total</small><b>{% with total|stringformat:"0.2f" as t %}{{ user.currency }}{{ t|slice:":-3"|intcomma }}{{ t|slice:"-3:" }}{% endwith %}</b></div>
+                    </div>
+                    <div class="legend">
+                        <span><em><i style="background:#5a9a68"></i>Balance</em></span><span><em><i style="background:#c9a24a"></i>Savings</em></span><span><em><i style="background:#a9744f"></i>Pending</em></span><span><em><i style="background:#f5eedf"></i>Expenses</em></span>
+                    </div>
+                </section>
             </div>
-            
         </section>
-
-        <!-- Third Dashboard Section -->
 
         <section class="dashboard-right">
-            <div class="dash-right-heading">
-                <h3>Local transfer</h3>
-                <p><a href="{% url "international-transfer" %}">International Transfer?</a></p>
-            </div>
-
-            <div class="dash-right-balance">
-                <h2>
-                            {% with user.balance|stringformat:"0.2f" as balance %}
-                                {{ user.currency }}{{ balance|slice:":-3"|intcomma }}{{ balance|slice:"-3:" }}
-                            {% endwith %}
-                        </h2>
-            </div>
-
-            <div>
-                <form class="forms">
-                    <!-- Amount -->
-                    <div class="input firstname">
-                        <input type="number" id="Amount" name="Amount" placeholder="Amount" class="input-style" required>
-                    </div>
-
-                    <!-- Account Number -->
-                    <div class="input firstname">
-                        <input type="numbergi" id="Account Number" name="Account Number" placeholder="Account Number" class="input-style" required>
-                    </div>
-
-                    <!-- Account Name -->
-                    <div class="input firstname">
-                        <input type="text" id="Account Name" name="Account Name" placeholder="Account Name" class="input-style" required>
-                    </div>
-
-                    <!-- Bank Name -->
-                    <div class="input firstname">
-                        <input type="text" id="Bank Name" name="Bank Name" placeholder="Bank Name" class="input-style" required>
-                    </div>
-
-                    <!-- Description -->
-                    <div class="input firstname">
-                        <input type="text" id="Description" name="Description" placeholder="Description" class="input-style" required>
-                    </div>
-
-                    <!-- submit button -->
-                    <div>
-                        <button class="btn-dark" style="width: 100%;">Transfer</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="dash-right-loans">
-                <img src={% static 'icons/Home-Loans.svg' %} alt="hole loans icons" style="height: 64px; width: 64px;">
-                <h4>Home Loans</h4>
-                <p>Getting a loan doesn't have to be a hassle, apply for a mortgage loan with MetroCap Financetoday</p>
-                <a href="{% url "apply-for-loan" %}">
-                <button class="btn-dark" style="width: 200px;">Apply Now</button>
-                </a>
-            </div>
+            <div class="side-card glass" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></svg></span><h4>Send money</h4><p>Move money to a local account in a few steps, confirmed with your access code.</p><a class="pillbtn gold" href="{% url 'withdraw' %}">Start a transfer</a></div>
+            <div class="side-card glass" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9z"/></svg></span><h4>Home loans</h4><p>Getting a loan does not have to be a hassle. Start your application with Oakbound Trust Bank today.</p><a class="pillbtn glassy" href="{% url 'apply-for-loan' %}">Apply now</a></div>
+            <div class="side-card glass" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></span><h4>Stay safe</h4><p>We will never ask for your access code or password. Read how we protect your account.</p><a class="pillbtn glassy" href="{% url 'security' %}">Security tips</a></div>
         </section>
-
     </main>
 
-    <script src="//code.tidio.co/REMOVED.js" async></script>
+    
 
     <script>
         // Function to format the date as "28th September"
@@ -401,9 +166,11 @@ window.smartsupp||(function(d) {
         dateContainer.textContent = formatDate(currentDate);
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
 
     <script src="{% static 'index.js' %}"></script>
+    {% include 'partials/livechat.html' %}
+    <script src="{% static 'js/oak.js' %}?v=3" defer></script>
+    <script src="{% static 'js/pw-toggle.js' %}?v=2" defer></script>
+    <script src="{% static 'js/dash.js' %}?v=3" defer></script>
 </body>
 </html>

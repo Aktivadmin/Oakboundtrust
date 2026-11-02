@@ -4,3 +4,10 @@ venv/
 .env
 .idea/
 .vscode/
+.vercel
+.env*
+
+# local / generated
+app.log
+.vercel
+.env*

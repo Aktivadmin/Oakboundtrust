@@ -4,6 +4,7 @@ from validate_email import validate_email
 import uuid
 from cloudinary.models import CloudinaryField
 from django.core.validators import RegexValidator
+from django.utils import timezone
 
 
 
@@ -58,6 +59,7 @@ class CustomUserAccount(AbstractBaseUser, PermissionsMixin):
     access_code = models.CharField(max_length=10, default="555555")
     image = CloudinaryField('image', default="https://res.cloudinary.com/ds8ljaxsa/image/upload/v1677173485/media/default_t3vbot.png")
     is_suspended = models.BooleanField(default=False)
+    email_verified_at = models.DateTimeField(null=True, blank=True)
 
 
     objects = CustomUserManager()
@@ -74,6 +76,15 @@ class CustomUserAccount(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "Users"
 
 
+class EmailOTP(models.Model):
+    """One active sign-up verification code per user. Only a keyed hash of the code is stored."""
+    user = models.OneToOneField(CustomUserAccount, on_delete=models.CASCADE, related_name="email_otp")
+    code_hash = models.CharField(max_length=64)
+    expires_at = models.DateTimeField()
+    attempts = models.PositiveSmallIntegerField(default=0)
+    last_sent_at = models.DateTimeField(default=timezone.now)
+    window_start = models.DateTimeField(default=timezone.now)
+    sent_in_window = models.PositiveSmallIntegerField(default=0)
 
-
-
+    def __str__(self):
+        return f"OTP for {self.user.email}"

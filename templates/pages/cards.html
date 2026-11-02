@@ -1,0 +1,51 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Cards | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}Gold, green and brown cards from Oakbound Trust Bank.{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ghost" aria-hidden="true" data-par="0.1">CARDS</div>
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'home' %}">Home</a><span>/</span><span>Cards</span></div>
+        <span class="ob-eyebrow">Cards</span>
+        <h1 class="ob-h1" data-reveal>Cards in every shade of <span class="ob-it">you.</span></h1>
+        <p class="ob-lead" data-reveal style="--d:.1s">Choose the card that fits how you spend and manage it alongside your account.</p>
+    </div>
+</section>
+<section class="ob-sec">
+    <div class="ob-wrap ob-spotlight">
+        <div class="art" data-reveal="zoom"><img src="{% static 'images/brand/cards-fan.svg' %}" alt="Oakbound cards in gold, green and brown"></div>
+        <div data-reveal>
+            <h2 class="ob-h2">One account, <span class="ob-dim">three ways to pay.</span></h2>
+            <ul class="ob-ticks">
+                <li>Apply online from your dashboard</li>
+                <li>Every payment appears in your transaction history</li>
+                <li>Use it for local and international payments</li>
+            </ul>
+            <div class="ob-row" style="margin-top:34px"><a class="ob-btn gold" href="{% url 'application' %}">Apply for a card <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'pricing' %}">See pricing</a></div>
+        </div>
+    </div>
+</section>
+<section class="ob-sec light">
+    <div class="ob-wrap">
+        <div class="ob-head" data-reveal><span class="ob-eyebrow">Choose yours</span><h2 class="ob-h2">Three cards, <span class="ob-it">one family.</span></h2></div>
+        <div class="ob-grid c3">
+            <div class="ob-card" data-reveal><div class="ob-ico" style="background:#4a3020;color:#e6c77c">{% include 'doodles/d-acorn.html' %}</div><h3 class="ob-h3">Oak</h3><p>The everyday card in deep brown. Simple, dependable and ready for daily spending.</p><a class="more" href="{% url 'application' %}">Apply &rarr;</a></div>
+            <div class="ob-card" data-reveal style="--d:.1s"><div class="ob-ico" style="background:#2f6b3f;color:#fff">{% include 'doodles/d-leaf.html' %}</div><h3 class="ob-h3">Canopy</h3><p>The green card for people who travel and pay internationally.</p><a class="more" href="{% url 'application' %}">Apply &rarr;</a></div>
+            <div class="ob-card" data-reveal style="--d:.2s"><div class="ob-ico" style="background:#c9a24a;color:#2b1b12">{% include 'doodles/d-star.html' %}</div><h3 class="ob-h3">Gilded</h3><p>The gold card for customers who want the most from their banking.</p><a class="more" href="{% url 'application' %}">Apply &rarr;</a></div>
+        </div>
+        <p style="margin-top:28px;opacity:.55;font-size:.9rem">Card names and features are sample copy and subject to approval.</p>
+    </div>
+</section>
+<section class="ob-cta" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ob-wrap" style="position:relative">
+        <span class="ob-eyebrow">Ready when you are</span>
+        <h2 class="ob-h1" data-reveal>Let&rsquo;s get you <span class="ob-it">started.</span></h2>
+        <div class="ob-row" data-reveal><a class="ob-btn cream" href="{% url 'signup' %}">Open an account <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'contact' %}">Talk to us</a></div>
+    </div>
+</section>
+</main>
+{% endblock %}

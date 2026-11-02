@@ -1,0 +1,51 @@
+{% load static %}
+    <header class="ob-header">
+        <a class="ob-logo" href="{% url 'home' %}" aria-label="Oakbound Trust Bank home">
+            <img src="{% static 'images/brand/logo-side-reversed.svg' %}" alt="Oakbound Trust Bank">
+        </a>
+        <nav class="ob-pill" aria-label="Main">
+            <a href="{% url 'home' %}">Personal</a>
+            <a href="{% url 'cards' %}">Cards</a>
+            <a href="{% url 'loans' %}">Loans</a>
+            <a href="{% url 'small-businesses' %}">Business</a>
+            <a href="{% url 'investment' %}">Invest</a>
+            <a href="{% url 'pricing' %}">Pricing</a>
+            <div class="dd">
+                <button type="button" aria-haspopup="true">Company</button>
+                <div class="menu">
+                    <a href="{% url 'about' %}">About us</a>
+                    <a href="{% url 'security' %}">Security</a>
+                    <a href="{% url 'blog' %}">Insights blog</a>
+                    <a href="{% url 'careers' %}">Careers</a>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </div>
+            </div>
+            <a href="{% url 'help' %}">Help</a>
+        </nav>
+        <div class="ob-right">
+            {% if user.is_authenticated %}
+            <a class="ob-btn ghost sm" href="{% url 'logout' %}">Log out</a>
+            <a class="ob-btn cream sm" href="{% url 'dashboard' %}">My account <span class="ar">&rarr;</span></a>
+            {% else %}
+            <a class="ob-btn ghost sm" href="{% url 'login' %}">Log in</a>
+            <a class="ob-btn cream sm" href="{% url 'signup' %}">Open account <span class="ar">&rarr;</span></a>
+            {% endif %}
+            <button class="ob-burger" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+        </div>
+    </header>
+
+    <div class="ob-drawer" aria-label="Menu">
+        <a href="{% url 'home' %}">Personal</a>
+        <a href="{% url 'cards' %}">Cards</a>
+        <a href="{% url 'loans' %}">Loans</a>
+        <a href="{% url 'mortgage' %}">Mortgage</a>
+        <a href="{% url 'small-businesses' %}">Business</a>
+        <a href="{% url 'investment' %}">Invest</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'help' %}">Help</a>
+        <a href="{% url 'about' %}"><small>Company</small>About us</a>
+        <a href="{% url 'blog' %}">Insights blog</a>
+        <a href="{% url 'careers' %}">Careers</a>
+        <a href="{% url 'contact' %}">Contact</a>
+        {% if user.is_authenticated %}<a href="{% url 'dashboard' %}"><small>Account</small>My account</a>{% else %}<a href="{% url 'login' %}"><small>Account</small>Log in</a><a href="{% url 'signup' %}">Open account</a>{% endif %}
+    </div>

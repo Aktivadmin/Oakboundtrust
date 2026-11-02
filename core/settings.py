@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'core.middleware.ImpersonationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -79,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context.admin_view',
             ],
         },
     },
@@ -100,8 +102,9 @@ if DEBUG:
 else:
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.getenv('DATABASE_URL')
-
+            default=os.getenv('DATABASE_URL'),
+            conn_max_age=30,          # reuse the connection between requests (saves the TLS handshake)
+            conn_health_checks=True,  # drop it if the serverless instance was frozen
         )
     }
 
@@ -181,10 +184,26 @@ cloudinary.config(
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
-# email config
+# email config (credentials come from the environment, never from code)
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-EMAIL_HOST = 'smtp.zoho.com' # zoho
-EMAIL_HOST_USER = 'support@example.invalid'
-EMAIL_HOST_PASSWORD = 'REMOVED'
-EMAIL_PORT = 465
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.zoho.com')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '465'))
 EMAIL_USE_TLS = True
+
+# Public address used in emails (set SITE_URL in the environment once you have a domain)
+SITE_URL = os.getenv('SITE_URL', 'https://oakboundtrust.vercel.app').rstrip('/')
+
+# Static files: cache for a week when served by WhiteNoise (Vercel serves them from its CDN)
+WHITENOISE_MAX_AGE = 60 * 60 * 24 * 7
+
+# Outgoing mail identity (sent through Resend; the domain must be verified there)
+SUPPORT_EMAIL = os.getenv('SUPPORT_EMAIL', 'support@oakboundtrust.com')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', SUPPORT_EMAIL)
+
+# Sign-up email codes: true | false | auto (auto = enforced once email sending is configured)
+OTP_REQUIRED = os.getenv('OTP_REQUIRED', 'auto')
+
+# Live chat (Smartsupp). The key is a public site ID, not a secret. Leave empty to turn the chat off.
+SMARTSUPP_KEY = os.getenv('SMARTSUPP_KEY', '16ec4f158e83a24b200a011bd19bd16f41b3b15c')

@@ -1,0 +1,2 @@
+{% comment %}Profile photo, or initials when the account still has the default placeholder image.{% endcomment %}
+{% if user.image and 'default_t3vbot' not in user.image.url %}<img class="dash-avatar" src="{{ user.image.url }}" alt="" width="52" height="52" loading="lazy" decoding="async">{% else %}<span class="dash-avatar initials" aria-hidden="true">{{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}</span>{% endif %}

@@ -1,0 +1,3 @@
+{% extends "admin/login.html" %}
+{% load static %}
+{% block extrahead %}{{ block.super }}<script src="{% static 'js/pw-toggle.js' %}?v=2" defer></script>{% endblock %}

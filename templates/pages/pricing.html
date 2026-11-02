@@ -1,0 +1,49 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Pricing | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}Simple, transparent plans from Oakbound Trust Bank.{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ghost" aria-hidden="true" data-par="0.1">PRICING</div>
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'home' %}">Home</a><span>/</span><span>Pricing</span></div>
+        <span class="ob-eyebrow">Pricing</span>
+        <h1 class="ob-h1" data-reveal>Simple plans. <span class="ob-it">No surprises.</span></h1>
+        <p class="ob-lead" data-reveal style="--d:.1s">Pick the plan that fits your life. You can change it whenever your needs change.</p>
+    </div>
+</section>
+<section class="ob-sec light">
+    <div class="ob-wrap">
+        <div class="ob-grid c3">
+            {% for p in plans %}
+            <div class="ob-card ob-plan{% if p.feat %} feat{% endif %}" data-reveal style="--d:{{ forloop.counter0 }}00ms">
+                {% if p.feat %}<span class="badge">Most popular</span>{% endif %}
+                <h3 class="ob-h3" style="margin-top:10px">{{ p.name }}</h3>
+                <p>{{ p.blurb }}</p>
+                <div class="price">{{ p.price }}<small>{{ p.per }}</small></div>
+                <ul class="ob-ticks">{% for i in p.items %}<li>{{ i }}</li>{% endfor %}</ul>
+                <a class="ob-btn {% if p.feat %}gold{% else %}green{% endif %}" href="{% url 'signup' %}">Choose {{ p.name }}</a>
+            </div>
+            {% endfor %}
+        </div>
+        <p style="margin-top:28px;opacity:.55;font-size:.9rem">Prices shown are sample figures. Final fees and limits will be confirmed in our fee schedule.</p>
+    </div>
+</section>
+<section class="ob-sec paper">
+    <div class="ob-wrap">
+        <div class="ob-head center"><span class="ob-eyebrow">Good to know</span><h2 class="ob-h2">Pricing <span class="ob-it">questions.</span></h2></div>
+        <div class="ob-faq">{% for cat, q, a in faqs %}<details><summary>{{ q }}</summary><p>{{ a }}</p></details>{% endfor %}</div>
+    </div>
+</section>
+<section class="ob-cta" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ob-wrap" style="position:relative">
+        <span class="ob-eyebrow">Ready when you are</span>
+        <h2 class="ob-h1" data-reveal>Let&rsquo;s get you <span class="ob-it">started.</span></h2>
+        <div class="ob-row" data-reveal><a class="ob-btn cream" href="{% url 'signup' %}">Open an account <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'contact' %}">Talk to us</a></div>
+    </div>
+</section>
+</main>
+{% endblock %}

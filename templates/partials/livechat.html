@@ -1,0 +1,20 @@
+{% if smartsupp_key and not impersonating %}
+<!-- Smartsupp live chat: loads after the page has finished, so it never slows the first view -->
+<script>
+(function () {
+  var _smartsupp = window._smartsupp = window._smartsupp || {};
+  _smartsupp.key = '{{ smartsupp_key }}';
+  _smartsupp.offsetY = (document.querySelector('.dash-nav') && window.innerWidth < 900) ? 96 : 20;   // clear the phone tab bar
+  function load() {
+    if (window.smartsupp) return;
+    var s, c, o = window.smartsupp = function () { o._.push(arguments); }; o._ = [];
+    s = document.getElementsByTagName('script')[0]; c = document.createElement('script');
+    c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
+    c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
+  }
+  function later() { (window.requestIdleCallback || function (f) { setTimeout(f, 1200); })(load); }
+  if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
+})();
+</script>
+<noscript>Powered by <a href="https://www.smartsupp.com" target="_blank" rel="noopener">Smartsupp</a></noscript>
+{% endif %}

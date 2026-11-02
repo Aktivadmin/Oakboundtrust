@@ -6,7 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetroCap Finance</title>
+    <title>Oakbound Trust Bank</title>
+    <link rel="icon" href="{% static 'favicons/favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'favicons/favicon.ico' %}" sizes="any">
+    <link rel="apple-touch-icon" href="{% static 'favicons/apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+    <meta name="theme-color" content="#4A3020">
 
     <style>
         .material-symbols-rounded {
@@ -22,168 +27,33 @@
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
 
     <!-- Google symbols -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=chevron_right&display=swap">
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'reset.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=8">
+    <script>document.documentElement.classList.add('js');</script>
 
-    <!-- Smartsupp Live Chat script -->
-<script type="text/javascript">
-var _smartsupp = _smartsupp || {};
-_smartsupp.key = 'REMOVED';
-window.smartsupp||(function(d) {
-  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-  c.type='text/javascript';c.charset='utf-8';c.async=true;
-  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-})(document);
-</script>
-<noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+    
 
     
 </head>
 
-<body>
+<body class="ob-legacy ob-dash{% if impersonating %} has-banner{% endif %}">
 
+    {% include 'partials/imp_banner.html' %}
     <main class="grid-6" id="dashboard">
 
         <!-- Left Dashboard Section -->
 
-        <section class="dashboard-navigation">
-            <div class="dashboard-main-logo">
-                <a href="{% url 'home' %}"><img src="{% static 'images/logo1.png' %}" alt="logo" height="150", width="150"></a>
-            </div>
-
-            
-            <div class="dashboard-nav-links">
-
-                <!-- Dashboard -->
-                <div>
-                    <a href="{% url 'dashboard' %}" rel="Dashboard" class="dark-link">
-                        <img src="{% static 'icons/dash-light.svg' %}" alt="dash-svg">
-                        <p>Dashboard</p>
-                    </a>
-                </div>
-
-                <!-- Transactions -->
-                <div class="dash-links">
-                    <a href="{% url 'transaction' %}" rel="Transaction" class="dark-link">
-                        <img src="{% static 'icons/trans-light.svg' %}" alt="dash-svg">
-                        <p>Transactions</p>
-                    </a>  
-                </div>
-
-                <!-- Credit Cards -->
-                <div>
-                    <a href="{% url 'credit-card' %}" rel="Credit Cards" class="light-link">
-                        <img src="{% static 'icons/cc-dark.svg' %}" alt="dash-svg">
-                        <p>Credit Cards</p>
-                    </a>  
-                </div>
-
-                <!-- Deposit -->
-                <div>
-                    <a href="{% url 'deposit' %}" rel="Deposit" class="dark-link">
-                        <img src="{% static 'icons/deposit-light.svg' %}" alt="dash-svg">
-                        <p>Deposit</p>   
-                    </a>
-                </div>
-
-                <!-- Withdraw -->
-                <div>
-                    <a href="{% url 'withdraw' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>Transfer</p>
-                    </a>
-                </div>
-
-                <div>
-                    <a href="{% url 'international-transfer' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>International Transfer</p>
-                    </a>
-                </div>
-                
-                <div>
-                    <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
-                        {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
-                        <p>Logout</p>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Mobile Dashboard Navigation Menu -->
-            <div class="ham-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-
-            <!-- Dashboard Navigation links -->
-            <div class="mobile-navigation-menu web-app">   
-                
-                <!-- Mobile navigation menu -->
-                <!-- Dashboard -->
-                <div >
-                    <a href="{% url 'dashboard' %}" rel="Dashboard" class="dark-link">
-                        <img src="{% static 'icons/dash-light.svg' %}" alt="dash-svg">
-                        <p>Dashboard</p>
-                    </a>
-                </div>
-        
-                <!-- Transactions -->
-                <div class="dash-links">
-                    <a href="{% url 'transaction' %}" rel="Transaction" class="dark-link">
-                        <img src="{% static 'icons/trans-light.svg' %}" alt="dash-svg">
-                        <p>Transactions</p>
-                    </a>
-                </div>
-        
-                <!-- Credit Cards -->
-                <div>
-                    <a href="{% url 'credit-card' %}" rel="Credit Cards" class="light-link">
-                        <img src="{% static 'icons/cc-dark.svg' %}" alt="dash-svg">
-                        <p>Credit Cards</p>
-                    </a>
-                </div>
-        
-                <!-- Deposit -->
-                <div>
-                    <a href="{% url 'deposit' %}" rel="Deposit" class="dark-link">
-                        <img src="{% static 'icons/deposit-light.svg' %}" alt="dash-svg">
-                        <p>Deposit</p>
-                    </a>
-                </div>
-        
-                <!-- Withdraw -->
-                <div>
-                    <a href="{% url 'withdraw' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>Transfer</p>
-                    </a>
-                </div>
-
-                <div>
-                    <a href="{% url 'international-transfer' %}" rel="Withdraw" class="dark-link">
-                        <img src="{% static 'icons/withdraw-dark.svg' %}" alt="dash-svg">
-                        <p>International Transfer</p>
-                    </a>
-                </div>
-
-                <div>
-                    <a href="{% url 'logout' %}" rel="Withdraw" class="dark-link">
-                        {% comment %} <img src="{% static 'icons/withdraw-light.svg' %}" alt="dash-svg"> {% endcomment %}
-                        <p>Logout</p>
-                    </a>
-                </div>
-            </div>
-        </section>
+        {% include 'partials/dash_nav.html' with active='card' %}
 
         <!--Dashboard Center-->
 
@@ -192,7 +62,7 @@ window.smartsupp||(function(d) {
             <!--Greeting & Profile Pic-->
             <div class="dash-center-first">
                 <div class="flex-row">
-                    <img src="{{user.image.url}}" alt="sun-icon" width="70" height="70">
+                    {% include 'partials/dash_avatar.html' %}
                     <p>Hello, {{user.first_name}}</p>
                 </div>
 
@@ -205,7 +75,7 @@ window.smartsupp||(function(d) {
             <!--Cards-->
             <div class="cc-center-second">
                 <h3>Cards</h3>
-                <img src="{% static 'images/cc-dash image.png' %}" alt="Debit Card Image">
+                <img src="{% static 'images/brand/card-single.svg' %}" alt="Debit Card Image">
                 <h3>Activate Debit Card</h3>
                 <div class="grid-6">
                     <div class="trans-light-card2">
@@ -229,7 +99,7 @@ window.smartsupp||(function(d) {
     </main>
 
     <script src="{% static 'index.js' %}"></script>
-    <script src="//code.tidio.co/REMOVED.js" async></script>
+    
     <script>
         // Function to format the date as "28th September"
         function formatDate(date) {
@@ -273,5 +143,9 @@ window.smartsupp||(function(d) {
     </script>
 
 
+    {% include 'partials/livechat.html' %}
+    <script src="{% static 'js/oak.js' %}?v=3" defer></script>
+    <script src="{% static 'js/pw-toggle.js' %}?v=2" defer></script>
+    <script src="{% static 'js/dash.js' %}?v=3" defer></script>
 </body>
 </html>

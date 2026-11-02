@@ -1,0 +1,36 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Services | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}Everything Oakbound Trust Bank offers.{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ghost" aria-hidden="true" data-par="0.1">SERVICES</div>
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'home' %}">Home</a><span>/</span><span>Services</span></div>
+        <span class="ob-eyebrow">Services</span>
+        <h1 class="ob-h1" data-reveal>Everything your money <span class="ob-it">needs.</span></h1>
+        <p class="ob-lead" data-reveal style="--d:.1s">Accounts, cards, transfers, loans and more, built to work together.</p>
+    </div>
+</section>
+<section class="ob-sec">
+    <div class="ob-wrap"><div class="ob-grid c4">
+        {% for title, text, doodle, url in services %}
+        <a class="ob-card" href="{% url url %}" data-reveal style="text-decoration:none;--d:{{ forloop.counter0 }}0ms">
+            <div class="ob-ico">{% with t='doodles/'|add:doodle|add:'.html' %}{% include t %}{% endwith %}</div>
+            <h3 class="ob-h3">{{ title }}</h3><p>{{ text }}</p><span class="more">Learn more &rarr;</span>
+        </a>
+        {% endfor %}
+    </div></div>
+</section>
+<section class="ob-cta" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ob-wrap" style="position:relative">
+        <span class="ob-eyebrow">Ready when you are</span>
+        <h2 class="ob-h1" data-reveal>Let&rsquo;s get you <span class="ob-it">started.</span></h2>
+        <div class="ob-row" data-reveal><a class="ob-btn cream" href="{% url 'signup' %}">Open an account <span class="ar">&rarr;</span></a><a class="ob-btn ghost" href="{% url 'contact' %}">Talk to us</a></div>
+    </div>
+</section>
+</main>
+{% endblock %}

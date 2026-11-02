@@ -1,0 +1,12 @@
+{% load static %}<a class="ob-post" href="{% url 'blog-post' p.slug %}">
+    <div class="thumb" style="background:{{ p.accent }}">
+        <svg viewBox="0 0 400 275" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            {% with t='doodles/'|add:p.doodle|add:'.html' %}{% include t with cls='' attrs='x="190" y="30" width="230" height="230" style="color:rgba(245,238,223,.26)"' %}{% endwith %}
+            {% include 'doodles/d-squiggle.html' with cls='' attrs='x="24" y="210" width="160" height="32" style="color:rgba(230,199,124,.55)"' %}
+        </svg>
+        <span class="tag">{{ p.tag }}</span>
+    </div>
+    <div class="meta">{{ p.date }} &middot; {{ p.read }}</div>
+    <h3>{{ p.title }}</h3>
+    <p>{{ p.excerpt }}</p>
+</a>

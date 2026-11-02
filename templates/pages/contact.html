@@ -1,0 +1,39 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Contact | Oakbound Trust Bank{% endblock %}
+{% block meta_description %}Get in touch with Oakbound Trust Bank.{% endblock %}
+{% block content %}
+<main class="ob-main">
+<section class="ob-page" data-spot>
+    <div class="ob-spot" aria-hidden="true"></div>
+    <div class="ghost" aria-hidden="true" data-par="0.1">HELLO</div>
+    <div class="ob-wrap" style="position:relative">
+        <div class="ob-crumbs"><a href="{% url 'home' %}">Home</a><span>/</span><span>Contact</span></div>
+        <span class="ob-eyebrow">Contact</span>
+        <h1 class="ob-h1" data-reveal>Let&rsquo;s <span class="ob-it">talk.</span></h1>
+        <p class="ob-lead" data-reveal style="--d:.1s">Questions, feedback or something urgent? Tell us and we will reply by email.</p>
+    </div>
+</section>
+<section class="ob-sec light">
+    <div class="ob-wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,5vw,72px)">
+        <form class="ob-form" method="post" data-reveal>
+            {% csrf_token %}
+            {% for m in messages %}<div class="ob-msg"{% if m.tags == 'error' %} style="background:rgba(160,40,40,.12);color:#7a1f1f"{% endif %}>{{ m }}</div>{% endfor %}
+            <div class="two">
+                <label>Your name<input name="name" required value="{{ form.name|default:'' }}" autocomplete="name"></label>
+                <label>Email<input name="email" type="email" required value="{{ form.email|default:'' }}" autocomplete="email"></label>
+            </div>
+            <label>Topic<select name="topic"><option>General question</option><option>Account</option><option>Card</option><option>Payment or transfer</option><option>Loan or mortgage</option><option>Security concern</option><option>Careers</option></select></label>
+            <label>Message<textarea name="message" required>{{ form.message|default:'' }}</textarea></label>
+            <div><button class="ob-btn green" type="submit">Send message <span class="ar">&rarr;</span></button></div>
+            <p style="opacity:.6;font-size:.88rem;margin:0">Never include your PIN, password or full card number in a message.</p>
+        </form>
+        <aside data-reveal style="--d:.1s">
+            <div class="ob-card"><div class="ob-ico">{% include 'doodles/d-spark.html' %}</div><h3 class="ob-h3">Urgent?</h3><p>If a card is lost or a payment looks wrong, say so in the topic and message. We prioritise those.</p></div>
+            <div class="ob-card" style="margin-top:18px"><div class="ob-ico">{% include 'doodles/d-leaf.html' %}</div><h3 class="ob-h3">Help centre</h3><p>Many answers are already written down.</p><a class="more" href="{% url 'help' %}">Browse help &rarr;</a></div>
+        </aside>
+    </div>
+</section>
+
+</main>
+{% endblock %}

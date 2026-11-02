@@ -1,0 +1,7 @@
+{% if impersonating %}
+<div class="imp-banner glass" role="status">
+    <span class="pulse" aria-hidden="true"></span>
+    <p><b>Admin view.</b> <span class="hide-m">You are looking at </span><b>{{ user.first_name }} {{ user.last_name }}</b><span class="hide-m"> ({{ user.email }})</span>. Read-only.</p>
+    <form method="post" action="{% url 'console-stop' %}">{% csrf_token %}<button type="submit">Exit view</button></form>
+</div>
+{% endif %}

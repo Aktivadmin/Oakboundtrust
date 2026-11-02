@@ -1,0 +1,20 @@
+{% load static %}
+{% comment %}Account sidebar (desktop) and floating dock (mobile). Pass active='dashboard|transaction|card|deposit|withdraw|international'.{% endcomment %}
+<aside class="dash-nav glass" aria-label="Account navigation">
+    <a class="dash-brand" href="{% url 'home' %}" aria-label="Oakbound Trust Bank home">
+        <img src="{% static 'images/brand/icon-O-reversed.svg' %}" alt="">
+        <span>Oakbound<small>Trust Bank</small></span>
+    </a>
+    <nav class="dash-links">
+        <a href="{% url 'dashboard' %}" class="{% if active == 'dashboard' %}on{% endif %}"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg><span>Overview</span></a>
+        <a href="{% url 'transaction' %}" class="{% if active == 'transaction' %}on{% endif %}"><svg viewBox="0 0 24 24"><path d="M7 4v13M7 17l-3-3M7 17l3-3"/><path d="M17 20V7M17 7l-3 3M17 7l3 3"/></svg><span>Activity</span></a>
+        <a href="{% url 'credit-card' %}" class="{% if active == 'card' %}on{% endif %}"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/></svg><span>Cards</span></a>
+        <a href="{% url 'deposit' %}" class="{% if active == 'deposit' %}on{% endif %}"><svg viewBox="0 0 24 24"><path d="M12 3v12M12 15l-4-4M12 15l4-4"/><path d="M4 17v1.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V17"/></svg><span>Deposit</span></a>
+        <a href="{% url 'withdraw' %}" class="{% if active == 'withdraw' %}on{% endif %}"><svg viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></svg><span>Send</span></a>
+        <a href="{% url 'international-transfer' %}" class="{% if active == 'international' %}on{% endif %}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span>Abroad</span></a>
+    </nav>
+    <div class="dash-foot">
+        {% if real_user.is_superuser or user.is_superuser %}<a class="dash-admin" href="{% url 'console' %}"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg><span>Admin console</span></a>{% endif %}
+        <a class="dash-out" href="{% url 'logout' %}"><svg viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 8l-4 4 4 4M6 12h10"/></svg><span>Log out</span></a>
+    </div>
+</aside>

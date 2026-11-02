@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 
 # Create a custom logger for your app
@@ -16,11 +17,11 @@ formatter = logging.Formatter(
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setFormatter(formatter)
 
-# File handler (logs to a file, e.g. app.log)
-file_handler = logging.FileHandler("app.log")
-file_handler.setFormatter(formatter)
-
 # Add handlers if not already added
 if not logger.hasHandlers():
     logger.addHandler(console_handler)
-    logger.addHandler(file_handler)
+    # Vercel's filesystem is read-only, so only write app.log when not deployed there
+    if not os.getenv("VERCEL"):
+        file_handler = logging.FileHandler("app.log")
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)

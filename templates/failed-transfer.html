@@ -6,7 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetroCap Finance</title>
+    <title>Transfer not completed | Oakbound Trust Bank</title>
+    <link rel="icon" href="{% static 'favicons/favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'favicons/favicon.ico' %}" sizes="any">
+    <link rel="apple-touch-icon" href="{% static 'favicons/apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+    <meta name="theme-color" content="#4A3020">
 
     <style>
         .material-symbols-rounded {
@@ -22,16 +27,19 @@
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
 
     <!-- Google symbols -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=chevron_right&display=swap">
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'reset.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=8">
+    <script>document.documentElement.classList.add('js');</script>
 
     <style>
         /* Center the div using flexbox */
@@ -56,29 +64,45 @@
         }
     </style>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
     
 </head>
 
-<body>
+<body class="ob-legacy ob-dash fail-page">
+    <main class="fail-wrap">
+        <a class="rcpt-back" href="{% url 'dashboard' %}"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Dashboard</span></a>
 
-    
-    <div class="centered-div">
-        <div class="centered-content">
-            <img src="{% static 'images/logo1.png' %}" height="150" width="180" alt="logo">
-            <h2 style="color:red;">Account accessed by unauthorized user</h2>
-            <p style="margin-top:20px;" class="text-muted">Your MetroCap account has been blocked and this<br>transaction cannot currently be completed</p>
+        <article class="fail glass" role="alert">
+            <header class="fail-head">
+                <span class="fail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5l9.2 16H2.8L12 3.5z"/><path d="M12 10v4.4M12 17.4v.1"/></svg></span>
+                <div><small>Transfer not completed</small><h1>We could not send this transfer</h1></div>
+            </header>
 
+            <p class="fail-lead">The access code you entered did not match the one on your account, so we stopped the transfer before anything was sent.</p>
 
+            <dl class="fail-grid">
+                <div><dt>Status</dt><dd><span class="chip declined">Not sent</span></dd></div>
+                <div><dt>Reason</dt><dd>Incorrect access code</dd></div>
+                {% if data.amount %}<div><dt>Amount requested</dt><dd>{{ user.currency }}{{ data.amount }}</dd></div>{% endif %}
+                <div><dt>Your money</dt><dd>No money has left your account</dd></div>
+            </dl>
 
-            <div style="margin-top:20px; margin-left:35%;">
-                <a href="mailto:support@example.invalid" style="text-decoration:None;"><button class="btn-dark">Contact Support</button></a>
+            <h2 class="fail-h">What you can do</h2>
+            <ol class="fail-steps">
+                <li><b>Check the code and try again.</b><span>Make sure you are entering your own access code, with no spaces.</span></li>
+                <li><b>Forgotten your code?</b><span>Contact support and we will help you confirm it is you before anything is changed.</span></li>
+                <li><b>Did not try this transfer?</b><span>Contact support straight away and change your password so we can protect your account.</span></li>
+            </ol>
+
+            <div class="fail-actions">
+                <a class="pillbtn gold" href="{{ retry_url|default:'/withdraw/' }}">Try again</a>
+                <a class="pillbtn glassy" href="{% url 'contact' %}">Contact support</a>
+                <a class="pillbtn glassy" href="{% url 'dashboard' %}">Back to dashboard</a>
             </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+            <p class="fail-note">Write to <b>support@oakboundtrust.com</b>. We will never ask you for your access code or password.</p>
+        </article>
+    </main>
+    {% include 'partials/livechat.html' %}
+    <script src="{% static 'js/oak.js' %}?v=3" defer></script>
+    <script src="{% static 'js/dash.js' %}?v=3" defer></script>
 </body>
 </html>
