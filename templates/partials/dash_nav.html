@@ -13,6 +13,7 @@
         <a href="{% url 'deposit' %}">Deposit</a>
         <a href="{% url 'withdraw' %}">Send money</a>
         <a href="{% url 'international-transfer' %}">Send abroad</a>
+        <a href="{% url 'contact' %}" data-live-chat>Live support</a>
         <a href="{% url 'home' %}">Oakbound website</a>
         {% if real_user.is_superuser or user.is_superuser %}<a href="{% url 'console' %}">Admin console</a>{% endif %}
         <a class="out" href="{% url 'logout' %}">Log out</a>

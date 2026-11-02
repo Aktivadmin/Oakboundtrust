@@ -9,6 +9,7 @@
         <div class="ob-crumbs"><a href="{% url 'blog' %}">Insights</a><span>/</span><span>{{ post.tag }}</span></div>
         <span class="ob-eyebrow">{{ post.tag }} &middot; {{ post.date }} &middot; {{ post.read }}</span>
         <h1 class="ob-h1" style="max-width:14em" data-reveal>{{ post.title }}</h1>
+        <img class="ob-post-hero" src="{% static 'images/blog/' %}{{ post.slug }}.svg" alt="" width="400" height="275">
     </div>
 </section>
 <section class="ob-sec paper">

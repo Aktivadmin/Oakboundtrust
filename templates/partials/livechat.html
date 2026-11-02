@@ -13,6 +13,12 @@
     c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
   }
   function later() { (window.requestIdleCallback || function (f) { setTimeout(f, 1200); })(load); }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-live-chat]'); if (!a) return;
+    e.preventDefault(); load();
+    var tries = 0, t = setInterval(function () { tries++; if (window.smartsupp) { try { window.smartsupp('chat:open'); } catch (x) {} clearInterval(t); } else if (tries > 20) clearInterval(t); }, 150);
+    window.smartsupp && window.smartsupp('chat:open');
+  });
   if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
 })();
 </script>

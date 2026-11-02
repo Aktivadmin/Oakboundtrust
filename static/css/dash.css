@@ -502,3 +502,11 @@ body.ob-dash .side-card h4 { text-transform: none; letter-spacing: -0.02em; font
   body.ob-dash .dash-right-loans img { width: 48px !important; height: 48px !important; } body.ob-dash .dash-right-loans p { font-size: 0.9rem; margin: 0; }
   body.ob-dash .dash-right-loans button { width: 100% !important; min-height: 48px; }
 }
+
+/* v18: stat labels stay on a single line */
+.stat .k, body.ob-dash .dash-center-second .grid-6 h4, body.ob-dash .cc-center-second .grid-6 h4 { white-space: nowrap; }
+@media (max-width: 640px) {
+  .stat .k { font-size: 0.64rem; letter-spacing: 0.08em; }
+  body.ob-dash .dash-center-second .grid-6 h4, body.ob-dash .cc-center-second .grid-6 h4 { font-size: 0.66rem !important; letter-spacing: 0.08em; }
+}
+@media (max-width: 380px) { .stat .k { font-size: 0.58rem; letter-spacing: 0.05em; } }

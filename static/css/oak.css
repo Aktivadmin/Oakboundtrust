@@ -407,3 +407,7 @@ body.ob-auth .ob-toasts { position: static; translate: none; width: auto; margin
 body.ob-auth .ob-toast { box-shadow: none; background: rgba(47, 107, 63, 0.12); border-color: rgba(47, 107, 63, 0.25); animation: none; }
 body.ob-auth .ob-toast.error, body.ob-auth .ob-toast.warning { background: rgba(192, 69, 58, 0.1); border-color: rgba(192, 69, 58, 0.28); }
 body.ob-auth .signup-form .ob-toast .x { background: none !important; color: inherit !important; padding: 0 6px !important; border-radius: 0 !important; font-size: 1.4rem; width: auto; }
+
+.ob-post .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--spring, ease); }
+.ob-post:hover .thumb img { transform: scale(1.05); }
+.ob-post-hero { display: block; width: min(100%, 560px); aspect-ratio: 16 / 11; object-fit: cover; border-radius: 28px; margin-top: 28px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35); }

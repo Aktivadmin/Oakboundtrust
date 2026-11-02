@@ -371,3 +371,20 @@ class CardActivationTests(TestCase):
         r = self.client.get("/deposit/")
         self.assertContains(r, self.u.account_number)
         self.assertContains(r, self.u.routing_number)
+
+
+class InsightsAndContactTests(TestCase):
+    def test_every_post_has_an_image_and_page(self):
+        import os
+        from app import content
+        self.assertGreaterEqual(len(content.BLOG_POSTS), 12)
+        for p in content.BLOG_POSTS:
+            self.assertTrue(os.path.exists(f"static/images/blog/{p['slug']}.svg"), p["slug"])
+            self.assertEqual(self.client.get(f"/blog/{p['slug']}/").status_code, 200)
+        self.assertContains(self.client.get("/blog/"), "images/blog/")
+
+    def test_contact_shows_email_and_location_and_live_support(self):
+        r = self.client.get("/contact/")
+        self.assertContains(r, "support@oakboundtrust.com")
+        self.assertContains(r, "Kentucky, USA")
+        self.assertContains(r, "data-live-chat")

@@ -42,8 +42,8 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
-    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=17">
+    <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=10">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=18">
     <script>document.documentElement.classList.add('js');</script>
 
     
@@ -90,7 +90,7 @@
                         <a href="{% url "withdraw" %}"><button class="btn-light">Transfer Money</button></a>
                     </div>
                     <div class="trans-light-card1">
-                        <h4>Oakbound Trust Bank Savings</h4>
+                        <h4>Savings</h4>
                         <h2>
                             {% with user.savings|stringformat:"0.2f" as savings %}
                                 {{ user.currency }}{{ savings|slice:":-3"|intcomma }}{{ savings|slice:"-3:" }}

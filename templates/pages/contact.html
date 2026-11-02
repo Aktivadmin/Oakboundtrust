@@ -29,7 +29,10 @@
             <p style="opacity:.6;font-size:.88rem;margin:0">Never include your PIN, password or full card number in a message.</p>
         </form>
         <aside data-reveal style="--d:.1s">
-            <div class="ob-card"><div class="ob-ico">{% include 'doodles/d-spark.html' %}</div><h3 class="ob-h3">Urgent?</h3><p>If a card is lost or a payment looks wrong, say so in the topic and message. We prioritise those.</p></div>
+            <div class="ob-card"><div class="ob-ico">{% include 'doodles/d-leaf.html' %}</div><h3 class="ob-h3">Reach us directly</h3>
+                <p><b>Email:</b> <a href="mailto:{{ support_email }}">{{ support_email }}</a><br><b>Location:</b> Kentucky, USA</p>
+                <a class="more" href="{% url 'contact' %}" data-live-chat>Start live support <span class="ar">&rarr;</span></a></div>
+            <div class="ob-card" style="margin-top:18px"><div class="ob-ico">{% include 'doodles/d-spark.html' %}</div><h3 class="ob-h3">Urgent?</h3><p>If a card is lost or a payment looks wrong, say so in the topic and message. We prioritise those.</p></div>
             <div class="ob-card" style="margin-top:18px"><div class="ob-ico">{% include 'doodles/d-leaf.html' %}</div><h3 class="ob-h3">Help centre</h3><p>Many answers are already written down.</p><a class="more" href="{% url 'help' %}">Browse help &rarr;</a></div>
         </aside>
     </div>

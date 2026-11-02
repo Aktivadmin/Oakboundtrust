@@ -18,6 +18,7 @@
                     <a href="{% url 'blog' %}">Insights blog</a>
                     <a href="{% url 'careers' %}">Careers</a>
                     <a href="{% url 'contact' %}">Contact</a>
+                    <a href="{% url 'contact' %}" data-live-chat>Live support</a>
                 </div>
             </div>
             <a href="{% url 'help' %}">Help</a>
@@ -47,5 +48,6 @@
         <a href="{% url 'blog' %}">Insights blog</a>
         <a href="{% url 'careers' %}">Careers</a>
         <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'contact' %}" data-live-chat>Live support</a>
         {% if user.is_authenticated %}<a href="{% url 'dashboard' %}"><small>Account</small>My account</a>{% else %}<a href="{% url 'login' %}"><small>Account</small>Log in</a><a href="{% url 'signup' %}">Open account</a>{% endif %}
     </div>

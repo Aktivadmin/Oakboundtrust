@@ -7,4 +7,5 @@ def admin_view(request):
         "impersonating": getattr(request, "impersonating", False),
         "real_user": getattr(request, "real_user", None),
         "smartsupp_key": getattr(settings, "SMARTSUPP_KEY", ""),
+        "support_email": settings.SUPPORT_EMAIL,
     }
