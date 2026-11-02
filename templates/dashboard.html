@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Dashboard | Oakbound Trust Bank</title>
     <link rel="icon" href="{% static 'favicons/favicon.svg' %}" type="image/svg+xml">
     <link rel="icon" href="{% static 'favicons/favicon.ico' %}" sizes="any">
@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=9">
-    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=8">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=11">
     <script>document.documentElement.classList.add('js');</script>
 
     
@@ -82,14 +82,14 @@
 
             <div class="quick">
                 <a class="glass" href="{% url 'withdraw' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></svg></span><b>Send<small>Local transfer</small></b></a>
-                <a class="glass" href="{% url 'international-transfer' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><b>Send abroad<small>International</small></b></a>
+                <a class="glass" href="{% url 'international-transfer' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><b>Abroad<small>International</small></b></a>
                 <a class="glass" href="{% url 'deposit' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v12M12 15l-4-4M12 15l4-4"/><path d="M4 17v1.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V17"/></svg></span><b>Deposit<small>Add funds</small></b></a>
                 <a class="glass" href="{% url 'credit-card' %}" data-tilt="9"><span class="ico"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/></svg></span><b>Cards<small>Apply or manage</small></b></a>
             </div>
 
             <div class="two-col">
                 <section class="activity glass">
-                    <h3 class="dash-h">Recent activity</h3>
+                    <div class="act-head"><h3 class="dash-h">Recent activity</h3><a class="act-all" href="{% url 'transaction' %}">See all</a></div>
                     {% if transactions %}
                     {% for transaction in transactions|slice:":10" %}
                     <div class="act">

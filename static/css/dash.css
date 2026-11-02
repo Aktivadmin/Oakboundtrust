@@ -338,3 +338,88 @@ body.fail-page { display: block !important; height: auto !important; min-height:
 .act-link:hover { background: rgba(201, 162, 74, 0.3); }
 
 @media print { #chat-application, [id^='smartsupp'] { display: none !important; } }
+
+
+/* ============================================================
+   Mobile app layout (phones): short, thumb-friendly, swipeable
+   ============================================================ */
+.act-head { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+.act-head h3 { margin: 18px 0 8px !important; }
+.act-all { padding: 7px 14px; border-radius: 999px; font: 600 0.8rem var(--f-app); color: var(--gold-2) !important; background: rgba(201, 162, 74, 0.16); text-decoration: none; margin-top: 8px; }
+body.ob-dash { -webkit-tap-highlight-color: transparent; } body.ob-dash a, body.ob-dash button { touch-action: manipulation; }
+
+@media (max-width: 640px) {
+  body.ob-dash main#dashboard { padding: 10px 14px calc(104px + env(safe-area-inset-bottom)); gap: 14px; }
+  body.ob-dash .dashboard-center, body.ob-dash .dashboard-right { gap: 14px; }
+
+  /* tab bar: respects the home indicator, bigger touch targets */
+  .dash-nav { left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); padding: 6px; border-radius: 26px; }
+  .dash-links a { padding: 9px 2px 7px; font-size: 0.68rem; min-height: 54px; gap: 5px; font-weight: 600; letter-spacing: 0.01em; }
+  .dash-nav svg { width: 23px; height: 23px; }
+
+  /* sticky app bar */
+  body.ob-dash .dash-center-first { position: sticky; top: 8px; z-index: 30; padding: 8px 14px 8px 8px !important; flex-direction: row !important; flex-wrap: nowrap !important; align-items: center !important; gap: 8px; }
+  body.ob-dash .dash-center-first .flex-row { flex-wrap: nowrap; min-width: 0; } body.ob-dash .dash-center-first .flex-row:first-child p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  body.ob-dash.has-banner .dash-center-first { top: 62px; }
+  body.ob-dash .dash-center-first { background: linear-gradient(145deg, rgba(40, 26, 18, 0.94), rgba(24, 15, 9, 0.94)) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  body.ob-dash .dash-center-first .flex-row:last-child { display: none; }
+  .dash-avatar { width: 40px; height: 40px; font-size: 0.9rem; }
+  body.ob-dash .flex-row p { font-size: 1rem; }
+  body.ob-dash .dash-center-first .flex-row:last-child { padding: 0 4px; font-size: 0.85rem; }
+  body.ob-dash .dash-center-first .flex-row:last-child img { width: 17px; }
+  .dash-greet { display: none; }
+
+  /* balance card: compact, card art becomes a soft watermark */
+  .bal-hero { padding: 22px 20px 20px; border-radius: 28px; position: relative; overflow: hidden; }
+  .bal-hero > div:first-child { position: relative; z-index: 1; }
+  .bal-hero .art { position: absolute; right: -46px; top: -34px; width: 176px; order: 0; opacity: 0.22; transform: rotate(10deg); pointer-events: none; z-index: 0; }
+  .bal-hero .art img { transform: none; } .bal-hero:hover .art img { transform: none; }
+  .bal-hero .lbl { font-size: 0.72rem; }
+  .bal-hero .amt { font-size: clamp(2.3rem, 11.5vw, 2.9rem); margin: 10px 0 18px; }
+  .bal-hero .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pillbtn { justify-content: center; padding: 14px 16px; min-height: 48px; }
+
+  /* quick actions: one row of four round buttons, like a banking app */
+  .quick { grid-template-columns: repeat(4, 1fr); gap: 8px; order: 0; }
+  .quick a { padding: 14px 4px 12px; border-radius: 24px; justify-items: center; text-align: center; gap: 8px; min-height: 92px; }
+  .quick a:hover { transform: none; }
+  .quick .ico { width: 46px; height: 46px; border-radius: 50%; }
+  .quick b { font-size: 0.76rem; line-height: 1.2; font-weight: 600; } .quick small { display: none; }
+
+  /* stat tiles: swipe sideways instead of stacking */
+  .stats { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -14px; padding: 2px 14px 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .stats::-webkit-scrollbar { display: none; }
+  .stat { scroll-snap-align: start; padding: 16px 18px; border-radius: 22px; } .stat .v { font-size: 1.45rem; margin-top: 10px; } .stat:hover { transform: none; }
+
+  /* activity: short list, one line per item, newest five */
+  .activity { padding: 4px 6px 8px; border-radius: 26px; }
+  .act-head { padding: 0 12px; } .act-head h3 { margin: 14px 0 6px !important; font-size: 1.2rem; }
+  .act { grid-template-columns: 40px minmax(0, 1fr) auto; gap: 10px; padding: 10px 8px; border-radius: 18px; }
+  .act .ic { width: 40px; height: 40px; border-radius: 14px; } .act .ic svg { width: 18px; height: 18px; }
+  .act b { font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  .act small { font-size: 0.78rem; } .act .amt { font-size: 0.95rem; white-space: nowrap; }
+  .activity .act:nth-of-type(n+6) { display: none; }
+  .chip { margin-top: 3px; font-size: 0.66rem; } .act-link { padding: 2px 9px; font-size: 0.66rem; margin-left: 4px; }
+  .empty { padding: 28px 12px; } .empty svg { width: 44px; height: 44px; }
+
+  /* donut: small and tidy */
+  .donut-card { padding: 20px; gap: 12px; border-radius: 26px; } .donut-card .dash-h { font-size: 1.1rem; }
+  .donut { width: 150px; } .donut .mid b { font-size: 1.1rem; }
+  .legend { grid-template-columns: 1fr 1fr; gap: 8px 14px; font-size: 0.84rem; } .legend span { justify-content: flex-start; }
+
+  /* side cards: swipeable row */
+  body.ob-dash .dashboard-right { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; margin: 0 -14px; padding: 2px 14px 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  body.ob-dash .dashboard-right::-webkit-scrollbar { display: none; }
+  .side-card { flex: 0 0 80%; scroll-snap-align: start; padding: 18px; border-radius: 24px; gap: 8px; }
+  .side-card .ico { width: 42px; height: 42px; border-radius: 15px; } .side-card h4 { font-size: 1.05rem; }
+  .side-card p { font-size: 0.88rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .two-col { gap: 14px; }
+}
+@media (max-width: 380px) {
+  .quick b { font-size: 0.7rem; } .dash-links a { font-size: 0.64rem; } .bal-hero .amt { font-size: 2.2rem; }
+  body.ob-dash .dash-center-first .flex-row:last-child p { display: none; }
+}
+
+/* side-card titles: real headings, not the tiny all-caps label style of the old cards */
+body.ob-dash .side-card h4 { text-transform: none; letter-spacing: -0.02em; font: 700 1.15rem/1.2 var(--f-app); opacity: 1; color: var(--cream) !important; }
+@media (max-width: 640px) { body.ob-dash .side-card h4 { font-size: 1.05rem; } }
