@@ -6,6 +6,7 @@
         <span>Oakbound<small>Trust Bank</small></span>
     </a>
     <button type="button" class="mb-menu" id="mb-menu" aria-expanded="false" aria-controls="mb-sheet" aria-label="Open menu"><i></i><i></i><i></i></button>
+    {% include "partials/suspended_banner.html" with where="mbar" %}
     <nav class="mb-sheet" id="mb-sheet" aria-label="Menu" hidden>
         <a href="{% url 'dashboard' %}">Overview</a>
         <a href="{% url 'transaction' %}">Activity</a>
@@ -20,6 +21,7 @@
         <a class="out" href="{% url 'logout' %}">Log out</a>
     </nav>
 </header>
+{% include "partials/suspended_banner.html" %}
 {% comment %}Account sidebar (desktop) and floating dock (mobile). Pass active='dashboard|transaction|card|deposit|withdraw|international'.{% endcomment %}
 <aside class="dash-nav glass" aria-label="Account navigation">
     <a class="dash-brand" href="{% url 'home' %}" aria-label="Oakbound Trust Bank home">

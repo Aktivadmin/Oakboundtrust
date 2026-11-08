@@ -409,36 +409,51 @@ class ThemeTests(TestCase):
 
 
 class SuspensionTests(TestCase):
-    PAGES = ["/dashboard/", "/transactions/", "/credit_card/", "/deposit/", "/withdraw/", "/international-transfer/"]
+    VIEWABLE = ["/dashboard/", "/transactions/", "/credit_card/"]
+    BLOCKED = ["/deposit/", "/withdraw/", "/international-transfer/", "/beneficiary/"]
 
     def setUp(self):
         self.u = User.objects.create_user("s@example.com", "pw12345678", zipcode="1", balance=5000)
         self.client.force_login(self.u)
 
-    def test_active_account_is_not_blocked(self):
-        for url in self.PAGES:
-            self.assertEqual(self.client.get(url).status_code, 200, url)
-
-    def test_suspended_account_sees_the_notice_everywhere(self):
+    def suspend(self):
         self.u.is_suspended = True
         self.u.save()
-        for url in self.PAGES + ["/receipt/abc123/", "/beneficiary/"]:
+
+    def test_active_account_is_not_blocked_and_has_no_banner(self):
+        for url in self.VIEWABLE + self.BLOCKED[:3]:
+            r = self.client.get(url)
+            self.assertEqual(r.status_code, 200, url)
+            self.assertNotContains(r, "susp-banner")
+
+    def test_suspended_dashboard_shows_banner_and_message_popup(self):
+        self.suspend()
+        for url in self.VIEWABLE:
+            r = self.client.get(url)
+            self.assertEqual(r.status_code, 200, url)
+            self.assertContains(r, "Account suspended")
+            self.assertContains(r, "extended compliance review")
+            self.assertContains(r, "Business Account Compliance Department.")
+            self.assertContains(r, "mailto:support@oakboundtrust.com")
+            self.assertContains(r, "data-live-chat")
+
+    def test_suspended_transaction_pages_show_the_notice(self):
+        self.suspend()
+        for url in self.BLOCKED:
             r = self.client.get(url)
             self.assertEqual(r.status_code, 403, url)
             self.assertContains(r, "extended compliance review", status_code=403)
-            self.assertContains(r, "Business Account Compliance Department.", status_code=403)
 
-    def test_suspended_account_cannot_transfer(self):
-        self.u.is_suspended = True
-        self.u.save()
+    def test_suspended_account_cannot_transfer_or_request_card(self):
+        self.suspend()
         r = self.client.post("/withdraw/", {"amount": "100", "acc-no": "12345678", "acc-name": "X", "bank-name": "Y",
                                             "description": "t", "access-code": "555555"})
         self.assertEqual(r.status_code, 403)
+        self.assertEqual(self.client.post("/credit_card/activate/", {}).status_code, 403)
         self.u.refresh_from_db()
         self.assertEqual(self.u.balance, 5000)
 
     def test_suspended_can_still_log_out_and_see_public_pages(self):
-        self.u.is_suspended = True
-        self.u.save()
+        self.suspend()
         self.assertEqual(self.client.get("/pricing/").status_code, 200)
         self.assertEqual(self.client.get("/logout/").status_code, 302)

@@ -445,7 +445,7 @@ body.ob-dash .side-card h4 { text-transform: none; letter-spacing: -0.02em; font
 
 .dash-mbar { display: none; }
 @media (max-width: 900px) {
-  .dash-mbar { display: flex; align-items: center; justify-content: space-between; position: sticky; top: 8px; z-index: 55; padding: 8px 10px 8px 14px; border-radius: 22px; background: linear-gradient(145deg, rgba(40, 26, 18, 0.96), rgba(24, 15, 9, 0.96)) !important; }
+  .dash-mbar { order: -3; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 8px; z-index: 55; padding: 8px 10px 8px 14px; border-radius: 22px; background: linear-gradient(145deg, rgba(40, 26, 18, 0.96), rgba(24, 15, 9, 0.96)) !important; }
   body.ob-dash.has-banner .dash-mbar { top: 62px; }
   .mb-brand { display: flex; align-items: center; gap: 10px; color: var(--cream, #f7efe1); text-decoration: none; font: 700 1.05rem/1.1 var(--f-app); }
   .mb-brand img { width: 34px; height: 34px; } .mb-brand small { display: block; font-weight: 500; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; }
@@ -524,3 +524,32 @@ body.susp-page { display: block !important; min-height: 100vh; }
 .susp-body p { margin: 0; } .susp-sign { font-weight: 600; margin-top: 6px !important; }
 .susp-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
 @media (max-width: 480px) { .susp-actions { display: grid; } .susp-actions .pillbtn { justify-content: center; } }
+
+/* ---- suspended account: banner on every dashboard page + message pop-up ---- */
+.susp-banner { grid-column: 1 / -1; order: -2; display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 16px; border-radius: 22px; cursor: pointer; text-align: left; color: var(--cream); font-family: var(--f-app);
+  border: 1px solid rgba(240, 164, 157, 0.55); background: linear-gradient(135deg, rgba(192, 69, 58, 0.34), rgba(192, 69, 58, 0.14)); box-shadow: 0 14px 30px -18px rgba(192, 69, 58, 0.8); transition: transform 0.35s var(--spring), filter 0.2s; }
+.susp-banner:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.susp-banner .sb-ico { flex: none; width: 40px; height: 40px; border-radius: 14px; display: grid; place-items: center; background: rgba(192, 69, 58, 0.4); color: #ffd9d4; }
+.susp-banner .sb-ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.susp-banner .sb-text { flex: 1; min-width: 0; display: grid; gap: 2px; } .susp-banner b { font-size: 1rem; letter-spacing: -0.01em; } .susp-banner small { opacity: 0.8; font-size: 0.84rem; }
+.susp-banner .sb-go { flex: none; padding: 7px 14px; border-radius: 999px; background: rgba(255, 255, 255, 0.16); font-weight: 600; font-size: 0.82rem; }
+.susp-modal { position: fixed; inset: 0; z-index: 140; display: grid; place-items: center; padding: 18px; }
+.susp-modal[hidden] { display: none; }
+.susp-m-backdrop { position: absolute; inset: 0; background: rgba(10, 6, 3, 0.62); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: fadein 0.3s; }
+.susp-m-card { position: relative; width: min(560px, 100%); max-height: calc(100vh - 36px); overflow-y: auto; padding: clamp(24px, 5vw, 40px); border-radius: 32px; display: grid; gap: 14px; animation: pop 0.45s var(--spring); background: var(--glass), rgba(43, 27, 18, 0.94); color: var(--cream); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.susp-m-card h2 { margin: 0; font: 700 clamp(1.5rem, 5vw, 2rem)/1.1 var(--f-app); letter-spacing: -0.035em; }
+.susp-m-x { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, 0.12); color: inherit; font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.susp-channels { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--glass-line); } .susp-channels > span { font: 600 0.72rem/1 var(--f-app); letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.65; }
+.susp-channels .pillbtn { font-size: 0.9rem; padding: 12px 18px; overflow-wrap: anywhere; }
+body.susp-open { overflow: hidden; }
+@media (max-width: 480px) { .susp-channels .susp-actions { display: grid; } .susp-channels .pillbtn { justify-content: center; } .susp-banner .sb-go { display: none; } }
+
+/* banner placement: inside the sticky top bar on phones, a full-width row on desktop */
+.susp-banner.in-mbar { display: none; }
+@media (max-width: 900px) {
+  .dash-mbar { flex-wrap: wrap; row-gap: 8px; }
+  .susp-banner.desk { display: none; }
+  .susp-banner.in-mbar { display: flex; flex: 0 0 100%; order: 3; padding: 8px 12px; border-radius: 16px; box-shadow: none; }
+  .susp-banner.in-mbar .sb-ico { width: 32px; height: 32px; border-radius: 11px; } .susp-banner.in-mbar .sb-ico svg { width: 18px; height: 18px; }
+  .susp-banner.in-mbar b { font-size: 0.9rem; } .susp-banner.in-mbar small { font-size: 0.74rem; }
+}

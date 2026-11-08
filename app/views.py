@@ -252,9 +252,6 @@ def credit_card(request):
         'user':current_user,
 
     }
-    if current_user.is_suspended:
-        messages.error(request, "Your account is restricted, please contact support")
-        return redirect('dashboard')
         
     return render(request, 'credit-cards.html', context)
 
@@ -538,9 +535,6 @@ def transaction(request):
         'user':current_user,
         'transactions': transactions
     }
-    if current_user.is_suspended:
-        messages.error(request, "Your account is restricted, please contact support")
-        return redirect('dashboard')
         
     return render(request, 'transaction.html', context)
 

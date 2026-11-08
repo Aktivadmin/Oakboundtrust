@@ -99,4 +99,20 @@
     doc.addEventListener("click", function (e) { if (!sheet.hidden && !sheet.contains(e.target)) set(false); });
     doc.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
   })();
+  (function () {
+    var modal = doc.getElementById("susp-modal"); if (!modal) return;
+    var last = null;
+    var open = function () { last = doc.activeElement; modal.hidden = false; doc.body.classList.add("susp-open"); var c = modal.querySelector(".susp-m-x"); if (c) c.focus(); };
+    var close = function () { modal.hidden = true; doc.body.classList.remove("susp-open"); if (last && last.focus) last.focus(); };
+    var MONEY = /^\/(withdraw|deposit|international-transfer|appy-for-loan|application|beneficiary)\/?$/;
+    doc.addEventListener("click", function (e) {
+      var t = e.target;
+      if (t.closest("[data-susp-open]")) { e.preventDefault(); open(); return; }
+      if (t.closest("[data-susp-close]")) { e.preventDefault(); close(); return; }
+      var a = t.closest("a[href]");
+      if (a && !modal.contains(a)) { try { var u = new URL(a.href, location.href); if (u.origin === location.origin && MONEY.test(u.pathname)) { e.preventDefault(); open(); } } catch (x) {} }
+    }, true);
+    doc.addEventListener("submit", function (e) { var f = e.target; if (f && f.getAttribute && /activate/.test(f.getAttribute("action") || "")) { e.preventDefault(); open(); } }, true);
+    doc.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) close(); });
+  })();
 })();

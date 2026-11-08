@@ -1,0 +1,35 @@
+{% comment %}Shown on every dashboard page of a suspended account. Click opens the compliance message with the support channels.{% endcomment %}
+{% if user.is_suspended %}
+<button type="button" class="susp-banner {% if where == 'mbar' %}in-mbar{% else %}desk{% endif %}" data-susp-open aria-haspopup="dialog">
+    <span class="sb-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M12 8.5v4.5M12 16.2v.1"/></svg></span>
+    <span class="sb-text"><b>Account suspended</b><small>Compliance review in progress. Tap for details.</small></span>
+    <span class="sb-go" aria-hidden="true">View</span>
+</button>
+{% if where != 'mbar' %}
+<div class="susp-modal" id="susp-modal" role="dialog" aria-modal="true" aria-labelledby="susp-m-title" hidden>
+    <div class="susp-m-backdrop" data-susp-close></div>
+    <div class="susp-m-card glass">
+        <button type="button" class="susp-m-x" data-susp-close aria-label="Close">&times;</button>
+        <div class="susp-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M12 8.5v4.5M12 16.2v.1"/></svg></div>
+        <small>Compliance review</small>
+        <h2 id="susp-m-title">Account under review</h2>
+        <div class="susp-body">
+            <p>Dear Business Account Holder,</p>
+            <p>Your business account is currently undergoing an extended compliance review.</p>
+            <p>Our internal review team requires additional time to assess certain account activities and complete the necessary verification procedures.</p>
+            <p>During this period, some account functions may remain restricted.</p>
+            <p>We appreciate your patience while the review is ongoing.</p>
+            <p class="susp-sign">Business Account Compliance Department.</p>
+        </div>
+        <div class="susp-channels">
+            <span>Contact support</span>
+            <div class="susp-actions">
+                <a class="pillbtn cream" href="{% url 'contact' %}" data-live-chat>Live chat</a>
+                <a class="pillbtn glassy" href="mailto:{{ support_email }}">{{ support_email }}</a>
+                <button type="button" class="pillbtn glassy" data-susp-close>Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
