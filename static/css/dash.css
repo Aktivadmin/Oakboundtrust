@@ -510,3 +510,17 @@ body.ob-dash .side-card h4 { text-transform: none; letter-spacing: -0.02em; font
   body.ob-dash .dash-center-second .grid-6 h4, body.ob-dash .cc-center-second .grid-6 h4 { font-size: 0.66rem !important; letter-spacing: 0.08em; }
 }
 @media (max-width: 380px) { .stat .k { font-size: 0.58rem; letter-spacing: 0.05em; } }
+
+/* ---- account under review: full-screen notice that replaces every account page ---- */
+body.susp-page { display: block !important; min-height: 100vh; }
+.susp-backdrop { position: fixed; inset: 0; z-index: 0; background: rgba(10, 6, 3, 0.35); }
+.susp-wrap { position: relative; z-index: 1; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+.susp { width: min(560px, 100%); padding: clamp(26px, 5vw, 44px); border-radius: 34px; display: grid; gap: 14px; text-align: left; animation: pop 0.5s var(--spring) both; }
+.susp-icon { width: 62px; height: 62px; border-radius: 20px; display: grid; place-items: center; background: rgba(201, 162, 74, 0.2); color: var(--gold-2); }
+.susp-icon svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.susp small { font: 600 0.72rem/1 var(--f-app); letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-2); margin-top: 4px; }
+.susp h1 { margin: 0; font: 700 clamp(1.6rem, 5vw, 2.2rem)/1.1 var(--f-app); letter-spacing: -0.035em; }
+.susp-body { display: grid; gap: 12px; font-size: 1.02rem; line-height: 1.6; opacity: 0.92; }
+.susp-body p { margin: 0; } .susp-sign { font-weight: 600; margin-top: 6px !important; }
+.susp-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+@media (max-width: 480px) { .susp-actions { display: grid; } .susp-actions .pillbtn { justify-content: center; } }

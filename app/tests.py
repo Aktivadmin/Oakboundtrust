@@ -406,3 +406,39 @@ class ThemeTests(TestCase):
             self.assertContains(r, "ob-theme", msg_prefix=url)
             self.assertContains(r, "css/theme.css", msg_prefix=url)
             self.assertContains(r, "data-theme-toggle", msg_prefix=url)
+
+
+class SuspensionTests(TestCase):
+    PAGES = ["/dashboard/", "/transactions/", "/credit_card/", "/deposit/", "/withdraw/", "/international-transfer/"]
+
+    def setUp(self):
+        self.u = User.objects.create_user("s@example.com", "pw12345678", zipcode="1", balance=5000)
+        self.client.force_login(self.u)
+
+    def test_active_account_is_not_blocked(self):
+        for url in self.PAGES:
+            self.assertEqual(self.client.get(url).status_code, 200, url)
+
+    def test_suspended_account_sees_the_notice_everywhere(self):
+        self.u.is_suspended = True
+        self.u.save()
+        for url in self.PAGES + ["/receipt/abc123/", "/beneficiary/"]:
+            r = self.client.get(url)
+            self.assertEqual(r.status_code, 403, url)
+            self.assertContains(r, "extended compliance review", status_code=403)
+            self.assertContains(r, "Business Account Compliance Department.", status_code=403)
+
+    def test_suspended_account_cannot_transfer(self):
+        self.u.is_suspended = True
+        self.u.save()
+        r = self.client.post("/withdraw/", {"amount": "100", "acc-no": "12345678", "acc-name": "X", "bank-name": "Y",
+                                            "description": "t", "access-code": "555555"})
+        self.assertEqual(r.status_code, 403)
+        self.u.refresh_from_db()
+        self.assertEqual(self.u.balance, 5000)
+
+    def test_suspended_can_still_log_out_and_see_public_pages(self):
+        self.u.is_suspended = True
+        self.u.save()
+        self.assertEqual(self.client.get("/pricing/").status_code, 200)
+        self.assertEqual(self.client.get("/logout/").status_code, 302)

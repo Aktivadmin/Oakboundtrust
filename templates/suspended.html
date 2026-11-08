@@ -1,0 +1,42 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "partials/theme_head.html" %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex">
+    <title>Account under review | Oakbound Trust Bank</title>
+    <link rel="icon" href="{% static 'favicons/favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'favicons/favicon.ico' %}" sizes="any">
+    <meta name="theme-color" content="#2B1B12">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/oak.css' %}?v=10">
+    <link rel="stylesheet" href="{% static 'css/dash.css' %}?v=20">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=8">
+</head>
+<body class="ob-legacy ob-dash susp-page">
+    <div class="susp-backdrop"></div>
+    <main class="susp-wrap" role="alertdialog" aria-modal="true" aria-labelledby="susp-title" aria-describedby="susp-body">
+        <section class="susp glass">
+            <div class="susp-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M12 8.5v4.5M12 16.2v.1"/></svg></div>
+            <small>Compliance review</small>
+            <h1 id="susp-title">Account under review</h1>
+            <div class="susp-body" id="susp-body">
+                <p>Dear Business Account Holder,</p>
+                <p>Your business account is currently undergoing an extended compliance review.</p>
+                <p>Our internal review team requires additional time to assess certain account activities and complete the necessary verification procedures.</p>
+                <p>During this period, some account functions may remain restricted.</p>
+                <p>We appreciate your patience while the review is ongoing.</p>
+                <p class="susp-sign">Business Account Compliance Department.</p>
+            </div>
+            <div class="susp-actions">
+                <a class="pillbtn cream" href="{% url 'logout' %}">Log out</a>
+                <a class="pillbtn glassy" href="{% url 'contact' %}" data-live-chat>Contact support</a>
+            </div>
+        </section>
+    </main>
+    {% include 'partials/livechat.html' %}
+</body>
+</html>
